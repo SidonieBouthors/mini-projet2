@@ -42,6 +42,6 @@ abstract public class SimpleArea extends Area {
 	 
 	 @Override
 	    public final float getCameraScaleFactor() {
-	        return 13;
+	        return 10.f;
 	    }
 }

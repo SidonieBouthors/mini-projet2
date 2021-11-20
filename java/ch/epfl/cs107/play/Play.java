@@ -2,6 +2,7 @@ package ch.epfl.cs107.play;
 
 import ch.epfl.cs107.play.game.Game;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
+import ch.epfl.cs107.play.game.tutos.Tuto1;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.io.ResourceFileSystem;
@@ -32,7 +33,7 @@ public class Play {
         // Create a demo game and initialize corresponding texts
 		//XMLTexts.initialize(fileSystem, "strings/icmon_fr.xml"); // example of dialog strings
 		//final Game game = new ICWars();
-		//final Game game = new Tuto1();
+		final Game game = new Tuto1();
 		// Use Swing display
 		final Window window = new SwingWindow(game.getTitle(), fileSystem, WINDOW_WIDTH, WINDOW_HEIGHT);
 		window.registerFonts(ResourcePath.FONTS);
