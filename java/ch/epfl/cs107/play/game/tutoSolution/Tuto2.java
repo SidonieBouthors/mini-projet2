@@ -1,21 +1,20 @@
-package ch.epfl.cs107.play.game.icwars;
+package ch.epfl.cs107.play.game.tutoSolution;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.icwars.actor.Cursor;
-import ch.epfl.cs107.play.game.icwars.area.ICWARSAREA;
-import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level0;
-import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level1;
+import ch.epfl.cs107.play.game.tutosSolution.actor.GhostPlayer;
+import ch.epfl.cs107.play.game.tutosSolution.area.Tuto2Area;
+import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Ferme;
+import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Village;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
-public class ICWARS extends AreaGame {
-	
+public class Tuto2 extends AreaGame {
 	public final static float CAMERA_SCALE_FACTOR = 13.f;
 
-	private Cursor player;
-	private final String[] areas = {"icwars/Level0", "icwars/Level1"};
+	private GhostPlayer player;
+	private final String[] areas = {"zelda/Ferme", "zelda/Village"};
 	
 	private int areaIndex;
 	/**
@@ -23,8 +22,8 @@ public class ICWARS extends AreaGame {
 	 */
 	private void createAreas(){
 
-		addArea(new Level0());
-		addArea(new Level1());
+		addArea(new Ferme());
+		addArea(new Village());
 
 	}
 
@@ -43,15 +42,18 @@ public class ICWARS extends AreaGame {
 	
 	 private void initArea(String areaKey) {
 		 
-		  ICWARSAREA area = (ICWARSAREA)setCurrentArea(areaKey, true);
+		  Tuto2Area area = (Tuto2Area)setCurrentArea(areaKey, true);
 		  DiscreteCoordinates coords = area.getPlayerSpawnPosition();
-		  player = new Cursor(area, Orientation.DOWN, coords,"icwars/allyCursor");
+		  player = new GhostPlayer(area, Orientation.DOWN, coords,"ghost.1");
 		  player.enterArea(area, coords);
 	      player.centerCamera();
 		 
 	 }
 	@Override
 	public void update(float deltaTime) {
+		if(player.isWeak()){
+			switchArea();         
+		}
 		super.update(deltaTime);
 
 	}
@@ -62,7 +64,7 @@ public class ICWARS extends AreaGame {
 
 	@Override
 	public String getTitle() {
-		return "ICWARS";
+		return "Tuto2";
 	}
 
 	protected void switchArea() {
@@ -71,9 +73,10 @@ public class ICWARS extends AreaGame {
 
 		areaIndex = (areaIndex==0) ? 1 : 0;
 
-		ICWARSAREA currentArea = (ICWARSAREA)setCurrentArea(areas[areaIndex], false);
+		Tuto2Area currentArea = (Tuto2Area)setCurrentArea(areas[areaIndex], false);
 		player.enterArea(currentArea, currentArea.getPlayerSpawnPosition());
 
+		player.strengthen();
 	}
 
 }

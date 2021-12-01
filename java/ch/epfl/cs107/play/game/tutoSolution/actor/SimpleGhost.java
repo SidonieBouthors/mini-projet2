@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.tutosSolution.actor;
+package ch.epfl.cs107.play.game.tutoSolution.actor;
 
 import java.awt.Color;
 
@@ -17,7 +17,7 @@ public class SimpleGhost extends Entity {
 	    /**
 	     * Default DemoActor constructor
 	     * @param position (Vector): initial position vector of the ghost
-	     * @param text (String): initial text moving with the ghost
+	     * @param spriteName (String): initial text moving with the ghost
 	     */
 	 public SimpleGhost(Vector position, String spriteName) {
 		 //super(position, new ImageGraphics(ResourcePath.getSprite(spriteName),  1.0f,1.0f, null, Vector.ZERO, 1.0f, -Float.MAX_VALUE));

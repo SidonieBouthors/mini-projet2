@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.tutosSolution.actor;
+package ch.epfl.cs107.play.game.tutoSolution.actor;
 
 import java.awt.Color;
 import java.util.Collections;

@@ -1,28 +1,29 @@
-package ch.epfl.cs107.play.game.icwars.area.MapICwars;
+package ch.epfl.cs107.play.game.tutoSolution.area.tuto2;
 
 import ch.epfl.cs107.play.game.areagame.actor.Background;
-import ch.epfl.cs107.play.game.icwars.actor.TANK;
-import ch.epfl.cs107.play.game.icwars.area.ICWARSAREA;
+import ch.epfl.cs107.play.game.areagame.actor.Foreground;
+import ch.epfl.cs107.play.game.tutoSolution.area.Tuto2Area;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 /**
  * Specific area
  */
-public class Level0 extends ICWARSAREA {
+public class Ferme extends Tuto2Area {
 	
 	@Override
 	public String getTitle() {
-		return "icwars/Level0";
+		return "zelda/Ferme";
 	}
 	
 	@Override
 	public DiscreteCoordinates getPlayerSpawnPosition() {
-		return new DiscreteCoordinates(5,5);
+		return new DiscreteCoordinates(2,10);
 	}
 	
 	protected void createArea() {
         // Base
         registerActor(new Background(this));
+        registerActor(new Foreground(this));
 	}
 	
 }
