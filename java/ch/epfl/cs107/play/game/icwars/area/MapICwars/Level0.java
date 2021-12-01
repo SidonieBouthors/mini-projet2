@@ -1,14 +1,13 @@
 package ch.epfl.cs107.play.game.icwars.area.MapICwars;
 
 import ch.epfl.cs107.play.game.areagame.actor.Background;
-import ch.epfl.cs107.play.game.icwars.actor.TANK;
-import ch.epfl.cs107.play.game.icwars.area.ICWARSAREA;
+import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 /**
  * Specific area
  */
-public class Level0 extends ICWARSAREA {
+public class Level0 extends ICWarsArea {
 	
 	@Override
 	public String getTitle() {

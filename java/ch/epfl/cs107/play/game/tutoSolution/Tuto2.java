@@ -2,10 +2,10 @@ package ch.epfl.cs107.play.game.tutoSolution;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.tutosSolution.actor.GhostPlayer;
-import ch.epfl.cs107.play.game.tutosSolution.area.Tuto2Area;
-import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Ferme;
-import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Village;
+import ch.epfl.cs107.play.game.tutoSolution.actor.GhostPlayer;
+import ch.epfl.cs107.play.game.tutoSolution.area.Tuto2Area;
+import ch.epfl.cs107.play.game.tutoSolution.area.tuto2.Ferme;
+import ch.epfl.cs107.play.game.tutoSolution.area.tuto2.Village;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;

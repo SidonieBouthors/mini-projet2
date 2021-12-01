@@ -3,14 +3,14 @@ package ch.epfl.cs107.play.game.icwars;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.icwars.actor.Cursor;
-import ch.epfl.cs107.play.game.icwars.area.ICWARSAREA;
+import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level0;
 import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level1;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
-public class ICWARS extends AreaGame {
+public class ICWars extends AreaGame {
 	
 	public final static float CAMERA_SCALE_FACTOR = 13.f;
 
@@ -43,7 +43,7 @@ public class ICWARS extends AreaGame {
 	
 	 private void initArea(String areaKey) {
 		 
-		  ICWARSAREA area = (ICWARSAREA)setCurrentArea(areaKey, true);
+		  ICWarsArea area = (ICWarsArea)setCurrentArea(areaKey, true);
 		  DiscreteCoordinates coords = area.getPlayerSpawnPosition();
 		  player = new Cursor(area, Orientation.DOWN, coords,"icwars/allyCursor");
 		  player.enterArea(area, coords);
@@ -71,7 +71,7 @@ public class ICWARS extends AreaGame {
 
 		areaIndex = (areaIndex==0) ? 1 : 0;
 
-		ICWARSAREA currentArea = (ICWARSAREA)setCurrentArea(areas[areaIndex], false);
+		ICWarsArea currentArea = (ICWarsArea)setCurrentArea(areas[areaIndex], false);
 		player.enterArea(currentArea, currentArea.getPlayerSpawnPosition());
 
 	}

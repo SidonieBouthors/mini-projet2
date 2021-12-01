@@ -2,9 +2,9 @@ package ch.epfl.cs107.play.game.tutoSolution;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
-import ch.epfl.cs107.play.game.tutosSolution.actor.SimpleGhost;
-import ch.epfl.cs107.play.game.tutosSolution.area.tuto1.Ferme;
-import ch.epfl.cs107.play.game.tutosSolution.area.tuto1.Village;
+import ch.epfl.cs107.play.game.tutoSolution.actor.SimpleGhost;
+import ch.epfl.cs107.play.game.tutoSolution.area.tuto1.Ferme;
+import ch.epfl.cs107.play.game.tutoSolution.area.tuto1.Village;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Button;
