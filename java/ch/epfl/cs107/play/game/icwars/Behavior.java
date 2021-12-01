@@ -8,19 +8,19 @@ import ch.epfl.cs107.play.window.Window;
 public class Behavior extends AreaBehavior {
 	public enum ICWarsCellType {
 		//https://stackoverflow.com/questions/25761438/understanding-bufferedimage-getrgb-output-values
-		NULL(0, false),
-		WALL(-16777216, false),
-		IMPASSABLE(-8750470, false),
-		INTERACT(-256, true),
-		DOOR(-195580, true),
-		WALKABLE(-1, true),;
+		NONE(0, 0),
+		ROAD(-16777216, 0),
+		PLAIN(-8750470, 1),
+		WOOD(-256, 3),
+		RIVER(-195580, 0),
+		MOUNTAIN(-256, 4),;
 
 		final int type;
-		final boolean isWalkable;
+		final int defense;
 
-		ICWarsCellType(int type, boolean isWalkable){
+		ICWarsCellType(int type, int defense){
 			this.type = type;
-			this.isWalkable = isWalkable;
+			this.defense = defense;
 		}
 
 		public static ICWarsCellType toType(int type){
@@ -30,7 +30,7 @@ public class Behavior extends AreaBehavior {
 			}
 			// When you add a new color, you can print the int value here before assign it to a type
 			System.out.println(type);
-			return NULL;
+			return NONE;
 		}
 	}
 

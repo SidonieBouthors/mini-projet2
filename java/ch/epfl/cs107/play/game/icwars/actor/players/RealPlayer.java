@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.icwars.actor;
+package ch.epfl.cs107.play.game.icwars.actor.players;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +13,7 @@ import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
-public class Cursor extends MovableAreaEntity {
+public class RealPlayer extends MovableAreaEntity {
 	private Sprite sprite;
 	/// Animation duration in frame number
     private final static int MOVE_DURATION = 8;
@@ -21,7 +21,7 @@ public class Cursor extends MovableAreaEntity {
 	 * Demo actor
 	 * 
 	 */
-	public Cursor(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
+	public RealPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
 		sprite = new Sprite(spriteName, 1.f, 1.f,this);
 		resetMotion();
