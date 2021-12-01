@@ -12,7 +12,7 @@ import ch.epfl.cs107.play.window.Window;
 
 public class ICWars extends AreaGame {
 	
-	public final static float CAMERA_SCALE_FACTOR = 13.f;
+	public final static float CAMERA_SCALE_FACTOR = 10.f;
 
 	private Cursor player;
 	private final String[] areas = {"icwars/Level0", "icwars/Level1"};
