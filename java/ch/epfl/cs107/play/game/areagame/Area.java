@@ -152,7 +152,7 @@ public abstract class Area implements Playable, PauseMenu.Pausable {
      * @return (int) : the width in number of cols
      */
     public int getWidth(){
-        return areaBehavior.width;
+        return areaBehavior.getWidth();
     }
 
     /**
@@ -160,7 +160,7 @@ public abstract class Area implements Playable, PauseMenu.Pausable {
      * @return (int) : the height in number of rows
      */
     public int getHeight(){
-        return areaBehavior.height;
+        return areaBehavior.getHeight();
     }
 
     /** @return the Window Keyboard for inputs */
