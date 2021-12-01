@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.tutosSolution;
+package ch.epfl.cs107.play.game.icwars;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
@@ -6,7 +6,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
-public class Tuto2Behavior extends AreaBehavior {
+public class BEHAVIOR extends AreaBehavior {
 	public enum Tuto2CellType{
 		//https://stackoverflow.com/questions/25761438/understanding-bufferedimage-getrgb-output-values
 		NULL(0, true),
@@ -40,7 +40,7 @@ public class Tuto2Behavior extends AreaBehavior {
 	 * @param window (Window), not null
 	 * @param name (String): Name of the Behavior, not null
 	 */
-	public Tuto2Behavior(Window window, String name){
+	public BEHAVIOR(Window window, String name){
 		super(window, name);
 		int height = getHeight();
 		int width = getWidth();

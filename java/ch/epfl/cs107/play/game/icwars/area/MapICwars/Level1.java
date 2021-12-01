@@ -1,16 +1,15 @@
-package ch.epfl.cs107.play.game.tutosSolution.area.tuto2;
+package ch.epfl.cs107.play.game.icwars.area.MapICwars;
 
 import ch.epfl.cs107.play.game.areagame.actor.Background;
-import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.tutosSolution.actor.SimpleGhost;
-import ch.epfl.cs107.play.game.tutosSolution.area.Tuto2Area;
+import ch.epfl.cs107.play.game.icwars.area.ICWARSAREA;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 
 /**
  * Specific area
  */
-public class Village extends Tuto2Area {
+public class Level1 extends ICWARSAREA {
 	
 	@Override
 	public String getTitle() {
