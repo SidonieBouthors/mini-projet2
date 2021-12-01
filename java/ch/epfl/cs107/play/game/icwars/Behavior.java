@@ -3,11 +3,10 @@ package ch.epfl.cs107.play.game.icwars;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public class Behavior extends AreaBehavior {
-	public enum Tuto2CellType{
+	public enum ICWarsCellType {
 		//https://stackoverflow.com/questions/25761438/understanding-bufferedimage-getrgb-output-values
 		NULL(0, false),
 		WALL(-16777216, false),
@@ -19,13 +18,13 @@ public class Behavior extends AreaBehavior {
 		final int type;
 		final boolean isWalkable;
 
-		Tuto2CellType(int type, boolean isWalkable){
+		ICWarsCellType(int type, boolean isWalkable){
 			this.type = type;
 			this.isWalkable = isWalkable;
 		}
 
-		public static Tuto2CellType toType(int type){
-			for(Tuto2CellType ict : Tuto2CellType.values()){
+		public static ICWarsCellType toType(int type){
+			for(ICWarsCellType ict : ICWarsCellType.values()){
 				if(ict.type == type)
 					return ict;
 			}
@@ -46,7 +45,7 @@ public class Behavior extends AreaBehavior {
 		int width = getWidth();
 		for(int y = 0; y < height; y++) {
 			for (int x = 0; x < width ; x++) {
-				Tuto2CellType color = Tuto2CellType.toType(getRGB(height-1-y, x));
+				ICWarsCellType color = ICWarsCellType.toType(getRGB(height-1-y, x));
 				setCell(x,y, new Tuto2Cell(x,y,color));
 			}
 		}
@@ -57,7 +56,7 @@ public class Behavior extends AreaBehavior {
 	 */
 	public class Tuto2Cell extends AreaBehavior.Cell {
 		/// Type of the cell following the enum
-		private final Tuto2CellType type;
+		private final ICWarsCellType type;
 		
 		/**
 		 * Default Tuto2Cell Constructor
@@ -65,7 +64,7 @@ public class Behavior extends AreaBehavior {
 		 * @param y (int): y coordinate of the cell
 		 * @param type (EnigmeCellType), not null
 		 */
-		public  Tuto2Cell(int x, int y, Tuto2CellType type){
+		public  Tuto2Cell(int x, int y, ICWarsCellType type){
 			super(x, y);
 			this.type = type;
 		}

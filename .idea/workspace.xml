@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f423c3a5-213b-44fa-abaa-9e6e5d8606f3" name="Changes" comment="Pour de vrai">
-      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/TANK.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutoSolution/Tuto1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutoSolution/Tuto2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutoSolution/Tuto2Behavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/Play.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/Play.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/Tuto2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/Tuto2Behavior$Tuto2Cell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/Tuto2Behavior$Tuto2CellType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/Tuto2Behavior.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/actor/GhostPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/actor/SimpleGhost.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/area/Tuto2Area.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/area/tuto2/Ferme.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/tutosSolution/area/tuto2/Village.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/BEHAVIOR.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/BEHAVIOR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWARS.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWARS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/area/MapICwars/Level0.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/area/MapICwars/Level0.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/area/MapICwars/Level1.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/area/MapICwars/Level1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutosSolution/actor/GhostPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Cursor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutosSolution/actor/SimpleGhost.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutosSolution/area/SimpleArea.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/Behavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/Behavior.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +78,7 @@
       <workItem from="1638359385380" duration="5000" />
       <workItem from="1638359516576" duration="182000" />
       <workItem from="1638359884735" duration="2121000" />
-      <workItem from="1638366359454" duration="464000" />
+      <workItem from="1638366359454" duration="884000" />
     </task>
     <task id="LOCAL-00001" summary="Pour de vrai">
       <created>1638359540748</created>
@@ -129,7 +108,28 @@
       <option name="project" value="LOCAL" />
       <updated>1638360985197</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Pour de vrai">
+      <created>1638366840356</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1638366840356</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Pour de vrai">
+      <created>1638366870094</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1638366870094</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Pour de vrai">
+      <created>1638367062390</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1638367062390</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
