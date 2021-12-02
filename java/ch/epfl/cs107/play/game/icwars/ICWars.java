@@ -8,11 +8,14 @@ import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level0;
 import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level1;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
 public class ICWars extends AreaGame {
 	
 	public final static float CAMERA_SCALE_FACTOR = 10.f;
+	public final static int NUMBERS_OF_LEVELS = 2;
+	private int currentLevelPassed;
 
 	private RealPlayer player;
 	private final String[] areas = {"icwars/Level0", "icwars/Level1"};
@@ -48,16 +51,27 @@ public class ICWars extends AreaGame {
 		  player = new RealPlayer(area, Orientation.DOWN, coords,"icwars/allyCursor");
 		  player.enterArea(area, coords);
 	      player.centerCamera();
+		  currentLevelPassed=0;
 		 
 	 }
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 
+		//Dealing with ending of the game and switching levels
+		Keyboard keyboard= getCurrentArea().getKeyboard();
+		if (keyboard.get(Keyboard.N).isPressed()) {
+			switchArea();
+		}
+		if (keyboard.get(Keyboard.R).isPressed()) {
+			initArea("icwars/Level0");
+		}
+
 	}
 
 	@Override
 	public void end() {
+		System.out.println("Game Over");
 	}
 
 	@Override
@@ -73,6 +87,12 @@ public class ICWars extends AreaGame {
 
 		ICWarsArea currentArea = (ICWarsArea)setCurrentArea(areas[areaIndex], false);
 		player.enterArea(currentArea, currentArea.getPlayerSpawnPosition());
+
+		//Dealing with ending of the game
+		currentLevelPassed++;
+		if (currentLevelPassed >= NUMBERS_OF_LEVELS) {
+			end();
+		}
 
 	}
 
