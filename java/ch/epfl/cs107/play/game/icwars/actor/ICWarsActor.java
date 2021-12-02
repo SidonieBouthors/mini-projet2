@@ -13,11 +13,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class ICWarsActor extends MovableAreaEntity {
-    private ICWarsFaction type;
 
-    ICWarsActor(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction type) {
+    protected ICWarsFaction faction;
+
+    ICWarsActor(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {
         super(owner,orientation,coordinates);
-        this.type=type;
+        this.faction=faction;
 
     }
 
@@ -27,32 +28,20 @@ public class ICWarsActor extends MovableAreaEntity {
     }
 
     public enum ICWarsFaction {
-        NONE(0),
-        ALLY(1),
-        ENEMIE(2);
+        NONE(0,""),
+        ALLY(1,"icwars/friendly"),
+        ENEMIE(2,"icwars/enemy");
 
         final int faction;
+        final String beginSpriteName;
 
-        ICWarsFaction(int faction) {
+        ICWarsFaction(int faction, String beginSpriteName) {
             this.faction=faction;
+            this.beginSpriteName=beginSpriteName;
         }
 
     }
-    public enum ICWarsType{
-        NONE(0,0,0),
-        SOLDIER(2,2,5),
-        TANK(4,7,10);
 
-        final int rayon;
-        final int damage;
-        final int hpMax;
-
-        ICWarsType(int rayon,int damage, int hpMax) {
-            this.rayon = rayon;
-            this.damage=damage;
-            this.hpMax = hpMax;
-        }
-    }
     @Override
     public void draw(Canvas canvas) {
 
@@ -82,78 +71,6 @@ public class ICWarsActor extends MovableAreaEntity {
     public void acceptInteraction(AreaInteractionVisitor v) {
 
     }
-    public class Unit implements Interactable, Interactor {
-        private String name;
-        private int hp;
 
-
-        public void update(float deltaTime) {
-            ICWarsActor.this.update(deltaTime);
-            if (hp < 0) {
-                hp=0;
-            }
-
-        }
-        public void getDamaged() {
-        }
-
-        public int getHp() {
-            return hp;
-        }
-
-        @Override
-        public List<DiscreteCoordinates> getCurrentCells() {
-            return Collections.singletonList(getCurrentMainCellCoordinates());
-        }
-
-        @Override
-        public List<DiscreteCoordinates> getFieldOfViewCells() {
-            return null;
-        }
-
-        @Override
-        public boolean wantsCellInteraction() {
-            return true;
-        }
-
-        @Override
-        public boolean wantsViewInteraction() {
-            return false;
-        }
-
-        @Override
-        public void interactWith(Interactable other) {
-
-        }
-
-        @Override
-        public boolean takeCellSpace() {
-            return true;
-        }
-
-        @Override
-        public boolean isCellInteractable() {
-            return false;
-        }
-
-        @Override
-        public boolean isViewInteractable() {
-            return false;
-        }
-
-        @Override
-        public void acceptInteraction(AreaInteractionVisitor v) {
-
-        }
-
-        @Override
-        public void onLeaving(List<DiscreteCoordinates> coordinates) {
-
-        }
-
-        @Override
-        public void onEntering(List<DiscreteCoordinates> coordinates) {
-
-        }
-    }
 }
+

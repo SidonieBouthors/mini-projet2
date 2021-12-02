@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f423c3a5-213b-44fa-abaa-9e6e5d8606f3" name="Changes" comment="AH">
-      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/BEHAVIOR$Tuto2Cell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/BEHAVIOR.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/Behavior$ICWarsCellType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/ICWarsArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/ICWarsArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/Behavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWarsBehavior.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWars.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWars.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/TANK.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/area/ICWarsArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/area/ICWarsArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +84,8 @@
       <workItem from="1638366359454" duration="1838000" />
       <workItem from="1638368256871" duration="202000" />
       <workItem from="1638432541090" duration="498000" />
-      <workItem from="1638464975658" duration="4570000" />
+      <workItem from="1638464975658" duration="4817000" />
+      <workItem from="1638470860051" duration="5350000" />
     </task>
     <task id="LOCAL-00001" summary="Pour de vrai">
       <created>1638359540748</created>
@@ -163,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638368300058</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="AH">
+      <created>1638469804102</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1638469804102</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

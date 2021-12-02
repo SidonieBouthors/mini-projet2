@@ -2,6 +2,8 @@ package ch.epfl.cs107.play.game.icwars;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
+import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.players.RealPlayer;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level0;
@@ -19,6 +21,7 @@ public class ICWars extends AreaGame {
 
 	private RealPlayer player;
 	private final String[] areas = {"icwars/Level0", "icwars/Level1"};
+	private Unit unit;
 	
 	private int areaIndex;
 	/**
@@ -51,6 +54,8 @@ public class ICWars extends AreaGame {
 		  player = new RealPlayer(area, Orientation.DOWN, coords,"icwars/allyCursor");
 		  player.enterArea(area, coords);
 	      player.centerCamera();
+		  unit = new Unit(area,Orientation.UP,new DiscreteCoordinates(6,5), ICWarsActor.ICWarsFaction.ENEMIE, Unit.ICWarsType.SOLDIER);
+		  unit.enterArea(area,new DiscreteCoordinates(6,5));
 		  currentLevelPassed=0;
 		 
 	 }
@@ -93,6 +98,7 @@ public class ICWars extends AreaGame {
 		if (currentLevelPassed >= NUMBERS_OF_LEVELS) {
 			end();
 		}
+
 
 	}
 
