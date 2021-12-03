@@ -6,8 +6,8 @@ import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.players.RealPlayer;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
-import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level0;
-import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level1;
+import ch.epfl.cs107.play.game.icwars.area.Level0;
+import ch.epfl.cs107.play.game.icwars.area.Level1;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Keyboard;
@@ -79,7 +79,7 @@ public class ICWars extends AreaGame {
 
 	@Override
 	public String getTitle() {
-		return "ICWARS";
+		return "ICWars";
 	}
 
 	protected void switchArea() {
