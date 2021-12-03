@@ -10,7 +10,8 @@ import ch.epfl.cs107.play.window.Window;
 public abstract class ICWarsArea extends Area {
 	
 	private ICWarsBehavior ICWarsBehavior;
-
+	private final static float CAMERA_SCALE_FACTOR = 10.f;
+	
     /**
      * Create the area by adding it all actors
      * called by begin method
@@ -22,7 +23,7 @@ public abstract class ICWarsArea extends Area {
 
     @Override
     public final float getCameraScaleFactor() {
-        return ICWars.CAMERA_SCALE_FACTOR;
+        return CAMERA_SCALE_FACTOR;
     }
 
     public abstract DiscreteCoordinates getPlayerSpawnPosition();

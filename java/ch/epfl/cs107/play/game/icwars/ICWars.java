@@ -15,7 +15,6 @@ import ch.epfl.cs107.play.window.Window;
 
 public class ICWars extends AreaGame {
 	
-	public final static float CAMERA_SCALE_FACTOR = 10.f;
 	public final static int NUMBERS_OF_LEVELS = 2;
 	private int currentLevelPassed;
 
