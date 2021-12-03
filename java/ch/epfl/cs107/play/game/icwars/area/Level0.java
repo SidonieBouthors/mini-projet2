@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.icwars.area.MapICwars;
+package ch.epfl.cs107.play.game.icwars.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
@@ -16,7 +16,7 @@ public class Level0 extends ICWarsArea {
 	
 	@Override
 	public DiscreteCoordinates getPlayerSpawnPosition() {
-		return new DiscreteCoordinates(5,5);
+		return new DiscreteCoordinates(0,0);
 	}
 	
 	protected void createArea() {

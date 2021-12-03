@@ -16,8 +16,8 @@ public class ICWarsActor extends MovableAreaEntity {
 
     protected ICWarsFaction faction;
 
-    ICWarsActor(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {
-        super(owner,orientation,coordinates);
+    public ICWarsActor(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
+        super(owner,Orientation.UP,coordinates);
         this.faction=faction;
 
     }
@@ -28,24 +28,41 @@ public class ICWarsActor extends MovableAreaEntity {
     }
 
     public enum ICWarsFaction {
-        NONE(0,""),
-        ALLY(1,"icwars/friendly"),
-        ENEMY(2,"icwars/enemy");
+        ALLY(1),
+        ENEMY(2);
 
         final int faction;
-        final String beginSpriteName;
 
-        ICWarsFaction(int faction, String beginSpriteName) {
+
+        ICWarsFaction(int faction) {
             this.faction=faction;
-            this.beginSpriteName=beginSpriteName;
+
         }
 
     }
-
-    @Override
-    public void draw(Canvas canvas) {
-
+    /**
+     * registor the actor in the area specified
+     * @param area (Area): initial area, not null
+     * @param position (DiscreteCoordinates): initial position, not null
+     */
+    public void enterArea(Area area, DiscreteCoordinates position){
+        area.registerActor(this);
+        setOwnerArea(area);
+        setCurrentPosition(position.toVector());
     }
+    
+    /**
+     * unregistor the actor in the area specified
+     */
+    public void leaveArea(){
+        getOwnerArea().unregisterActor(this);
+    }
+    
+    @Override
+    public void draw(Canvas canvas){
+    
+    }
+
 
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {

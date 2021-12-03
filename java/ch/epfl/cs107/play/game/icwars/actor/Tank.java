@@ -16,11 +16,12 @@ public class Tank extends Unit {
 
 
 
-    public Tank(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {
-        super(owner, orientation, coordinates, faction);
-        maxHp=10;
-        radius=4;
+    public Tank(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
+        super(owner, coordinates,faction);
+        maxHP =10;
         maxDamage=7;
+        radius = 4;
+
     }
 
 
