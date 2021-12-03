@@ -2,12 +2,12 @@ package ch.epfl.cs107.play.game.icwars;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
+
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.players.RealPlayer;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
-import ch.epfl.cs107.play.game.icwars.area.Level0;
-import ch.epfl.cs107.play.game.icwars.area.Level1;
+import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level0;
+import ch.epfl.cs107.play.game.icwars.area.MapICwars.Level1;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Keyboard;
@@ -15,7 +15,7 @@ import ch.epfl.cs107.play.window.Window;
 
 public class ICWars extends AreaGame {
 	
-	public final static int NUMBERS_OF_LEVELS = 2;
+	private final static int NUMBERS_OF_LEVELS = 2;
 	private int currentLevelPassed;
 
 	private RealPlayer player;
