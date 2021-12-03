@@ -1,0 +1,281 @@
+Index: java/ch/epfl/cs107/play/game/icwars/actor/Tank.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ch.epfl.cs107.play.game.icwars.actor;\n\nimport ch.epfl.cs107.play.game.areagame.Area;\nimport ch.epfl.cs107.play.game.areagame.actor.Interactable;\nimport ch.epfl.cs107.play.game.areagame.actor.Interactor;\nimport ch.epfl.cs107.play.game.areagame.actor.Orientation;\nimport ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;\nimport ch.epfl.cs107.play.math.DiscreteCoordinates;\n\npublic class Tank extends Unit {\n    public final int MAX_HP_TANK = 10;\n    public final int DAMAGE_TANK = 7;\n\n    public Tank(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {\n        super(owner, orientation, coordinates, faction);\n    }\n\n\n    public int getDamage() {\n        return DAMAGE_TANK;\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java b/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java
+--- a/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java	(revision e4e4f2446ca2f39b9839f8a413b58e856f69ac99)
++++ b/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java	(date 1638531426684)
+@@ -4,15 +4,33 @@
+ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
++import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+ import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
+ import ch.epfl.cs107.play.math.DiscreteCoordinates;
++import ch.epfl.cs107.play.math.Vector;
++import ch.epfl.cs107.play.window.Canvas;
+ 
+ public class Tank extends Unit {
+-    public final int MAX_HP_TANK = 10;
+-    public final int DAMAGE_TANK = 7;
++    private final int MAX_HP_TANK = 10;
++    private final int DAMAGE_TANK = 7;
++    private final int RADIUS_TANK = 4;
++    private Sprite sprite;
++    private int currentHp;
+ 
+     public Tank(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {
++
+         super(owner, orientation, coordinates, faction);
++        sprite = new Sprite (this.getSpriteName(),1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
++        currentHp = MAX_HP_TANK;
++
++    }
++    public String getSpriteName() {
++        if (this.faction == ICWarsFaction.ENEMY) {
++            return "icwars/enemyTank";
++        } else {
++            return "icwars/friendlyTank";
++
++        }
+     }
+ 
+ 
+@@ -20,5 +38,44 @@
+         return DAMAGE_TANK;
+     }
+ 
++    public int getRADIUS() {
++        return RADIUS_TANK;
++    }
++
++    @Override
++    public void draw(Canvas canvas) {
++        sprite.draw(canvas);
++    }
++
++    public void getDamaged(int damage){
++        if ((currentHp -= damage) < 0) {
++            currentHp=0;
++        }else {
++            currentHp -= damage;
++        }
++    }
++
++/**
++ *
++ * @param area (Area): initial area, not null
++ * @param position (DiscreteCoordinates): initial position, not null
++ */
++    public void enterArea(Area area, DiscreteCoordinates position){
++        area.registerActor(this);
++        setOwnerArea(area);
++        setCurrentPosition(position.toVector());
++    }
++    public void leaveArea(){
++        getOwnerArea().unregisterActor(this);
++    }
++
++    public void repairing(int repair) {
++
++        if ((currentHp += repair) > MAX_HP_TANK) {
++            currentHp = MAX_HP_TANK;
++        } else {
++           currentHp += repair;
++        }
++    }
+ 
+ }
+Index: java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ch.epfl.cs107.play.game.icwars.actor;\n\nimport ch.epfl.cs107.play.game.areagame.Area;\nimport ch.epfl.cs107.play.game.areagame.actor.Interactable;\nimport ch.epfl.cs107.play.game.areagame.actor.Interactor;\nimport ch.epfl.cs107.play.game.areagame.actor.Orientation;\nimport ch.epfl.cs107.play.math.DiscreteCoordinates;\n\nimport java.util.List;\n\npublic class Soldier extends Unit {\n\n    public Soldier(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {\n        super(owner, orientation, coordinates, faction);\n    }\n\n    @Override\n    public List<DiscreteCoordinates> getFieldOfViewCells() {\n        return null;\n    }\n\n    @Override\n    public boolean wantsCellInteraction() {\n        return false;\n    }\n\n    @Override\n    public boolean wantsViewInteraction() {\n        return false;\n    }\n\n    @Override\n    public void interactWith(Interactable other) {\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java b/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java
+--- a/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java	(revision e4e4f2446ca2f39b9839f8a413b58e856f69ac99)
++++ b/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java	(date 1638531426687)
+@@ -4,33 +4,78 @@
+ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
++import ch.epfl.cs107.play.game.areagame.actor.Sprite;
++import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
+ import ch.epfl.cs107.play.math.DiscreteCoordinates;
+-
+-import java.util.List;
++import ch.epfl.cs107.play.math.Vector;
++import ch.epfl.cs107.play.window.Canvas;
+ 
+ public class Soldier extends Unit {
++    private final int MAX_HP_SOLDIER = 10;
++    private final int DAMAGE_SOLDIER = 7;
++    private final int RADIUS_SOLDIER = 4;
++    private Sprite sprite;
++    private int currentHp;
+ 
+     public Soldier(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {
++
+         super(owner, orientation, coordinates, faction);
++        sprite = new Sprite (this.getSpriteName(),1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
++        currentHp = MAX_HP_SOLDIER;
++
++    }
++    public String getSpriteName() {
++        if (this.faction == ICWarsFaction.ENEMY) {
++            return "icwars/enemySoldier";
++        } else {
++            return "icwars/friendlySoldier";
++
++        }
+     }
+ 
+-    @Override
+-    public List<DiscreteCoordinates> getFieldOfViewCells() {
+-        return null;
++
++    public int getDamage() {
++        return DAMAGE_SOLDIER;
++    }
++
++    public int getRADIUS() {
++        return RADIUS_SOLDIER;
+     }
+ 
+     @Override
+-    public boolean wantsCellInteraction() {
+-        return false;
++    public void draw(Canvas canvas) {
++        sprite.draw(canvas);
+     }
+ 
+-    @Override
+-    public boolean wantsViewInteraction() {
+-        return false;
++    public void getDamaged(int damage){
++        if ((currentHp -= damage) < 0) {
++            currentHp=0;
++        }else {
++            currentHp -= damage;
++        }
+     }
+ 
+-    @Override
+-    public void interactWith(Interactable other) {
++    /**
++     *
++     * @param area (Area): initial area, not null
++     * @param position (DiscreteCoordinates): initial position, not null
++     */
++    public void enterArea(Area area, DiscreteCoordinates position){
++        area.registerActor(this);
++        setOwnerArea(area);
++        setCurrentPosition(position.toVector());
++    }
++    public void leaveArea(){
++        getOwnerArea().unregisterActor(this);
++    }
+ 
+-    }
+-}
++    public void repairing(int repair) {
++
++        if ((currentHp += repair) > MAX_HP_SOLDIER) {
++            currentHp = MAX_HP_SOLDIER;
++        } else {
++            currentHp += repair;
++        }
++    }
++
++}
+\ No newline at end of file
+Index: java/ch/epfl/cs107/play/game/icwars/actor/Unit.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ch.epfl.cs107.play.game.icwars.actor;\n\nimport ch.epfl.cs107.play.game.areagame.Area;\nimport ch.epfl.cs107.play.game.areagame.actor.Interactable;\nimport ch.epfl.cs107.play.game.areagame.actor.Interactor;\nimport ch.epfl.cs107.play.game.areagame.actor.Orientation;\nimport ch.epfl.cs107.play.math.DiscreteCoordinates;\n\nimport java.util.List;\n\npublic class Unit extends ICWarsActor implements Interactor, Interactable {\n\n    public Unit(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {\n        super(owner, orientation, coordinates, faction);\n    }\n\n\n\n\n    @Override\n    public List<DiscreteCoordinates> getFieldOfViewCells() {\n        return null;\n    }\n\n    @Override\n    public boolean wantsCellInteraction() {\n        return false;\n    }\n\n    @Override\n    public boolean wantsViewInteraction() {\n        return false;\n    }\n\n    @Override\n    public void interactWith(Interactable other) {\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java b/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java
+--- a/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java	(revision e4e4f2446ca2f39b9839f8a413b58e856f69ac99)
++++ b/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java	(date 1638530951505)
+@@ -4,12 +4,14 @@
+ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
++import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+ import ch.epfl.cs107.play.math.DiscreteCoordinates;
+ 
+ import java.util.List;
+ 
+ public class Unit extends ICWarsActor implements Interactor, Interactable {
+ 
++
+     public Unit(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {
+         super(owner, orientation, coordinates, faction);
+     }
+@@ -24,7 +26,7 @@
+ 
+     @Override
+     public boolean wantsCellInteraction() {
+-        return false;
++        return true;
+     }
+ 
+     @Override
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"f423c3a5-213b-44fa-abaa-9e6e5d8606f3\" name=\"Changes\" comment=\"AH\">\n      <change afterPath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutoSolution/UnitTest.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/TANK.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWars.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWars.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"ProjectId\" id=\"21gOaahZh4aXO0ppyPBMhle21xU\" />\n  <component name=\"ProjectLevelVcsManager\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutoSolution\" />\n      <recent name=\"$PROJECT_DIR$/java/ch/epfl/cs107/play/game/TutoSolution\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"Play\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"ch.epfl.cs107.play.Play\" />\n      <module name=\"MP2\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"ch.epfl.cs107.play.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.Play\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"f423c3a5-213b-44fa-abaa-9e6e5d8606f3\" name=\"Changes\" comment=\"\" />\n      <created>1638359327597</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1638359327597</updated>\n      <workItem from=\"1638359329629\" duration=\"27000\" />\n      <workItem from=\"1638359385380\" duration=\"5000\" />\n      <workItem from=\"1638359516576\" duration=\"182000\" />\n      <workItem from=\"1638359884735\" duration=\"2121000\" />\n      <workItem from=\"1638366359454\" duration=\"1838000\" />\n      <workItem from=\"1638368256871\" duration=\"202000\" />\n      <workItem from=\"1638432541090\" duration=\"498000\" />\n      <workItem from=\"1638464975658\" duration=\"4817000\" />\n      <workItem from=\"1638470860051\" duration=\"8478000\" />\n      <workItem from=\"1638528118510\" duration=\"2366000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Pour de vrai\">\n      <created>1638359540748</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638359540748</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Pour de vrai\">\n      <created>1638359900743</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638359900743</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Pour de vrai\">\n      <created>1638359995147</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638359995147</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Pour de vrai\">\n      <created>1638360985197</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638360985197</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Pour de vrai\">\n      <created>1638366840356</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638366840356</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Pour de vrai\">\n      <created>1638366870094</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638366870094</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"Pour de vrai\">\n      <created>1638367062390</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638367062390</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"Pour de vrai\">\n      <created>1638367249733</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638367249733</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"Pour de vrai\">\n      <created>1638368264214</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638368264214</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"Pour de vrai\">\n      <created>1638368300058</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638368300058</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"AH\">\n      <created>1638469804102</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638469804102</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"AH\">\n      <created>1638479838128</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1638479838128</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"13\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n    <MESSAGE value=\"Pour de vrai\" />\n    <MESSAGE value=\"AH\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"AH\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e4e4f2446ca2f39b9839f8a413b58e856f69ac99)
++++ b/.idea/workspace.xml	(date 1638531285079)
+@@ -2,15 +2,8 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="f423c3a5-213b-44fa-abaa-9e6e5d8606f3" name="Changes" comment="AH">
+-      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutoSolution/UnitTest.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/TANK.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWars.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWars.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -93,7 +86,7 @@
+       <workItem from="1638432541090" duration="498000" />
+       <workItem from="1638464975658" duration="4817000" />
+       <workItem from="1638470860051" duration="8478000" />
+-      <workItem from="1638528118510" duration="2366000" />
++      <workItem from="1638528118510" duration="3011000" />
+     </task>
+     <task id="LOCAL-00001" summary="Pour de vrai">
+       <created>1638359540748</created>
+@@ -179,7 +172,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1638479838128</updated>
+     </task>
+-    <option name="localTasksCounter" value="13" />
++    <task id="LOCAL-00013" summary="AH">
++      <created>1638530703881</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1638530703881</updated>
++    </task>
++    <option name="localTasksCounter" value="14" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
