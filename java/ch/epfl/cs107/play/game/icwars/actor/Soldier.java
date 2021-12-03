@@ -8,14 +8,11 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 import java.util.List;
 
-public class Unit extends ICWarsActor implements Interactor, Interactable {
+public class Soldier extends Unit {
 
-    public Unit(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {
+    public Soldier(Area owner, Orientation orientation, DiscreteCoordinates coordinates, ICWarsFaction faction) {
         super(owner, orientation, coordinates, faction);
     }
-
-
-
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {

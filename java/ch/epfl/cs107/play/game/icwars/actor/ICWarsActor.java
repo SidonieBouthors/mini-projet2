@@ -30,7 +30,7 @@ public class ICWarsActor extends MovableAreaEntity {
     public enum ICWarsFaction {
         NONE(0,""),
         ALLY(1,"icwars/friendly"),
-        ENEMIE(2,"icwars/enemy");
+        ENEMY(2,"icwars/enemy");
 
         final int faction;
         final String beginSpriteName;

@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f423c3a5-213b-44fa-abaa-9e6e5d8606f3" name="Changes" comment="AH">
+      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutoSolution/UnitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/TANK.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWars.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWars.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" afterDir="false" />
@@ -46,6 +52,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/tutoSolution" />
       <recent name="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/TutoSolution" />
     </key>
   </component>
@@ -85,7 +92,8 @@
       <workItem from="1638368256871" duration="202000" />
       <workItem from="1638432541090" duration="498000" />
       <workItem from="1638464975658" duration="4817000" />
-      <workItem from="1638470860051" duration="5350000" />
+      <workItem from="1638470860051" duration="8478000" />
+      <workItem from="1638528118510" duration="2366000" />
     </task>
     <task id="LOCAL-00001" summary="Pour de vrai">
       <created>1638359540748</created>
@@ -164,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638469804102</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="AH">
+      <created>1638479838128</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1638479838128</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

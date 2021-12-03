@@ -54,8 +54,6 @@ public class ICWars extends AreaGame {
 		  player = new RealPlayer(area, Orientation.DOWN, coords,"icwars/allyCursor");
 		  player.enterArea(area, coords);
 	      player.centerCamera();
-		  unit = new Unit(area,Orientation.UP,new DiscreteCoordinates(6,5), ICWarsActor.ICWarsFaction.ENEMIE, Unit.ICWarsType.SOLDIER);
-		  unit.enterArea(area,new DiscreteCoordinates(6,5));
 		  currentLevelPassed=0;
 		 
 	 }
