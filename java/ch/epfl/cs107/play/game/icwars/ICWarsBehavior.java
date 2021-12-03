@@ -13,7 +13,8 @@ public class ICWarsBehavior extends AreaBehavior {
 		PLAIN(-8750470, 1),
 		WOOD(-256, 3),
 		RIVER(-195580, 0),
-		MOUNTAIN(-256, 4),;
+		MOUNTAIN(-256, 4),
+		CITY(-1,2);
 
 		final int type;
 		final int defense;
@@ -76,6 +77,7 @@ public class ICWarsBehavior extends AreaBehavior {
 
 		@Override
 		protected boolean canEnter(Interactable entity) {
+			entity.takeCellSpace();
 			return true;
 	    }
 
