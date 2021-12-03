@@ -28,6 +28,9 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     public Unit(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
         super(owner, coordinates, faction);
         sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
+        for(int i = -radius , i<=radius,++i){
+
+        }
     }
 
     public int getRadius() {

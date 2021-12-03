@@ -12,16 +12,11 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Tank extends Unit {
 
-
-
-
-
     public Tank(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
         super(owner, coordinates,faction);
         maxHP =10;
+        radius=4;
         maxDamage=7;
-        radius = 4;
-
     }
 
 
