@@ -61,7 +61,7 @@ public class ICWarsPlayer extends ICWarsActor{
     }
 	@Override
 	public boolean takeCellSpace() {
-		return false;
+		return true;
 	}
 	@Override
     public boolean isCellInteractable() {
