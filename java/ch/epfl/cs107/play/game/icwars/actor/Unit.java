@@ -28,7 +28,33 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     public Unit(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
         super(owner, coordinates, faction);
         sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
-        for(int i = -radius , i<=radius,++i){
+
+        int xPosition = coordinates.x;
+        int yPosition = coordinates.y;
+        int largeeur = this.getOwnerArea().getWidth();
+        int hauteur = this.getOwnerArea().getHeight();
+
+        boolean left=false;
+        boolean up = false;
+        boolean right = false;
+        boolean down = false;
+
+        for (int i = -radius; i <= radius; i++) {
+
+            if (!(xPosition -radius < 0 || xPosition + radius>  largeeur || yPosition<0 || yPosition > hauteur)){
+
+                if (xPosition > -radius) {
+                    left = true;
+                } else if (xPosition + radius < largeeur) {
+                    right = true;
+                } else if (yPosition > -radius) {
+                    down = true;
+                } else if (yPosition + radius < hauteur) {
+                    up = true;
+                }
+                range.addNode(new DiscreteCoordinates(i+xPosition,i+yPosition),left,up,right,down);
+            }
+
 
         }
     }

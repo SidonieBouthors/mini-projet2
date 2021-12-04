@@ -3,7 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="f423c3a5-213b-44fa-abaa-9e6e5d8606f3" name="Changes" comment="AH">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/Play.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/Play.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior$ICWarsCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior$ICWarsCell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior$ICWarsCellType.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior$ICWarsCellType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor$ICWarsFaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor$ICWarsFaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Soldier.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Soldier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Tank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/ICWarsPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/ICWarsPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/ICWarsArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/ICWarsArea.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/Level0.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/Level0.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/Level1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/Level1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/MapICwars/Level0.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/area/MapICwars/Level1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,6 +103,11 @@
       <workItem from="1638464975658" duration="4817000" />
       <workItem from="1638470860051" duration="8478000" />
       <workItem from="1638528118510" duration="2366000" />
+      <workItem from="1638534330333" duration="8000" />
+      <workItem from="1638534373349" duration="54000" />
+      <workItem from="1638536823470" duration="57000" />
+      <workItem from="1638540476938" duration="189000" />
+      <workItem from="1638632283117" duration="3243000" />
     </task>
     <task id="LOCAL-00001" summary="Pour de vrai">
       <created>1638359540748</created>
@@ -186,7 +207,21 @@
       <option name="project" value="LOCAL" />
       <updated>1638531677970</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="AH">
+      <created>1638533167454</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1638533167454</updated>
+    </task>
+    <task id="LOCAL-00016" summary="AH">
+      <created>1638533396292</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1638533396292</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
