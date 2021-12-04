@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.icwars.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.icwars.area.Level0;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Tank extends Unit {
@@ -12,7 +13,11 @@ public class Tank extends Unit {
         maxDamage=7;
     }
 
-
+    public DiscreteCoordinates getSpawnPosition() {
+        if (this.faction == ICWarsFaction.ALLY) {
+            return new DiscreteCoordinates(2,5);
+        } else { return new DiscreteCoordinates(4,5); }
+    }
     public String getName() {
         if (ICWarsFaction.ENEMY == this.faction) {
             return "icwars/enemyTank";

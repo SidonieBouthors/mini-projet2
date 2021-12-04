@@ -24,24 +24,29 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     protected int maxDamage;
     protected int radius;
     protected ICWarsRange range;
+    protected DiscreteCoordinates coordinates;
 
     public Unit(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
         super(owner, coordinates, faction);
         sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
+        this.coordinates = coordinates;
 
         int xPosition = coordinates.x;
         int yPosition = coordinates.y;
         int largeeur = this.getOwnerArea().getWidth();
         int hauteur = this.getOwnerArea().getHeight();
 
-        boolean left=false;
-        boolean up = false;
-        boolean right = false;
-        boolean down = false;
+        boolean left;
+        boolean up;
+        boolean right;
+        boolean down;
 
-        for (int i = -radius; i <= radius; i++) {
-
-            if (!(xPosition -radius < 0 || xPosition + radius>  largeeur || yPosition<0 || yPosition > hauteur)){
+        /*for (int i = -radius; i <= radius; i++) {
+            right = false;
+            up = false;
+            left=false;
+            down = false;
+            if (!(xPosition -i < 0 || xPosition + i>  largeeur || yPosition<0 || yPosition > hauteur)){
 
                 if (xPosition > -radius) {
                     left = true;
@@ -56,7 +61,11 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
             }
 
 
-        }
+        }*/
+    }
+
+    public DiscreteCoordinates getCoordinates() {
+        return coordinates;
     }
 
     public int getRadius() {
@@ -120,6 +129,7 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);
+
     }
 
     @Override

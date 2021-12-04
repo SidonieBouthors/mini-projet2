@@ -51,12 +51,13 @@ public class ICWarsPlayer extends ICWarsActor{
     }
     @Override
     public void enterArea(Area area, DiscreteCoordinates position){
+		super.enterArea(area,position);
     	for(Unit unit :units){
-            area.registerActor(unit);
+			//Calling the method from ICWarsActor to register and set OwnerArea to the units
+			unit.enterArea(area,unit.getCoordinates());
         }
-    	area.registerActor(this);
-    	setOwnerArea(area);
-        setCurrentPosition(position.toVector());
+
+
     }
 	@Override
 	public boolean takeCellSpace() {
