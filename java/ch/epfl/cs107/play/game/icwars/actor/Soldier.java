@@ -1,14 +1,7 @@
 package ch.epfl.cs107.play.game.icwars.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.Interactable;
-import ch.epfl.cs107.play.game.areagame.actor.Interactor;
-import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
-import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.window.Canvas;
 
 public class Soldier extends Unit {
 
@@ -17,7 +10,6 @@ public class Soldier extends Unit {
         maxHP =5;
         maxDamage =2;
         radius =2;
-
 
     }
     public String getName() {
@@ -28,5 +20,8 @@ public class Soldier extends Unit {
             }
     }
 
-
+    @Override
+    public boolean takeCellSpace() {
+        return false;
+    }
 }
