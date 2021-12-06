@@ -6,7 +6,6 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Path;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
-import ch.epfl.cs107.play.game.icwars.ICWars;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsRange;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -41,18 +40,18 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
         boolean right;
         boolean down;
 
-        /*for (int i = -radius; i <= radius; i++) {
+        for (int i = -radius; i <= radius; i++) {
             right = false;
             up = false;
             left=false;
             down = false;
             if (!(xPosition -i < 0 || xPosition + i>  largeeur || yPosition<0 || yPosition > hauteur)){
 
-                if (xPosition > -radius) {
+                if (xPosition -radius> 0 ) {
                     left = true;
                 } else if (xPosition + radius < largeeur) {
                     right = true;
-                } else if (yPosition > -radius) {
+                } else if (yPosition -radius>0 ) {
                     down = true;
                 } else if (yPosition + radius < hauteur) {
                     up = true;
@@ -61,7 +60,7 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
             }
 
 
-        }*/
+        }
     }
 
     public DiscreteCoordinates getCoordinates() {
@@ -129,7 +128,6 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);
-
     }
 
     @Override

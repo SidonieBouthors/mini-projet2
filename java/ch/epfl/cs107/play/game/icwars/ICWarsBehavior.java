@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.icwars;
 
+import ch.epfl.cs107.play.game.actor.Entity;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
@@ -77,8 +78,14 @@ public class ICWarsBehavior extends AreaBehavior {
 
 		@Override
 		protected boolean canEnter(Interactable entity) {
-			entity.takeCellSpace();
+			//Checking if there exists an interactable that already take the cell space in the cell, if yes you cannot enter
+			for (Interactable interactable : entities) {
+				if (interactable.takeCellSpace() && interactable != entity) {
+					return false;
+				}
+			}
 			return true;
+
 	    }
 
 	    

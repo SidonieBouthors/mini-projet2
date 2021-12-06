@@ -1,16 +1,23 @@
 package ch.epfl.cs107.play.game.icwars.actor;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
+
+import java.awt.*;
+
 public class Tank extends Unit {
+
+
 
     public Tank(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
         super(owner, coordinates,faction);
         maxHP =10;
         radius=4;
         maxDamage=7;
+
     }
+
+
 
     public DiscreteCoordinates getSpawnPosition() {
         if (this.faction == ICWarsFaction.ALLY) {
@@ -23,6 +30,10 @@ public class Tank extends Unit {
         } else {
             return "icwars/friendlyTank";
         }
+    }
+    @Override
+    public boolean takeCellSpace() {
+        return true;
     }
 
 
