@@ -1,7 +1,6 @@
 package ch.epfl.cs107.play.game.icwars.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.icwars.area.Level0;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Tank extends Unit {
