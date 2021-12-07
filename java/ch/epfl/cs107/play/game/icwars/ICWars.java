@@ -75,6 +75,10 @@ public class ICWars extends AreaGame {
 		if (keyboard.get(Keyboard.R).isPressed()) {
 			initArea("icwars/Level0");
 		}
+		
+		if ( keyboard .get( Keyboard .U). isReleased ()) {
+			(( RealPlayer ) player ). selectUnit(1); // 0, 1 ...
+			}
 
 	}
 

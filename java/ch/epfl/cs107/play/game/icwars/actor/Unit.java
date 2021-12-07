@@ -31,15 +31,6 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
         sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
         this.coordinates = coordinates;
         sprite.setDepth(0);
-
-
-
-
-
-
-
-
-
     }
     public void createRange () {
 

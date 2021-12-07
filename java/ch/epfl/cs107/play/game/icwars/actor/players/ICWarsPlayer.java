@@ -9,7 +9,7 @@ import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class ICWarsPlayer extends ICWarsActor{
-	private ArrayList<Unit> units;
+	protected ArrayList<Unit> units;
 
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction, Unit... units) {
 		super(owner, coordinates, faction);
