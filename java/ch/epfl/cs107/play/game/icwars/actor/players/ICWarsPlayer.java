@@ -14,9 +14,13 @@ public class ICWarsPlayer extends ICWarsActor{
 	protected ArrayList<Unit> units;
 	protected Unit selectedUnit;
 
+
+
+
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction, Unit... units) {
 		super(owner, coordinates, faction);
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
+
 	}
 	
     /**Centres the camera on the player
@@ -65,9 +69,9 @@ public class ICWarsPlayer extends ICWarsActor{
 			selectedUnit = units.get(i);
 		}
 	}
-	public void setGUIInfo () {
-		GUI.setSelectedUnit(this.selectedUnit);
-		GUI.setCursorCoordinates(this.getCurrentMainCellCoordinates());
+	public void setGUIInfo (ICWarsPlayerGUI gui) {
+		gui.setSelectedUnit(this.selectedUnit);
+		gui.setCursorCoordinates(this.getCurrentMainCellCoordinates());
 	}
 	@Override
 	public boolean takeCellSpace() {

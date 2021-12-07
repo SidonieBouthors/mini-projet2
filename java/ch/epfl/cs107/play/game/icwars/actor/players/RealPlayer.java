@@ -14,7 +14,8 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class RealPlayer extends ICWarsPlayer {
 	private Sprite sprite;
-	private ICWarsPlayerGUI GUI;
+	private ICWarsPlayerGUI gui;
+
 
 	/// Animation duration in frame number
     private final static int MOVE_DURATION = 8;
@@ -31,6 +32,7 @@ public class RealPlayer extends ICWarsPlayer {
 		sprite.setDepth(1);
 		centerCamera();
 		resetMotion();
+		gui = new ICWarsPlayerGUI(10.f,this);
 	}
 	 
 	 @Override
@@ -75,7 +77,7 @@ public class RealPlayer extends ICWarsPlayer {
 	@Override
 	public void draw(Canvas canvas) {
 		sprite.draw(canvas);
-		GUI.draw(canvas);
+		gui.draw(canvas);
 	}
 
 }

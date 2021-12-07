@@ -14,11 +14,14 @@ public class ICWarsPlayerGUI implements Graphics{
 	public ICWarsPlayerGUI ( float cameraScaleFactor ,
 			ICWarsPlayer player ) {
 		this.player = player;
+
+		// Unité choisit au hasard a enlever dans le futur
+		player.selectUnit(0);
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
-		player.setGUIInfo();
+		player.setGUIInfo(this);
 		selectedUnit.drawRangeAndPathTo(cursorCoordinates, canvas);
 
 	}
