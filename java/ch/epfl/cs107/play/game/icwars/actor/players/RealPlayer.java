@@ -15,7 +15,7 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class RealPlayer extends ICWarsPlayer {
 	private Sprite sprite;
 	private ICWarsPlayerGUI GUI;
-	private Unit selectedUnit;
+
 	/// Animation duration in frame number
     private final static int MOVE_DURATION = 8;
     
@@ -77,10 +77,6 @@ public class RealPlayer extends ICWarsPlayer {
 		GUI.draw(canvas);
 	}
 
-	public void selectUnit(int i) {
-		if (i < units.size()) {
-			selectedUnit = units.get(i);
-		}
-	}
+
 
 }

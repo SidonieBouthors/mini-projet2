@@ -59,6 +59,7 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
         }
     }
 
+
     public DiscreteCoordinates getCoordinates() {
         return coordinates;
     }

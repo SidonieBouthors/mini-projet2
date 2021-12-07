@@ -6,10 +6,13 @@ import java.util.Arrays;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
+import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class ICWarsPlayer extends ICWarsActor{
+
 	protected ArrayList<Unit> units;
+	protected Unit selectedUnit;
 
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction, Unit... units) {
 		super(owner, coordinates, faction);
@@ -59,6 +62,11 @@ public class ICWarsPlayer extends ICWarsActor{
 
 
     }
+	public void selectUnit(int i) {
+		if (i < units.size()) {
+			selectedUnit = units.get(i);
+		}
+	}
 	@Override
 	public boolean takeCellSpace() {
 		return true;
