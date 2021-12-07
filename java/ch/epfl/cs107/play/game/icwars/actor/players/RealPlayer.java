@@ -16,6 +16,7 @@ public class RealPlayer extends ICWarsPlayer {
 	private Sprite sprite;
 	private ICWarsPlayerGUI GUI;
 	private Unit selectedUnit;
+	private DiscreteCoordinates coordinates;
 	/// Animation duration in frame number
     private final static int MOVE_DURATION = 8;
     
@@ -27,6 +28,7 @@ public class RealPlayer extends ICWarsPlayer {
 		else {
 			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
 		}
+		
 		sprite.setDepth(1);
 		centerCamera();
 		resetMotion();
