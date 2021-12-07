@@ -59,13 +59,15 @@ public class ICWarsPlayer extends ICWarsActor{
 			//Calling the method from ICWarsActor to register and set OwnerArea to the units
 			unit.enterArea(area,unit.getCoordinates());
         }
-
-
     }
 	public void selectUnit(int i) {
 		if (i < units.size()) {
 			selectedUnit = units.get(i);
 		}
+	}
+	public void setGUIInfo () {
+		GUI.setSelectedUnit(this.selectedUnit);
+		GUI.setCursorCoordinates(this.getCurrentMainCellCoordinates());
 	}
 	@Override
 	public boolean takeCellSpace() {
