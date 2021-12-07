@@ -43,8 +43,10 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     }
     public void createRange () {
 
-        int xPosition = (int)this.getPosition().x;
-        int yPosition = (int) this.getPosition().y;
+        range = new ICWarsRange();
+
+        int xPosition = this.coordinates.x;
+        int yPosition = this.coordinates.y;
         int largeeur = this.getOwnerArea().getWidth();
         int hauteur = this.getOwnerArea().getHeight();
         boolean left,up,right,down;
@@ -54,30 +56,14 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
         for (int fromX = -radius; fromX <= radius; fromX++) {
             for (int fromY = -radius; fromY  <= radius; fromY ++) {
 
-                if ( fromX + xPosition >0) {
-                    left = true;
-                } else{
-                    left = false;
-                }
-                if (fromX + xPosition < largeeur-1) {
-                    right = true;
-                } else {
-                    right = false;
-                }
-                if ( fromY +yPosition<hauteur-1) {
-                    up = true;
-                } else {
-                    up = false;
-                }
-                if (fromY  + yPosition >0) {
-                    down = true;
-                } else {
-                    down = false;
-                }
+                left = fromX + xPosition > 0;
+                right = fromX + xPosition < largeeur - 1;
+                up = fromY + yPosition < hauteur - 1;
+                down = fromY + yPosition > 0;
+
                 if (xPosition + fromX >= 0 && xPosition + fromX < largeeur && yPosition + fromY  >= 0 && yPosition + fromY  < hauteur) {
                     this.range.addNode(new DiscreteCoordinates(fromX + xPosition, fromY  + yPosition), left, up, right, down);
                 }
-
             }
         }
     }
