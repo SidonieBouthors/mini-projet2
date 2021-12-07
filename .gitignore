@@ -2,3 +2,4 @@
 bin/ch/epfl/cs107/play/game/icwars/actor/players/ICWarsPlayer.class
 bin/ch/epfl/cs107/play/game/icwars/actor/Tank.class
 bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class
+.idea/workspace.xml
