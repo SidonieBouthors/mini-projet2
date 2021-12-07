@@ -15,12 +15,9 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class RealPlayer extends ICWarsPlayer {
 	private Sprite sprite;
 	private ICWarsPlayerGUI GUI;
-<<<<<<< HEAD
 	private Unit selectedUnit;
 	private DiscreteCoordinates coordinates;
-=======
 
->>>>>>> c0ef8dc2c34f6fa217bc232b667e40f8bd1137bc
 	/// Animation duration in frame number
     private final static int MOVE_DURATION = 8;
     

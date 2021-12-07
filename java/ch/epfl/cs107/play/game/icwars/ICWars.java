@@ -77,7 +77,7 @@ public class ICWars extends AreaGame {
 		}
 		
 		if ( keyboard .get( Keyboard .U). isReleased ()) {
-			(( RealPlayer ) player ). selectUnit(1); // 0, 1 ...
+			(( RealPlayer ) player ).selectUnit(1); // 0, 1 ...
 			}
 
 	}
