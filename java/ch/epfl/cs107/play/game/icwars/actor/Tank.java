@@ -3,8 +3,6 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 
-import java.awt.*;
-
 public class Tank extends Unit {
 
 
@@ -14,6 +12,8 @@ public class Tank extends Unit {
         maxHP =10;
         radius=4;
         maxDamage=7;
+        this.createRange();
+
 
     }
 
@@ -31,10 +31,7 @@ public class Tank extends Unit {
             return "icwars/friendlyTank";
         }
     }
-    @Override
-    public boolean takeCellSpace() {
-        return true;
-    }
+
 
 
 }

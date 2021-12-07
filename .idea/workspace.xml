@@ -3,17 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f423c3a5-213b-44fa-abaa-9e6e5d8606f3" name="Changes" comment="AH">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior$ICWarsCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior$ICWarsCell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior$ICWarsCellType.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior$ICWarsCellType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWarsBehavior.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Soldier.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Soldier.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Tank.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/ICWarsPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/ICWarsPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWarsBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/ICWarsBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/ICWarsActor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Soldier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Tank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +105,12 @@
       <workItem from="1638700155981" duration="117000" />
       <workItem from="1638700991004" duration="266000" />
       <workItem from="1638724184700" duration="742000" />
-      <workItem from="1638733581623" duration="770000" />
+      <workItem from="1638733581623" duration="785000" />
+      <workItem from="1638734657359" duration="778000" />
+      <workItem from="1638795881248" duration="332000" />
+      <workItem from="1638803326951" duration="47000" />
+      <workItem from="1638812933420" duration="7985000" />
+      <workItem from="1638862667001" duration="593000" />
     </task>
     <task id="LOCAL-00001" summary="Pour de vrai">
       <created>1638359540748</created>
@@ -241,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638650292705</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="AH">
+      <created>1638734362419</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1638734362419</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,5 +275,15 @@
     <MESSAGE value="Pour de vrai" />
     <MESSAGE value="AH" />
     <option name="LAST_COMMIT_MESSAGE" value="AH" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

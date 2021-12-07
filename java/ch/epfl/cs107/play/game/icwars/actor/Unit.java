@@ -17,6 +17,7 @@ import java.util.Queue;
 public class Unit extends ICWarsActor implements Interactor, Interactable {
     
     protected Sprite sprite;
+
     protected String spriteName;
     protected int currentHP;
     protected int maxHP;
@@ -29,37 +30,55 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
         super(owner, coordinates, faction);
         sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
         this.coordinates = coordinates;
+        sprite.setDepth(0);
 
-        int xPosition = coordinates.x;
-        int yPosition = coordinates.y;
+
+
+
+
+
+
+
+
+    }
+    public void createRange () {
+
+        int xPosition = (int)this.getPosition().x;
+        int yPosition = (int) this.getPosition().y;
         int largeeur = this.getOwnerArea().getWidth();
         int hauteur = this.getOwnerArea().getHeight();
+        boolean left,up,right,down;
 
-        boolean left;
-        boolean up;
-        boolean right;
-        boolean down;
 
-        for (int i = -radius; i <= radius; i++) {
-            right = false;
-            up = false;
-            left=false;
-            down = false;
-            if (!(xPosition -i < 0 || xPosition + i>  largeeur || yPosition<0 || yPosition > hauteur)){
 
-                if (xPosition -radius> 0 ) {
+        for (int fromX = -radius; fromX <= radius; fromX++) {
+            for (int fromY = -radius; fromY  <= radius; fromY ++) {
+
+                if ( fromX + xPosition >0) {
                     left = true;
-                } else if (xPosition + radius < largeeur) {
-                    right = true;
-                } else if (yPosition -radius>0 ) {
-                    down = true;
-                } else if (yPosition + radius < hauteur) {
-                    up = true;
+                } else{
+                    left = false;
                 }
-                range.addNode(new DiscreteCoordinates(i+xPosition,i+yPosition),left,up,right,down);
+                if (fromX + xPosition < largeeur-1) {
+                    right = true;
+                } else {
+                    right = false;
+                }
+                if ( fromY +yPosition<hauteur-1) {
+                    up = true;
+                } else {
+                    up = false;
+                }
+                if (fromY  + yPosition >0) {
+                    down = true;
+                } else {
+                    down = false;
+                }
+                if (xPosition + fromX >= 0 && xPosition + fromX < largeeur && yPosition + fromY  >= 0 && yPosition + fromY  < hauteur) {
+                    this.range.addNode(new DiscreteCoordinates(fromX + xPosition, fromY  + yPosition), left, up, right, down);
+                }
+
             }
-
-
         }
     }
 

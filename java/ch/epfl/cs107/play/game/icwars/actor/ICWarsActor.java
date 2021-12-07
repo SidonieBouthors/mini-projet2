@@ -71,7 +71,7 @@ public class ICWarsActor extends MovableAreaEntity {
 
     @Override
     public boolean takeCellSpace() {
-        return true;
+        return false;
     }
 
     @Override

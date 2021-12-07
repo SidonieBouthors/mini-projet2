@@ -20,8 +20,5 @@ public class Soldier extends Unit {
             }
     }
 
-    @Override
-    public boolean takeCellSpace() {
-        return false;
-    }
+
 }

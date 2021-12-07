@@ -25,6 +25,7 @@ public class RealPlayer extends ICWarsPlayer {
 		else {
 			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
 		}
+		sprite.setDepth(1);
 		centerCamera();
 		resetMotion();
 	}
