@@ -19,6 +19,7 @@ public class Tank extends Unit {
 
 
 
+
     public DiscreteCoordinates getSpawnPosition() {
         if (this.faction == ICWarsFaction.ALLY) {
             return new DiscreteCoordinates(2,5);
