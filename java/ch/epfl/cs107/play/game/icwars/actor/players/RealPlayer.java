@@ -15,7 +15,7 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class RealPlayer extends ICWarsPlayer {
 	private Sprite sprite;
 	private ICWarsPlayerGUI gui;
-	private Unit selectedUnit;
+
 
 
 	/// Animation duration in frame number
@@ -47,6 +47,24 @@ public class RealPlayer extends ICWarsPlayer {
             moveIfPressed(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
           
 	        super.update(deltaTime);
+
+
+		 switch (state) {
+			 case IDLE:
+				 break;
+			 case NORMAl:
+				 if (keyboard.get(Keyboard.ENTER).isPressed()) {
+					 state=ICWarsPlayerState.SELECT_CELL;
+				 } else if (keyboard.get(Keyboard.TAB).isPressed()) {
+					 state = ICWarsPlayerState.IDLE;
+				 }
+			 case SELECT_CELL:
+				 if (!(selectedUnit == null)) {
+					 state = ICWarsPlayerState.MOVE_UNIT;
+				 }
+			 case MOVE_UNIT:
+
+		 }
 	       
 	    }
 	 /**

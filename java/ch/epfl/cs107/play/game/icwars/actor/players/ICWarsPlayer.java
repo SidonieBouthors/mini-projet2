@@ -15,6 +15,7 @@ public class ICWarsPlayer extends ICWarsActor{
 	protected ArrayList<Unit> units;
 	private ICWarsPlayerGUI gui;
 	protected ICWarsPlayerState state;
+	protected Unit selectedUnit;
 
 
 	public enum ICWarsPlayerState {
@@ -64,7 +65,6 @@ public class ICWarsPlayer extends ICWarsActor{
                 }
             }
 	    }
-		Keyboard keyboard = getOwnerArea().getKeyboard();
 
 
 

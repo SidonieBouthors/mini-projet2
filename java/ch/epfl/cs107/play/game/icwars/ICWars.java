@@ -19,6 +19,7 @@ public class ICWars extends AreaGame {
 	
 	private final static int NUMBERS_OF_LEVELS = 2;
 	private int currentLevelPassed;
+
 	
     
     
