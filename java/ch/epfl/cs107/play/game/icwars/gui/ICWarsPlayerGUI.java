@@ -27,7 +27,7 @@ public class ICWarsPlayerGUI implements Graphics{
 	public void draw(Canvas canvas) {
 		player.setGUIInfo(this);
 
-		if (!(selectedUnit == null)) {
+		if (selectedUnit != null && selectedUnit.getPosition() == player.getPosition()) {
 			selectedUnit.drawRangeAndPathTo(cursorCoordinates, canvas);
 		}
 	}

@@ -60,7 +60,7 @@ public class RealPlayer extends ICWarsPlayer {
 					 state = ICWarsPlayerState.IDLE;
 				 }
 			 case SELECT_CELL:
-				 if (!(selectedUnit == null)) {
+				 if (selectedUnit != null && this.getCurrentMainCellCoordinates()== selectedUnit.getCoordinates()) {
 					 state = ICWarsPlayerState.MOVE_UNIT;
 				 }
 			 case MOVE_UNIT:

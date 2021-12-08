@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.icwars.actor.players;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
@@ -72,9 +73,14 @@ public class ICWarsPlayer extends ICWarsActor{
                 }
             }
 	    }
+	}
 
 
-
+	@Override
+	public void onLeaving(List<DiscreteCoordinates> coordinates) {
+		if (state == ICWarsPlayerState.SELECT_CELL) {
+			state = ICWarsPlayerState.NORMAL;
+		}
 	}
     @Override
     public void leaveArea(){

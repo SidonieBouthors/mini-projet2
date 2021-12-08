@@ -37,11 +37,12 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
 
         range = new ICWarsRange();
 
-        int xPosition = this.coordinates.x;
-        int yPosition = this.coordinates.y;
+        int xPosition = (int) this.getPosition().x;
+        int yPosition = (int) this.getPosition().y;
         int largeeur = this.getOwnerArea().getWidth();
         int hauteur = this.getOwnerArea().getHeight();
         boolean left,up,right,down;
+
 
 
 
@@ -106,6 +107,7 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
         } else {
             currentHP += repair;
         }
+
     }
     
     /***
@@ -125,8 +127,9 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
 
     public void setUsed(boolean used) {
         this.used=used;
+
     }
-    
+
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);
