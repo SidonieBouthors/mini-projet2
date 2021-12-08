@@ -37,7 +37,7 @@ public class RealPlayer extends ICWarsPlayer {
 	}
 	 
 	 @Override
-	    public void update(float deltaTime) {
+	 public void update(float deltaTime) {
 
 			Keyboard keyboard= getOwnerArea().getKeyboard();
 			
@@ -63,10 +63,17 @@ public class RealPlayer extends ICWarsPlayer {
 					 state = ICWarsPlayerState.MOVE_UNIT;
 				 }
 			 case MOVE_UNIT:
-
-		 }
+				 if (keyboard.get(Keyboard.ENTER).isPressed()) {
+					 selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
+					 selectedUnit.setUsed(true);
+					 state = ICWarsPlayerState.NORMAl;
+					 break;
+				 }
+			 case ACTION:
+			 case ACTION_SELECTION:
+	     }
 	       
-	    }
+	}
 	 /**
      * Orientate and Move this player in the given orientation if the given button is down
      * @param orientation (Orientation): given orientation, not null
