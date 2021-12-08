@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f423c3a5-213b-44fa-abaa-9e6e5d8606f3" name="Changes" comment="AH">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/ICWars.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Soldier.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Soldier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Tank.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/Unit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/ch/epfl/cs107/play/game/icwars/actor/Unit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/ICWarsPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/ICWarsPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/gui/ICWarsPlayerGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ch/epfl/cs107/play/game/icwars/gui/ICWarsPlayerGUI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
