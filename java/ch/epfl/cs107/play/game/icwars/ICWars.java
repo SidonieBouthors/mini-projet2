@@ -58,7 +58,7 @@ public class ICWars extends AreaGame {
 		  Tank allyTank = new Tank(area, new DiscreteCoordinates(2, 5),ICWarsFaction.ALLY);
 		  Soldier allySoldier = new Soldier(area, new DiscreteCoordinates(3, 5),ICWarsFaction.ENEMY);
 		  player = new RealPlayer(area, coords,ICWarsFaction.ALLY, allyTank, allySoldier);
-		   
+		  player.startTurn();
 		  
 		  player.enterArea(area, coords);
 		  currentLevelPassed=0;

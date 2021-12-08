@@ -20,7 +20,7 @@ public class ICWarsPlayer extends ICWarsActor{
 
 	public enum ICWarsPlayerState {
 		IDLE(0),
-		NORMAl(1),
+		NORMAL(1),
 		SELECT_CELL(2),
 		MOVE_UNIT(3),
 		ACTION_SELECTION(4),
@@ -54,6 +54,13 @@ public class ICWarsPlayer extends ICWarsActor{
 			return true;
 		}
 		else { return false;}
+	}
+	public void startTurn() {
+		state = ICWarsPlayerState.NORMAL;
+		centerCamera();
+		for (Unit unit:units) {
+			unit.setUsed(false);
+		}
 	}
 	@Override
 	public void update(float deltaTime){
