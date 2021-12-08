@@ -40,14 +40,14 @@ public class RealPlayer extends ICWarsPlayer {
 
 	 public void update(float deltaTime) {
 
-			Keyboard keyboard= getOwnerArea().getKeyboard();
-			
-			moveIfPressed(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
-            moveIfPressed(Orientation.UP, keyboard.get(Keyboard.UP));
-            moveIfPressed(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
-            moveIfPressed(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
-          
-	        super.update(deltaTime);
+		Keyboard keyboard= getOwnerArea().getKeyboard();
+		
+		moveIfPressed(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
+        moveIfPressed(Orientation.UP, keyboard.get(Keyboard.UP));
+        moveIfPressed(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
+        moveIfPressed(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+      
+        super.update(deltaTime);
 
 
 		 switch (state) {
