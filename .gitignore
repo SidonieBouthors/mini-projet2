@@ -95,6 +95,3 @@ crashlytics-build.properties
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
-bin/ch/epfl/cs107/play/game/icwars/ICWars.class
-bin/ch/epfl/cs107/play/game/icwars/actor/players/ICWarsPlayer.class
-bin/ch/epfl/cs107/play/game/icwars/actor/players/RealPlayer.class
