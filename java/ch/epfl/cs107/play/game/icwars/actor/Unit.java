@@ -124,11 +124,22 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
 	    	new Path(getCurrentMainCellCoordinates ().toVector (),path).draw(canvas);
 	    }
     }
-
+    /**
+     * @param used
+     */
     public void setUsed(boolean used) {
         this.used=used;
 
     }
+    @Override
+    public boolean changePosition(DiscreteCoordinates newPosition) {
+    	if (range.nodeExists(newPosition) && super.changePosition(newPosition)) {
+    		this.createRange();
+    		return true;
+    	}
+    	return false;
+    }
+
 
     @Override
     public void draw(Canvas canvas) {
