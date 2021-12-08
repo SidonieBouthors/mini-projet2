@@ -22,7 +22,7 @@ public class ICWarsPlayerGUI implements Graphics{
 		assert (player.getClass() == RealPlayer.class);
 		this.player=(RealPlayer) player;
 	}
-
+ 
 	@Override
 	public void draw(Canvas canvas) {
 		player.setGUIInfo(this);
