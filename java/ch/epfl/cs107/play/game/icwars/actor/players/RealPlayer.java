@@ -37,36 +37,45 @@ public class RealPlayer extends ICWarsPlayer {
 	}
 	 
 	 @Override
-     public void update(float deltaTime) {
 
-		Keyboard keyboard= getOwnerArea().getKeyboard();
-		
-		moveIfPressed(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
-	    moveIfPressed(Orientation.UP, keyboard.get(Keyboard.UP));
-	    moveIfPressed(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
-	    moveIfPressed(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
-	  
-	    super.update(deltaTime);
-	
-	
-	  switch (state) {
-		 case IDLE:
-			 break;
-		 case NORMAL:
-			 if (keyboard.get(Keyboard.ENTER).isPressed()) {
-				 state=ICWarsPlayerState.SELECT_CELL;
-			 } else if (keyboard.get(Keyboard.TAB).isPressed()) {
-				 state = ICWarsPlayerState.IDLE;
-			 }
-		 case SELECT_CELL:
-			 if (!(selectedUnit == null)) {
-				 state = ICWarsPlayerState.MOVE_UNIT;
-			 }
-		 case MOVE_UNIT:
-	
-	 }
-       
-     }
+	 public void update(float deltaTime) {
+
+			Keyboard keyboard= getOwnerArea().getKeyboard();
+			
+			moveIfPressed(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
+            moveIfPressed(Orientation.UP, keyboard.get(Keyboard.UP));
+            moveIfPressed(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
+            moveIfPressed(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+          
+	        super.update(deltaTime);
+
+
+		 switch (state) {
+			 case IDLE:
+				 break;
+			 case NORMAL:
+				 if (keyboard.get(Keyboard.ENTER).isPressed()) {
+					 state=ICWarsPlayerState.SELECT_CELL;
+				 } else if (keyboard.get(Keyboard.TAB).isPressed()) {
+					 state = ICWarsPlayerState.IDLE;
+				 }
+			 case SELECT_CELL:
+				 if (!(selectedUnit == null)) {
+					 state = ICWarsPlayerState.MOVE_UNIT;
+				 }
+			 case MOVE_UNIT:
+				 if (keyboard.get(Keyboard.ENTER).isPressed()) {
+					 selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
+					 selectedUnit.setUsed(true);
+					 state = ICWarsPlayerState.NORMAL;
+					 break;
+				 }
+			 case ACTION:
+			 case ACTION_SELECTION:
+	     }
+	       
+	}
+
 	 /**
      * Orientate and Move this player in the given orientation if the given button is down
      * @param orientation (Orientation): given orientation, not null

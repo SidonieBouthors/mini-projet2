@@ -25,6 +25,7 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     protected int radius;
     protected ICWarsRange range;
     protected DiscreteCoordinates coordinates;
+    protected boolean used;
 
     public Unit(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
         super(owner, coordinates, faction);
@@ -121,6 +122,10 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
 	    	new Path(getCurrentMainCellCoordinates ().toVector (),path).draw(canvas);
 	    }
     }
+
+    public void setUsed(boolean used) {
+        this.used=used;
+    }
     
     @Override
     public void draw(Canvas canvas) {
@@ -146,5 +151,6 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     public void interactWith(Interactable other) {
 
     }
+
     
 }
