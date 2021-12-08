@@ -8,18 +8,35 @@ import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.window.Keyboard;
 
 public class ICWarsPlayer extends ICWarsActor{
 
 	protected ArrayList<Unit> units;
-	protected Unit selectedUnit;
+	private ICWarsPlayerGUI gui;
+	protected ICWarsPlayerState state;
 
 
+	public enum ICWarsPlayerState {
+		IDLE(0),
+		NORMAl(1),
+		SELECT_CELL(2),
+		MOVE_UNIT(3),
+		ACTION_SELECTION(4),
+		ACTION(5);
+		private int state;
 
+		ICWarsPlayerState(int state) {
+			this.state=state;
+		}
+
+	}
 
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction, Unit... units) {
 		super(owner, coordinates, faction);
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
+		gui = new ICWarsPlayerGUI(10.f,this);
+		state = ICWarsPlayerState.IDLE;
 
 	}
 	
@@ -47,6 +64,10 @@ public class ICWarsPlayer extends ICWarsActor{
                 }
             }
 	    }
+		Keyboard keyboard = getOwnerArea().getKeyboard();
+
+
+
 	}
     @Override
     public void leaveArea(){
@@ -64,15 +85,7 @@ public class ICWarsPlayer extends ICWarsActor{
 			unit.enterArea(area,unit.getCoordinates());
         }
     }
-	public void selectUnit(int i) {
-		if (i < units.size()) {
-			selectedUnit = units.get(i);
-		}
-	}
-	public void setGUIInfo (ICWarsPlayerGUI gui) {
-		gui.setSelectedUnit(this.selectedUnit);
-		gui.setCursorCoordinates(this.getCurrentMainCellCoordinates());
-	}
+
 	@Override
 	public boolean takeCellSpace() {
 		return true;

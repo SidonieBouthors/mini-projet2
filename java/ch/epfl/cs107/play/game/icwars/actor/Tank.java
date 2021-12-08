@@ -13,8 +13,6 @@ public class Tank extends Unit {
         radius=4;
         maxDamage=7;
         this.createRange();
-
-
     }
 
 

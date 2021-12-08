@@ -15,6 +15,7 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class RealPlayer extends ICWarsPlayer {
 	private Sprite sprite;
 	private ICWarsPlayerGUI gui;
+	private Unit selectedUnit;
 
 
 	/// Animation duration in frame number
@@ -78,6 +79,16 @@ public class RealPlayer extends ICWarsPlayer {
 	public void draw(Canvas canvas) {
 		sprite.draw(canvas);
 		gui.draw(canvas);
+	}
+	/*public void selectUnit(int i) {
+		if (i < units.size()) {
+			selectedUnit = units.get(i);
+		}
+	}*/
+
+	public void setGUIInfo (ICWarsPlayerGUI gui) {
+		gui.setSelectedUnit(this.selectedUnit);
+		gui.setCursorCoordinates(this.getCurrentMainCellCoordinates());
 	}
 
 }
