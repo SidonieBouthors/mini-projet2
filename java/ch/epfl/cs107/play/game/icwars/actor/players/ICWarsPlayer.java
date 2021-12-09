@@ -5,18 +5,44 @@ import java.util.Arrays;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Keyboard;
 
-public class ICWarsPlayer extends ICWarsActor{
+public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 	protected ArrayList<Unit> units;
 	private ICWarsPlayerGUI gui;
 	protected ICWarsPlayerState state;
 	protected Unit selectedUnit;
+	protected DiscreteCoordinates coordinates;
+
+
+	@Override
+	public List<DiscreteCoordinates> getFieldOfViewCells() {
+		return null;
+	}
+
+	@Override
+	public boolean wantsCellInteraction() {
+		return true;
+	}
+
+	@Override
+	public boolean wantsViewInteraction() {
+		return false;
+	}
+
+	@Override
+	public void interactWith(Interactable other) {
+
+	}
 
 
 	public enum ICWarsPlayerState {
@@ -39,10 +65,26 @@ public class ICWarsPlayer extends ICWarsActor{
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
 		gui = new ICWarsPlayerGUI(10.f,this);
 		state = ICWarsPlayerState.IDLE;
+		this.coordinates=coordinates;
+		this.faction=faction;
 
 	}
-	
-    /**Centres the camera on the player
+
+	// Non intrusive getter : An object ICWarsPlayerState is immutable.
+	public ICWarsPlayerState getState() {
+		return state;
+	}
+
+	// Non intrusive getter : An object Unit is immutable.
+	public Unit getSelectedUnit() {return selectedUnit;}
+
+	// Non intrusive getter : An object Discrete Coordinates is immutable.
+	public DiscreteCoordinates getCoordinates() {
+		return coordinates;
+	}
+
+
+	/**Centres the camera on the player
      */
 	public void centerCamera() {
 		getOwnerArea().setViewCandidate(this);
@@ -98,6 +140,8 @@ public class ICWarsPlayer extends ICWarsActor{
 			unit.enterArea(area,unit.getCoordinates());
         }
     }
+	@Override
+	public void acceptInteraction(AreaInteractionVisitor v) {((ICWarInteractionVisitor)v).interactWith(this); }
 
 	@Override
 	public boolean takeCellSpace() {

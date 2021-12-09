@@ -6,6 +6,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Path;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsRange;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -33,7 +34,9 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
         this.coordinates = coordinates;
         sprite.setDepth(0);
     }
-    public void createRange () {
+
+    // Protected Method to create the range of a unit.
+    protected void createRange () {
 
         range = new ICWarsRange();
 
@@ -42,6 +45,7 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
         int largeeur = this.getOwnerArea().getWidth();
         int hauteur = this.getOwnerArea().getHeight();
         boolean left,up,right,down;
+
 
 
 
@@ -165,6 +169,5 @@ public class Unit extends ICWarsActor implements Interactor, Interactable {
     public void interactWith(Interactable other) {
 
     }
-
     
 }

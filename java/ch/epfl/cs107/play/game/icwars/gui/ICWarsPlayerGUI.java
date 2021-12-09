@@ -21,23 +21,18 @@ public class ICWarsPlayerGUI implements Graphics{
 			ICWarsPlayer player ) {
 		assert (player.getClass() == RealPlayer.class);
 		this.player=(RealPlayer) player;
+
+		cursorCoordinates = player.getCoordinates();
 	}
  
 	@Override
 	public void draw(Canvas canvas) {
-		player.setGUIInfo(this);
 
-		if (selectedUnit != null && selectedUnit.getPosition() == player.getPosition()) {
+
+		if (selectedUnit != null && player.getState() == ICWarsPlayer.ICWarsPlayerState.MOVE_UNIT && selectedUnit.getPosition() == player.getPosition()) {
+
 			selectedUnit.drawRangeAndPathTo(cursorCoordinates, canvas);
 		}
+
 	}
-	
-	public void setSelectedUnit(Unit unit){
-		selectedUnit = unit;
-	}
-	
-	public void setCursorCoordinates(DiscreteCoordinates coordinates) {
-		cursorCoordinates = coordinates;
-	}
-	
 }

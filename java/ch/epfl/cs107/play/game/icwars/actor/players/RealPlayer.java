@@ -4,6 +4,7 @@ package ch.epfl.cs107.play.game.icwars.actor.players;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+import ch.epfl.cs107.play.game.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -34,6 +35,7 @@ public class RealPlayer extends ICWarsPlayer {
 		centerCamera();
 		resetMotion();
 		gui = new ICWarsPlayerGUI(10.f,this);
+
 	}
 	 
 	 @Override
@@ -62,9 +64,10 @@ public class RealPlayer extends ICWarsPlayer {
 			 case SELECT_CELL:
 				 if (selectedUnit != null && this.getCurrentMainCellCoordinates()== selectedUnit.getCoordinates()) {
 					 state = ICWarsPlayerState.MOVE_UNIT;
+
 				 }
 			 case MOVE_UNIT:
-				 if (keyboard.get(Keyboard.ENTER).isPressed()) {
+				 if (state == ICWarsPlayerState.MOVE_UNIT && keyboard.get(Keyboard.ENTER).isPressed()) {
 					 selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
 					 selectedUnit.setUsed(true);
 					 state = ICWarsPlayerState.NORMAL;
@@ -81,14 +84,17 @@ public class RealPlayer extends ICWarsPlayer {
      * @param orientation (Orientation): given orientation, not null
      * @param b (Button): button corresponding to the given orientation, not null
      */
-    private void moveIfPressed(Orientation orientation, Button b){
-        if(b.isDown()) {
-            if (!isDisplacementOccurs()) {
-                orientate(orientation);
-                move(MOVE_DURATION);
-            }
-        }
-    }
+    private void moveIfPressed(Orientation orientation, Button b) {
+		if (state == ICWarsPlayerState.NORMAL || state == ICWarsPlayerState.SELECT_CELL || state == ICWarsPlayerState.MOVE_UNIT){
+			if (b.isDown()) {
+				if (!isDisplacementOccurs()) {
+					orientate(orientation);
+					move(MOVE_DURATION);
+				}
+			}
+		}
+	}
+
 
     /**
      *
@@ -107,15 +113,19 @@ public class RealPlayer extends ICWarsPlayer {
 		sprite.draw(canvas);
 		gui.draw(canvas);
 	}
+
 	/*public void selectUnit(int i) {
 		if (i < units.size()) {
 			selectedUnit = units.get(i);
 		}
 	}*/
-
-	public void setGUIInfo (ICWarsPlayerGUI gui) {
-		gui.setSelectedUnit(this.selectedUnit);
-		gui.setCursorCoordinates(this.getCurrentMainCellCoordinates());
+	private class ICWarsPlayerInteractionHandler implements ICWarInteractionVisitor {
+		@Override
+		public void interactWith(Unit unit) {
+			if (state == ICWarsPlayerState.SELECT_CELL && unit.getFaction() == faction) {
+				selectedUnit = unit;
+			}
+		}
 	}
 
 }

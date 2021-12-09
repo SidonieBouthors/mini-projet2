@@ -40,6 +40,11 @@ public class ICWarsActor extends MovableAreaEntity {
         }
 
     }
+    // Non Intrusive getter : an object ICWarsFaction is immutable.
+    public ICWarsFaction getFaction() {
+        return faction;
+    }
+
     /**
      * registor the actor in the area specified
      * @param area (Area): initial area, not null
@@ -62,6 +67,7 @@ public class ICWarsActor extends MovableAreaEntity {
     public void draw(Canvas canvas){
     
     }
+
 
 
     @Override
