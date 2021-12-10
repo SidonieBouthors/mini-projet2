@@ -73,6 +73,7 @@ public class RealPlayer extends ICWarsPlayer {
 						state = ICWarsPlayerState.MOVE_UNIT;
 					} else {
 						state=ICWarsPlayerState.NORMAL;
+						int heho =0;
 					}
 					break;
 				case MOVE_UNIT:
