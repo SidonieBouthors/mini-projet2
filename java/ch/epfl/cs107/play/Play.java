@@ -85,7 +85,7 @@ public class Play {
 		} finally {
 			// Release resources
 			window.dispose();
-		}
+		} 
 	}
 
 }
