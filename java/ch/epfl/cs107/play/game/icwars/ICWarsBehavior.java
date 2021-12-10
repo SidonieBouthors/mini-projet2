@@ -67,7 +67,7 @@ public class ICWarsBehavior extends AreaBehavior {
 		 * @param type (EnigmeCellType), not null
 		 */
 		public  ICWarsCell(int x, int y, ICWarsCellType type){
-			super(x, y);
+			super(x, y); 
 			this.type = type;
 		}
 	
@@ -80,7 +80,7 @@ public class ICWarsBehavior extends AreaBehavior {
 		protected boolean canEnter(Interactable entity) {
 			//Checking if there exists an interactable that already take the cell space in the cell, if yes you cannot enter
 			for (Interactable interactable : entities) {
-				if (interactable.takeCellSpace() && interactable != entity) {
+				if (interactable.takeCellSpace() && entity.takeCellSpace() && interactable != entity) {
 					return false;
 				}
 			}
