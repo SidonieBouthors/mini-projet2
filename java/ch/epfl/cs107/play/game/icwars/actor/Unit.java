@@ -135,7 +135,9 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
      */
     public void setUsed(boolean used) {
         this.used=used;
-
+    }
+    public boolean getUsed() {
+        return used;
     }
     @Override
     public boolean changePosition(DiscreteCoordinates newPosition) {
@@ -165,14 +167,16 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     public boolean wantsViewInteraction() {
         return false;
     }
-    @Override
-    public void acceptInteraction(AreaInteractionVisitor v) {
-        ((ICWarInteractionVisitor)v).interactWith(this);
-    }
 
     @Override
     public void interactWith(Interactable other) {
 
     }
+
+    @Override
+    public void acceptInteraction(AreaInteractionVisitor v) {
+        ((ICWarInteractionVisitor)v).interactWith(this);
+    }
+
 
 }
