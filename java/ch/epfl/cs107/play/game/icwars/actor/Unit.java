@@ -38,12 +38,12 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     }
 
     // Protected Method to create the range of a unit.
-    protected void createRange () {
+    public void createRange () {
 
         range = new ICWarsRange();
 
-        int xPosition = coordinates.x;
-        int yPosition = coordinates.y;
+        int xPosition = (int)this.getPosition().x;
+        int yPosition = (int)this.getPosition().y;
         int largeeur = this.getOwnerArea().getWidth();
         int hauteur = this.getOwnerArea().getHeight();
         boolean left,up,right,down;
@@ -174,5 +174,5 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     public void interactWith(Interactable other) {
 
     }
-    
+
 }

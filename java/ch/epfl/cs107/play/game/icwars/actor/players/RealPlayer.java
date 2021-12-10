@@ -79,8 +79,8 @@ public class RealPlayer extends ICWarsPlayer {
 					if (keyboard.get(Keyboard.ENTER).isReleased()) {
 						selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
 						selectedUnit.setUsed(true);
+						selectedUnit.createRange();
 						state=ICWarsPlayerState.NORMAL;
-						break;
 					}
 				case ACTION:
 				case ACTION_SELECTION:
