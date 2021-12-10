@@ -6,6 +6,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
@@ -82,7 +83,7 @@ public class ICWarsActor extends MovableAreaEntity {
 
     @Override
     public boolean isCellInteractable() {
-        return false;
+        return true;
     }
 
     @Override
@@ -92,7 +93,7 @@ public class ICWarsActor extends MovableAreaEntity {
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-
+        ((ICWarInteractionVisitor)v).interactWith(this);
     }
 
 }

@@ -4,7 +4,7 @@ package ch.epfl.cs107.play.game.icwars.actor.players;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
-import ch.epfl.cs107.play.game.handler.ICWarInteractionVisitor;
+import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -52,31 +52,35 @@ public class RealPlayer extends ICWarsPlayer {
         super.update(deltaTime);
 
 
-		 switch (state) {
-			 case IDLE:
-				 break;
-			 case NORMAL:
-				 if (keyboard.get(Keyboard.ENTER).isPressed()) {
-					 state=ICWarsPlayerState.SELECT_CELL;
-				 } else if (keyboard.get(Keyboard.TAB).isPressed()) {
-					 state = ICWarsPlayerState.IDLE;
-				 }
-			 case SELECT_CELL:
-				 if (selectedUnit != null && this.getCurrentMainCellCoordinates()== selectedUnit.getCoordinates()) {
-					 state = ICWarsPlayerState.MOVE_UNIT;
 
-				 }
-			 case MOVE_UNIT:
-				 if (state == ICWarsPlayerState.MOVE_UNIT && keyboard.get(Keyboard.ENTER).isPressed()) {
-					 selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
-					 selectedUnit.setUsed(true);
-					 state = ICWarsPlayerState.NORMAL;
-					 break;
-				 }
-			 case ACTION:
-			 case ACTION_SELECTION:
-	     }
-	       
+			switch (state) {
+				case IDLE:
+					break;
+				case NORMAL:
+					if (keyboard.get(Keyboard.ENTER).isPressed()) {
+						state = ICWarsPlayerState.SELECT_CELL;
+					} else if (keyboard.get(Keyboard.TAB).isPressed()) {
+						state = ICWarsPlayerState.IDLE;
+					}
+					System.out.println(state);
+				case SELECT_CELL:
+					if (selectedUnit != null) {
+						state = ICWarsPlayerState.MOVE_UNIT;
+
+					} System.out.println(state);
+				case MOVE_UNIT:
+					if (state == ICWarsPlayerState.MOVE_UNIT) {
+						selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
+						selectedUnit.setUsed(true);
+						System.out.println(state);
+
+						break;
+					}
+				case ACTION:
+				case ACTION_SELECTION:
+			}
+
+
 	}
 
 	 /**

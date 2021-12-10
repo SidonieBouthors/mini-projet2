@@ -8,12 +8,11 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.handler.ICWarInteractionVisitor;
+import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.window.Keyboard;
 
 public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
@@ -143,7 +142,6 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {((ICWarInteractionVisitor)v).interactWith(this); }
 
-	@Override
 	public boolean takeCellSpace() {
 		return true;
 	}

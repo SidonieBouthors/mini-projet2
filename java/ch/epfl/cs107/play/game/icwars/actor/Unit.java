@@ -15,7 +15,7 @@ import ch.epfl.cs107.play.window.Canvas;
 import java.util.List;
 import java.util.Queue;
  
-public class Unit extends ICWarsActor implements Interactor, Interactable {
+public class Unit extends ICWarsActor implements Interactor,Interactable {
     
     protected Sprite sprite;
 
