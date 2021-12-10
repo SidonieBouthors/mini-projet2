@@ -29,8 +29,10 @@ public class ICWarsPlayerGUI implements Graphics{
 	public void draw(Canvas canvas) {
 		selectedUnit = player.getSelectedUnit();
 		cursorCoordinates = player.getCoordinates();
+		
+		
 
-		if (selectedUnit != null && player.getState() == ICWarsPlayer.ICWarsPlayerState.MOVE_UNIT) {
+		if (selectedUnit != null && player.getState() == ICWarsPlayer.ICWarsPlayerState.SELECT_CELL) {
 			selectedUnit.drawRangeAndPathTo(cursorCoordinates, canvas);
 		}
 	}

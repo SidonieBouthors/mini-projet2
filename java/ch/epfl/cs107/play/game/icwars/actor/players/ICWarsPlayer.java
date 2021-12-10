@@ -139,11 +139,10 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 			unit.enterArea(area,unit.getCoordinates());
         }
     }
-	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {((ICWarInteractionVisitor)v).interactWith(this); }
+
 
 	public boolean takeCellSpace() {
-		return true;
+		return false;
 	}
 	@Override
     public boolean isCellInteractable() {
@@ -153,4 +152,5 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	public boolean isViewInteractable() {
 		return false;
 	}
+	
 }

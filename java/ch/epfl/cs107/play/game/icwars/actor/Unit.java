@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Path;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsRange;
+import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -33,6 +34,7 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
         sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
         this.coordinates = coordinates;
         sprite.setDepth(0);
+        
     }
 
     // Protected Method to create the range of a unit.
@@ -40,8 +42,8 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
 
         range = new ICWarsRange();
 
-        int xPosition = (int) this.getPosition().x;
-        int yPosition = (int) this.getPosition().y;
+        int xPosition = coordinates.x;
+        int yPosition = coordinates.y;
         int largeeur = this.getOwnerArea().getWidth();
         int hauteur = this.getOwnerArea().getHeight();
         boolean left,up,right,down;
@@ -138,7 +140,6 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     @Override
     public boolean changePosition(DiscreteCoordinates newPosition) {
     	if (range.nodeExists(newPosition) && super.changePosition(newPosition)) {
-    		this.createRange();
     		return true;
     	}
     	return false;
@@ -163,6 +164,10 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     @Override
     public boolean wantsViewInteraction() {
         return false;
+    }
+    @Override
+    public void acceptInteraction(AreaInteractionVisitor v) {
+        ((ICWarInteractionVisitor)v).interactWith(this);
     }
 
     @Override

@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.icwars.actor.players;
 
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
@@ -16,6 +17,8 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class RealPlayer extends ICWarsPlayer {
 	private Sprite sprite;
 	private ICWarsPlayerGUI gui;
+	private final ICWarsPlayerInteractionHandler handler;
+
 
 
 
@@ -35,6 +38,7 @@ public class RealPlayer extends ICWarsPlayer {
 		centerCamera();
 		resetMotion();
 		gui = new ICWarsPlayerGUI(10.f,this);
+		handler = new ICWarsPlayerInteractionHandler();
 
 	}
 	 
@@ -69,11 +73,10 @@ public class RealPlayer extends ICWarsPlayer {
 
 					} System.out.println(state);
 				case MOVE_UNIT:
-					if (state == ICWarsPlayerState.MOVE_UNIT) {
+					if (keyboard.get(Keyboard.ENTER).isPressed()) {
 						selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
 						selectedUnit.setUsed(true);
-						System.out.println(state);
-
+						state=ICWarsPlayerState.NORMAL;
 						break;
 					}
 				case ACTION:
@@ -82,6 +85,7 @@ public class RealPlayer extends ICWarsPlayer {
 
 
 	}
+	
 
 	 /**
      * Orientate and Move this player in the given orientation if the given button is down
@@ -117,6 +121,11 @@ public class RealPlayer extends ICWarsPlayer {
 		sprite.draw(canvas);
 		gui.draw(canvas);
 	}
+	
+	public void interactWith(Interactable other ){
+            other.acceptInteraction(handler);
+    }
+	
 
 	/*public void selectUnit(int i) {
 		if (i < units.size()) {
@@ -129,6 +138,11 @@ public class RealPlayer extends ICWarsPlayer {
 			if (state == ICWarsPlayerState.SELECT_CELL && unit.getFaction() == faction) {
 				selectedUnit = unit;
 			}
+		}
+
+		@Override
+		public void interactWith(RealPlayer player) {
+			
 		}
 	}
 

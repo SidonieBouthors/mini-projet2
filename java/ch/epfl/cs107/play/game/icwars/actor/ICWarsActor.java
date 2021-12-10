@@ -93,8 +93,9 @@ public class ICWarsActor extends MovableAreaEntity {
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((ICWarInteractionVisitor)v).interactWith(this);
+        
     }
+    
 
 }
 
