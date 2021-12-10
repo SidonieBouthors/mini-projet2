@@ -172,6 +172,11 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     public void interactWith(Interactable other) {
 
     }
+    
+    @Override
+    public boolean takeCellSpace() {
+    	return true;
+    }
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
