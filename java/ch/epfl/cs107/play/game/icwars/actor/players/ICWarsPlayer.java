@@ -79,7 +79,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 	// Non intrusive getter : An object Discrete Coordinates is immutable.
 	public DiscreteCoordinates getCoordinates() {
-		return coordinates;
+		return getCurrentMainCellCoordinates();
 	}
 
 
@@ -141,9 +141,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
     }
 
 
-	public boolean takeCellSpace() {
-		return false;
-	}
+
 	@Override
     public boolean isCellInteractable() {
         return true;

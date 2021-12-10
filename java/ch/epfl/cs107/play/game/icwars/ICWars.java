@@ -56,7 +56,7 @@ public class ICWars extends AreaGame {
 		  ICWarsArea area = (ICWarsArea)setCurrentArea(areaKey, true);
 		  DiscreteCoordinates coords = area.getPlayerSpawnPosition();
 		  Tank allyTank = new Tank(area, new DiscreteCoordinates(2, 5),ICWarsFaction.ALLY);
-		  Soldier allySoldier = new Soldier(area, new DiscreteCoordinates(3, 5),ICWarsFaction.ENEMY);
+		  Soldier allySoldier = new Soldier(area, new DiscreteCoordinates(3, 5),ICWarsFaction.ALLY);
 		  player = new RealPlayer(area, coords,ICWarsFaction.ALLY, allyTank, allySoldier);
 		  player.startTurn();
 		  

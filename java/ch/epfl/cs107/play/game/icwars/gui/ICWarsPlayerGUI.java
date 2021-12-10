@@ -32,7 +32,7 @@ public class ICWarsPlayerGUI implements Graphics{
 		
 		
 
-		if (selectedUnit != null && player.getState() == ICWarsPlayer.ICWarsPlayerState.SELECT_CELL) {
+		if (selectedUnit != null && player.getState() == ICWarsPlayer.ICWarsPlayerState.MOVE_UNIT) {
 			selectedUnit.drawRangeAndPathTo(cursorCoordinates, canvas);
 		}
 	}
