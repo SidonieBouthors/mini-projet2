@@ -135,8 +135,12 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
      */
     public void setUsed(boolean used) {
         this.used=used;
+        if(used == true){sprite.setAlpha(0.5f);}
+        if (used == false){sprite.setAlpha(1.f);}
 
     }
+    public boolean getUsed(){return used;}
+    
     @Override
     public boolean changePosition(DiscreteCoordinates newPosition) {
     	if (range.nodeExists(newPosition) && super.changePosition(newPosition)) {

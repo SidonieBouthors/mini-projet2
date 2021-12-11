@@ -56,20 +56,20 @@ public class RealPlayer extends ICWarsPlayer {
         super.update(deltaTime);
 
 
-
+            //
 			switch (state) {
 				case IDLE:
 					break;
 				case NORMAL:
 					selectedUnit=null;
 					if (keyboard.get(Keyboard.ENTER).isReleased()) {
-						state = ICWarsPlayerState.SELECT_CELL;
+						this.state = ICWarsPlayerState.SELECT_CELL;
 					} else if (keyboard.get(Keyboard.TAB).isPressed()) {
-						state = ICWarsPlayerState.IDLE;
+						this.state = ICWarsPlayerState.IDLE;
 					}
 					break;
 				case SELECT_CELL:
-					if (selectedUnit != null) {
+					if (selectedUnit != null &&  selectedUnit.getUsed()==false) {
 						state = ICWarsPlayerState.MOVE_UNIT;
 					} else {
 						state=ICWarsPlayerState.NORMAL;
@@ -85,10 +85,12 @@ public class RealPlayer extends ICWarsPlayer {
 				case ACTION:
 				case ACTION_SELECTION:
 			}
-		 System.out.println(selectedUnit);
+		 
 
 
 	}
+
+
 	
 
 	 /**
@@ -122,8 +124,11 @@ public class RealPlayer extends ICWarsPlayer {
     
 	@Override
 	public void draw(Canvas canvas) {
-		sprite.draw(canvas);
-		gui.draw(canvas);
+		// Si le STATE est IDLE alors ne pas draw le cursor
+		if(state != ICWarsPlayerState.IDLE){
+			sprite.draw(canvas);
+		}
+	    gui.draw(canvas);
 	}
 	
 	public void interactWith(Interactable other ){
