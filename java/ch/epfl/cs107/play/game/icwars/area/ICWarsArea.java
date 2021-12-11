@@ -27,6 +27,7 @@ public abstract class ICWarsArea extends Area {
     }
 
     public abstract DiscreteCoordinates getPlayerSpawnPosition();
+    public abstract DiscreteCoordinates getEnemyPlayerSpawnPosition();
     
     /// Demo2Area implements Playable
 

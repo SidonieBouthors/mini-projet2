@@ -33,6 +33,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		return true;
 	}
 
+
 	@Override
 	public boolean wantsViewInteraction() {
 		return false;
