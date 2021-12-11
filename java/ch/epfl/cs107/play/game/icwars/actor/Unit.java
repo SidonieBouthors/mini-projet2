@@ -135,9 +135,15 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
      */
     public void setUsed(boolean used) {
         this.used=used;
+<<<<<<< HEAD
         if(used == true){sprite.setAlpha(0.5f);}
         if (used == false){sprite.setAlpha(1.f);}
 
+=======
+    }
+    public boolean getUsed() {
+        return used;
+>>>>>>> 927ef664079f80c1fa150f4e7da000a1090f5bae
     }
     public boolean getUsed(){return used;}
     
@@ -169,10 +175,6 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     public boolean wantsViewInteraction() {
         return false;
     }
-    @Override
-    public void acceptInteraction(AreaInteractionVisitor v) {
-        ((ICWarInteractionVisitor)v).interactWith(this);
-    }
 
     @Override
     public void interactWith(Interactable other) {
@@ -183,5 +185,11 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     public boolean takeCellSpace() {
     	return true;
     }
+
+    @Override
+    public void acceptInteraction(AreaInteractionVisitor v) {
+        ((ICWarInteractionVisitor)v).interactWith(this);
+    }
+
 
 }

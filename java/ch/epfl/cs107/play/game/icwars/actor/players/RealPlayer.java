@@ -61,7 +61,7 @@ public class RealPlayer extends ICWarsPlayer {
 				case IDLE:
 					break;
 				case NORMAL:
-					selectedUnit=null;
+
 					if (keyboard.get(Keyboard.ENTER).isReleased()) {
 						this.state = ICWarsPlayerState.SELECT_CELL;
 					} else if (keyboard.get(Keyboard.TAB).isPressed()) {
@@ -69,14 +69,19 @@ public class RealPlayer extends ICWarsPlayer {
 					}
 					break;
 				case SELECT_CELL:
+<<<<<<< HEAD
 					if (selectedUnit != null &&  selectedUnit.getUsed()==false) {
+=======
+					if (selectedUnit != null && selectedUnit.getUsed()==false) {
+>>>>>>> 927ef664079f80c1fa150f4e7da000a1090f5bae
 						state = ICWarsPlayerState.MOVE_UNIT;
 					} else {
 						state=ICWarsPlayerState.NORMAL;
+						int heho =0;
 					}
 					break;
 				case MOVE_UNIT:
-					if (keyboard.get(Keyboard.ENTER).isReleased()) {
+					if (keyboard.get(Keyboard.ENTER).isReleased() ) {
 						selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
 						selectedUnit.setUsed(true);
 						selectedUnit.createRange();
