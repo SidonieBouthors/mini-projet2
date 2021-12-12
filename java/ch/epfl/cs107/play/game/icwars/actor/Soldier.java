@@ -10,6 +10,7 @@ public class Soldier extends Unit {
         maxHP =5;
         maxDamage =2;
         radius =2;
+        currentHP=maxHP;
         createRange();
 
     }

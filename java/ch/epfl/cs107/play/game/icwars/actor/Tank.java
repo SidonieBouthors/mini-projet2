@@ -12,6 +12,7 @@ public class Tank extends Unit {
         maxHP =10;
         radius=4;
         maxDamage=7;
+        currentHP = maxHP;
         this.createRange();
     }
 

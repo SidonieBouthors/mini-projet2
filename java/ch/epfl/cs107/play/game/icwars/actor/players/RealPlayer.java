@@ -5,6 +5,7 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+
 import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
@@ -14,96 +15,93 @@ import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
-public class RealPlayer extends ICWarsPlayer {
+public class RealPlayer extends ICWarsPlayer{
 	private Sprite sprite;
 	private ICWarsPlayerGUI gui;
 	private final ICWarsPlayerInteractionHandler handler;
 
 
-
-
 	/// Animation duration in frame number
-    private final static int MOVE_DURATION = 8;
-    
+	private final static int MOVE_DURATION = 8;
+
 	public RealPlayer(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction, Unit... units) {
-		super(owner,coordinates,faction, units);
+		super(owner, coordinates, faction, units);
 		if (faction == ICWarsFaction.ALLY) {
-			sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0,0));
-		}
-		else {
+			sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
+		} else {
 			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
 		}
-		
-		sprite.setDepth(1);
-		centerCamera();
-		resetMotion();
 		gui = new ICWarsPlayerGUI(10.f,this);
+
+		sprite.setDepth(1);
+
+
 		handler = new ICWarsPlayerInteractionHandler();
 
 	}
-	 
-	 @Override
 
-	 public void update(float deltaTime) {
 
-		Keyboard keyboard= getOwnerArea().getKeyboard();
-		
+	@Override
+
+	public void update(float deltaTime) {
+
+		Keyboard keyboard = getOwnerArea().getKeyboard();
+
 		moveIfPressed(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
-        moveIfPressed(Orientation.UP, keyboard.get(Keyboard.UP));
-        moveIfPressed(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
-        moveIfPressed(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
-      
-        super.update(deltaTime);
+		moveIfPressed(Orientation.UP, keyboard.get(Keyboard.UP));
+		moveIfPressed(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
+		moveIfPressed(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+
+		super.update(deltaTime);
 
 
-            //
-			switch (state) {
-				case IDLE:
-					break;
-				case NORMAL:
+		//
+		switch (state) {
+			case IDLE:
+				break;
+			case NORMAL:
 
-					if (keyboard.get(Keyboard.ENTER).isReleased()) {
-						this.state = ICWarsPlayerState.SELECT_CELL;
-					} else if (keyboard.get(Keyboard.TAB).isPressed()) {
-						this.state = ICWarsPlayerState.IDLE;
-					}
-					break;
-				case SELECT_CELL:
-<<<<<<< HEAD
-					if (selectedUnit != null &&  selectedUnit.getUsed()==false) {
-=======
-					if (selectedUnit != null && selectedUnit.getUsed()==false) {
->>>>>>> 927ef664079f80c1fa150f4e7da000a1090f5bae
+				if (keyboard.get(Keyboard.ENTER).isReleased()) {
+					this.state = ICWarsPlayerState.SELECT_CELL;
+				} else if (keyboard.get(Keyboard.TAB).isPressed()) {
+					this.state = ICWarsPlayerState.IDLE;
+				}
+				break;
+			case SELECT_CELL:
+
+					if (selectedUnit != null && selectedUnit.getUsed() == false) {
+
 						state = ICWarsPlayerState.MOVE_UNIT;
 					} else {
-						state=ICWarsPlayerState.NORMAL;
+						state = ICWarsPlayerState.NORMAL;
 					}
 					break;
-				case MOVE_UNIT:
-					if (keyboard.get(Keyboard.ENTER).isReleased() ) {
-						selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
-						selectedUnit.setUsed(true);
-						selectedUnit.createRange();
-						state=ICWarsPlayerState.NORMAL;
-					}
-				case ACTION:
-				case ACTION_SELECTION:
-			}
-		 
+
+			case MOVE_UNIT:
+				if (keyboard.get(Keyboard.ENTER).isReleased()) {
+					if (selectedUnit.changePosition(this.getCurrentMainCellCoordinates())){
+					selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
+					selectedUnit.setUsed(true);
+					selectedUnit.createRange();
+					state = ICWarsPlayerState.NORMAL;}
+				}
+			case ACTION:
+			case ACTION_SELECTION:
 
 
+
+		}
 	}
 
 
-	
-
-	 /**
-     * Orientate and Move this player in the given orientation if the given button is down
-     * @param orientation (Orientation): given orientation, not null
-     * @param b (Button): button corresponding to the given orientation, not null
-     */
-    private void moveIfPressed(Orientation orientation, Button b) {
-		if (state == ICWarsPlayerState.NORMAL || state == ICWarsPlayerState.SELECT_CELL || state == ICWarsPlayerState.MOVE_UNIT){
+	/**
+	 * Orientate and Move this player in the given orientation if the given button is down
+	 *
+	 * @param orientation (Orientation): given orientation, not null
+	 * @param b           (Button): button corresponding to the given orientation, not null
+	 */
+	private void moveIfPressed(Orientation orientation, Button b) {
+		if (state == ICWarsPlayerState.NORMAL || state == ICWarsPlayerState.SELECT_CELL || state == ICWarsPlayerState.MOVE_UNIT) {
 			if (b.isDown()) {
 				if (!isDisplacementOccurs()) {
 					orientate(orientation);
@@ -114,31 +112,39 @@ public class RealPlayer extends ICWarsPlayer {
 	}
 
 
-    /**
-     *
-     * @param area (Area): initial area, not null
-     * @param position (DiscreteCoordinates): initial position, not null
-     */
-    @Override
-    public void enterArea(Area area, DiscreteCoordinates position){
-		super.enterArea(area, position);        
+	/**
+	 * @param area     (Area): initial area, not null
+	 * @param position (DiscreteCoordinates): initial position, not null
+	 */
+	@Override
+	public void enterArea(Area area, DiscreteCoordinates position) {
+		super.enterArea(area, position);
 		area.setViewCandidate(this);
-        resetMotion();
-    }
-    
+		resetMotion();
+	}
+
 	@Override
 	public void draw(Canvas canvas) {
 		// Si le STATE est IDLE alors ne pas draw le cursor
-		if(state != ICWarsPlayerState.IDLE){
+		if (state != ICWarsPlayerState.IDLE) {
 			sprite.draw(canvas);
+			gui.draw(canvas);
+
 		}
-	    gui.draw(canvas);
+
+
+
 	}
-	
-	public void interactWith(Interactable other ){
-            other.acceptInteraction(handler);
-    }
-	
+
+	public void interactWith(Interactable other) {
+		other.acceptInteraction(handler);
+	}
+
+	private void setSelectedUnitToGui() {
+		gui.setSelectedUnit(selectedUnit);
+	}
+
+
 
 	/*public void selectUnit(int i) {
 		if (i < units.size()) {
@@ -146,17 +152,21 @@ public class RealPlayer extends ICWarsPlayer {
 		}
 	}*/
 	private class ICWarsPlayerInteractionHandler implements ICWarInteractionVisitor {
+
 		@Override
 		public void interactWith(Unit unit) {
 			if (state == ICWarsPlayerState.SELECT_CELL && unit.getFaction() == faction) {
 				selectedUnit = unit;
+				setSelectedUnitToGui();
 			}
 		}
 
 		@Override
 		public void interactWith(RealPlayer player) {
-			
+
 		}
 	}
 
 }
+
+

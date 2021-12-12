@@ -34,6 +34,7 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
         sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
         this.coordinates = coordinates;
         sprite.setDepth(0);
+
         
     }
 
@@ -42,10 +43,10 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
 
         range = new ICWarsRange();
 
-        int xPosition = (int)this.getPosition().x;
-        int yPosition = (int)this.getPosition().y;
-        int largeeur = this.getOwnerArea().getWidth();
-        int hauteur = this.getOwnerArea().getHeight();
+        int xPosition = (int)getPosition().x;
+        int yPosition = (int)getPosition().y;
+        int width = this.getOwnerArea().getWidth();
+        int height = this.getOwnerArea().getHeight();
         boolean left,up,right,down;
 
 
@@ -55,12 +56,12 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
         for (int fromX = -radius; fromX <= radius; fromX++) {
             for (int fromY = -radius; fromY  <= radius; fromY ++) {
 
-                left = fromX + xPosition > 0;
-                right = fromX + xPosition < largeeur - 1;
-                up = fromY + yPosition < hauteur - 1;
-                down = fromY + yPosition > 0;
+                left = fromX > -radius && fromX+xPosition> 0;
+                right = fromX < radius && fromX+xPosition < width-1;
+                up = fromY + yPosition < height - 1 && fromY<radius;
+                down = fromY + yPosition > 0 && fromY > -radius;
 
-                if (xPosition + fromX >= 0 && xPosition + fromX < largeeur && yPosition + fromY  >= 0 && yPosition + fromY  < hauteur) {
+                if (xPosition + fromX >= 0 && xPosition + fromX < width && yPosition + fromY  >= 0 && yPosition + fromY  < height) {
                     this.range.addNode(new DiscreteCoordinates(fromX + xPosition, fromY  + yPosition), left, up, right, down);
                 }
             }
@@ -135,15 +136,11 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
      */
     public void setUsed(boolean used) {
         this.used=used;
-<<<<<<< HEAD
-        if(used == true){sprite.setAlpha(0.5f);}
-        if (used == false){sprite.setAlpha(1.f);}
 
-=======
-    }
-    public boolean getUsed() {
-        return used;
->>>>>>> 927ef664079f80c1fa150f4e7da000a1090f5bae
+        if(used == true){sprite.setAlpha(0.5f);} else {sprite.setAlpha(1.f);}
+
+
+
     }
     public boolean getUsed(){return used;}
     

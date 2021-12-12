@@ -68,6 +68,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		this.coordinates=coordinates;
 		this.faction=faction;
 
+
 	}
 
 	// Non intrusive getter : An object ICWarsPlayerState is immutable.
@@ -75,8 +76,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		return state;
 	}
 
-	// Non intrusive getter : An object Unit is immutable.
-	public Unit getSelectedUnit() {return selectedUnit;}
+
 
 	// Non intrusive getter : An object Discrete Coordinates is immutable.
 	public DiscreteCoordinates getCoordinates() {
@@ -99,7 +99,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		else { return false;}
 	}
 	public void startTurn() {
-		state = ICWarsPlayerState.NORMAL;
+		this.state = ICWarsPlayerState.NORMAL;
 		centerCamera();
 		for (Unit unit:units) {
 			unit.setUsed(false);
@@ -140,6 +140,11 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 			unit.enterArea(area,unit.getCoordinates());
         }
     }
+	public void setUnitsUsable() {
+		for (Unit unit : units) {
+			unit.setUsed(false);
+		}
+	}
 
 
 

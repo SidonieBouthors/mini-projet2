@@ -27,13 +27,15 @@ public class ICWarsPlayerGUI implements Graphics{
  
 	@Override
 	public void draw(Canvas canvas) {
-		selectedUnit = player.getSelectedUnit();
+
 		cursorCoordinates = player.getCoordinates();
-		
-		
 
 		if (selectedUnit != null && player.getState() == ICWarsPlayer.ICWarsPlayerState.MOVE_UNIT) {
 			selectedUnit.drawRangeAndPathTo(cursorCoordinates, canvas);
 		}
+	}
+
+	public void setSelectedUnit(Unit unit) {
+		selectedUnit = unit;
 	}
 }
