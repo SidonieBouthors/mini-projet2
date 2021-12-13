@@ -15,12 +15,11 @@ import java.util.List;
 
 public class ICWarsActor extends MovableAreaEntity {
 
-    protected ICWarsFaction faction;
+    protected Faction faction;
 
-    public ICWarsActor(Area owner, DiscreteCoordinates coordinates, ICWarsFaction faction) {
+    public ICWarsActor(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner,Orientation.UP,coordinates);
         this.faction=faction;
-
     }
 
     @Override
@@ -28,26 +27,27 @@ public class ICWarsActor extends MovableAreaEntity {
         super.update(deltaTime);
     }
 
-    public enum ICWarsFaction {
+    public enum Faction {
         ALLY(1),
         ENEMY(2);
 
         final int faction;
-
-
-        ICWarsFaction(int faction) {
+        Faction(int faction) {
             this.faction=faction;
-
         }
-
     }
-    // Non Intrusive getter : an object ICWarsFaction is immutable.
-    public ICWarsFaction getFaction() {
+    
+    /**
+     * Getter for faction of Actor
+     * Non Intrusive getter : an object ICWarsFaction is immutable.
+     * @return faction
+     */
+    public Faction getFaction() {
         return faction;
     }
 
     /**
-     * registor the actor in the area specified
+     * Register the actor in the area specified
      * @param area (Area): initial area, not null
      * @param position (DiscreteCoordinates): initial position, not null
      */
@@ -58,44 +58,30 @@ public class ICWarsActor extends MovableAreaEntity {
     }
     
     /**
-     * unregistor the actor in the area specified
+     * Unregister the actor in the area specified
      */
     public void leaveArea(){
         getOwnerArea().unregisterActor(this);
     }
     
     @Override
-    public void draw(Canvas canvas){
+    public void draw(Canvas canvas){}
     
-    }
-
-
-
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
 
     @Override
-    public boolean takeCellSpace() {
-        return false;
-    }
+    public boolean takeCellSpace() {return false;}
 
     @Override
-    public boolean isCellInteractable() {
-        return true;
-    }
+    public boolean isCellInteractable() {return true;}
 
     @Override
-    public boolean isViewInteractable() {
-        return false;
-    }
+    public boolean isViewInteractable() {return false;}
 
     @Override
-    public void acceptInteraction(AreaInteractionVisitor v) {
-        
-    }
-    
-
+    public void acceptInteraction(AreaInteractionVisitor v) {}
 }
 

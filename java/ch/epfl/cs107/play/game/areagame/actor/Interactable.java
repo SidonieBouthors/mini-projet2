@@ -12,7 +12,7 @@ import java.util.List;
  * This interface makes sense only in the "Area Context" with Actor contained into Area Cell
  */
 public interface Interactable {
-
+	
     /**
      * Get this Interactor's current occupying cells coordinates
      * @return (List of DiscreteCoordinates). May be empty but not null
@@ -26,7 +26,6 @@ public interface Interactable {
      * @return (boolean)
      */
     boolean takeCellSpace();
-
 
     /**@return (boolean): true if this is able to have cell interactions*/
     boolean isCellInteractable();
