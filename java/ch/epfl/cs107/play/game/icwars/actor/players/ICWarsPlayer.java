@@ -9,6 +9,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.Unit;
+import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
@@ -104,6 +105,14 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 			unit.setUsed(false);
 		}
 	}
+	/**
+	 * Setter for player state
+	 * @param state
+	 */
+	public void setState(PlayerState state) {
+		this.state=state;
+		
+	}
 	
 	@Override
 	public void onLeaving(List<DiscreteCoordinates> coordinates) {
@@ -111,6 +120,16 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 			state = PlayerState.NORMAL;
 		}
 	}
+	
+	@Override
+    public void enterArea(Area area, DiscreteCoordinates position){
+		super.enterArea(area,position);
+    	for(Unit unit :units){
+			//Calling the method from ICWarsActor to register and set OwnerArea to the units
+			//unit.enterArea(area,unit.getCoordinates());
+    		((ICWarsArea)area).addUnit(unit);
+        }
+    }
 	
     @Override
     public void leaveArea(){
@@ -120,15 +139,8 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
         }
         area.unregisterActor(this);
     }
-    
-    @Override
-    public void enterArea(Area area, DiscreteCoordinates position){
-		super.enterArea(area,position);
-    	for(Unit unit :units){
-			//Calling the method from ICWarsActor to register and set OwnerArea to the units
-			unit.enterArea(area,unit.getCoordinates());
-        }
-    }	
+	
+    	
     
     @Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {return null;}
@@ -147,4 +159,5 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	
 	@Override
 	public boolean isViewInteractable() {return false;}
+
 }

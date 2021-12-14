@@ -254,7 +254,7 @@ public final class Vector implements Serializable {
         if (object == null || !(object instanceof Vector))
             return false;
         Vector other = (Vector)object;
-        return Math.abs((x-other.x) + (y-other.y)) < EPSILON;
+        return (Math.abs(x-other.x) + Math.abs(y-other.y)) < EPSILON;
     }
 
     @Override

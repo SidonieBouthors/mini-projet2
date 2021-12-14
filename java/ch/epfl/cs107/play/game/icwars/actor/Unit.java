@@ -1,12 +1,15 @@
 package ch.epfl.cs107.play.game.icwars.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.AreaBehavior.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Path;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.icwars.ICWarsBehavior.ICWarsCell;
+import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsRange;
 import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -28,6 +31,7 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     protected ICWarsRange range;
     protected DiscreteCoordinates coordinates;
     protected boolean used;
+    protected int defenseStars;
 
     public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
@@ -157,6 +161,15 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     	}
     	return false;
     }
+    
+    
+	public void interactWith(ICWarsCell cell) {
+		defenseStars = cell.getDefense();
+	}
+	
+	public int getDefense() {
+		return defenseStars;
+	}
     
     @Override
     public void draw(Canvas canvas) {

@@ -50,6 +50,7 @@ public class ICWarsBehavior extends AreaBehavior {
 			System.out.println(type);
 			return NONE;
 		}
+
 	}
 
 	/**
@@ -68,6 +69,10 @@ public class ICWarsBehavior extends AreaBehavior {
 		public  ICWarsCell(int x, int y, ICWarsCellType type){
 			super(x, y); 
 			this.type = type;
+		}
+		
+		public int getDefense() {
+			return type.defense;
 		}
 
 		@Override
