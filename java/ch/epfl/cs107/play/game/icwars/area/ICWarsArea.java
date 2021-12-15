@@ -72,6 +72,11 @@ public abstract class ICWarsArea extends Area {
     	}
     }
     
+    public void centerCameraOnUnit(int unitIndex) {
+    	Unit unit = units.get(unitIndex);
+    	setViewCandidate(unit);
+    }
+    
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         if (super.begin(window, fileSystem)) {

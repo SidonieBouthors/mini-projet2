@@ -17,6 +17,7 @@ public abstract class Action implements Graphics{
 		this.unit = unit;
 		this.area = area;
 	}
+	
 	public abstract void doAction ( float dt , ICWarsPlayer player , Keyboard keyboard );
 
 }

@@ -1,7 +1,6 @@
 package ch.epfl.cs107.play.game.icwars.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.AreaBehavior.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -9,17 +8,19 @@ import ch.epfl.cs107.play.game.areagame.actor.Path;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.ICWarsBehavior.ICWarsCell;
-import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsRange;
 import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Collections;
  
-public class Unit extends ICWarsActor implements Interactor,Interactable {
+public abstract class Unit extends ICWarsActor implements Interactor,Interactable {
     
     protected Sprite sprite;
 
@@ -32,10 +33,11 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
     protected DiscreteCoordinates coordinates;
     protected boolean used;
     protected int defenseStars;
+    protected List<Action> actions;
 
     public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
-        sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
+        this.sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
         this.coordinates = coordinates;
         sprite.setDepth(0);
     }
@@ -72,6 +74,10 @@ public class Unit extends ICWarsActor implements Interactor,Interactable {
      */
     public DiscreteCoordinates getCoordinates() {
         return coordinates;
+    }
+    
+    public List<Action> getActions(){
+    	return Collections.unmodifiableList(actions);
     }
     /**
      * Getter for radius

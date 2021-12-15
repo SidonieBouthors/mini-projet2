@@ -9,7 +9,7 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class Wait extends Action{
 
-	Wait(Unit unit, Area area) {
+	public Wait(Unit unit, Area area) {
 		super(unit, area);
 		name = "(W)ait";
 		key = Keyboard.W;

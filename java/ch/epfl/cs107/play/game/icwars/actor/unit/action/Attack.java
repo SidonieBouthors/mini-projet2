@@ -10,9 +10,7 @@ import ch.epfl.cs107.play.game.icwars.actor.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
-import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
@@ -22,7 +20,7 @@ public class Attack extends Action{
 	private List<Integer> attackableUnitIndexes;
 	int targetNumber=0;
 	
-	Attack(Unit unit, Area area) {
+	public Attack(Unit unit, Area area) {
 		super(unit, area);
 		this.name = "(A)ttack";
 		this.key = Keyboard.A;
@@ -64,7 +62,10 @@ public class Attack extends Action{
 	
 	@Override
 	public void draw(Canvas canvas) {
-		
+		if (attackableUnitIndexes.size() != 0) {
+			int targetUnitIndex = attackableUnitIndexes.get(targetNumber);
+			((ICWarsArea)area).centerCameraOnUnit(targetUnitIndex);
+		}
 		cursor.setAnchor (canvas.getPosition ().add (1 ,0));
 		cursor.draw(canvas);
 	}

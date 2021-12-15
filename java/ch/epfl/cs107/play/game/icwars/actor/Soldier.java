@@ -1,10 +1,15 @@
 package ch.epfl.cs107.play.game.icwars.actor;
 
+import java.util.ArrayList;
+
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Attack;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Wait;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Soldier extends Unit {
-
+	
     public Soldier(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
         maxHP =5;
@@ -12,6 +17,9 @@ public class Soldier extends Unit {
         radius =2;
         currentHP=maxHP;
         createRange();
+        actions = new ArrayList<Action>();
+        actions.add(new Wait(this, owner));
+		actions.add(new Attack(this, owner));
     }
     public String getName() {
             if (Faction.ENEMY == this.faction) {

@@ -1,5 +1,10 @@
 package ch.epfl.cs107.play.game.icwars.actor;
+import java.util.ArrayList;
+
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Attack;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Wait;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 
@@ -11,6 +16,9 @@ public class Tank extends Unit {
         radius=4;
         maxDamage=7;
         currentHP = maxHP;
+        actions = new ArrayList<Action>();
+        actions.add(new Wait(this, owner));
+		actions.add(new Attack(this, owner));
         this.createRange();
     }
     public DiscreteCoordinates getSpawnPosition() {
