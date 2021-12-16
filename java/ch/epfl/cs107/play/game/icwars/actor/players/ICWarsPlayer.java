@@ -119,6 +119,21 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		
 	}
 	
+	protected void deleteDeadunits() {
+
+		List<Unit> toRemove = new ArrayList<>();
+
+		for(Unit unit:units) {
+			if (unit.getHP()==0) {
+				getOwnerArea().unregisterActor(unit);
+				toRemove.add(unit);
+				deadUnits.add(unit);
+
+			}
+		}
+		units.removeAll(toRemove);
+	}
+	
 	@Override
 	public void onLeaving(List<DiscreteCoordinates> coordinates) {
 		if (state == PlayerState.SELECT_CELL) {

@@ -1,8 +1,7 @@
 package ch.epfl.cs107.play.game.icwars.actor.players;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
@@ -129,17 +128,7 @@ public class RealPlayer extends ICWarsPlayer{
 		area.setViewCandidate(this);
 		resetMotion();
 	}	
-	
-	private void deleteDeadunits() {
 
-		for (Iterator<Unit> iterator = units.iterator(); iterator.hasNext();) {
-			Unit unit = iterator.next();
-			if(unit.getHP() == 2) {
-				iterator.remove();
-			}
-		}
-		// Il faut update la liste des acteurs qui sont selectionnable par le curseur pour en enlever les morts
-	}
 
 	@Override
 	public void draw(Canvas canvas) {
