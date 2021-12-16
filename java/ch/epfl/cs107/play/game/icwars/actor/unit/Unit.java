@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.icwars.actor.unit;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.AreaBehavior.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -16,7 +17,6 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Collections;
@@ -35,12 +35,14 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     protected boolean used;
     protected int defenseStars;
     protected List<Action> actions;
+    private final ICWarsUnitInteractionHandler handler;
 
     public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
         this.sprite = new Sprite(this.getSpriteName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
         this.coordinates = coordinates;
         sprite.setDepth(0);
+        handler = new ICWarsUnitInteractionHandler();
     }
     /***
      * Create range of a unit
@@ -115,10 +117,9 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * @param damage
      */
     public void damage(int damage){
-
-        if ((currentHP -= damage) < 0) {
+        if ((currentHP - damage) < 0) {
             currentHP=0;
-        }else {
+        } else {
             currentHP -= damage;
         }
     }
@@ -171,11 +172,6 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     	return false;
     }
     
-    
-	public void interactWith(ICWarsCell cell) {
-		defenseStars = cell.getDefense();
-	}
-	
 	public int getDefense() {
 		return defenseStars;
 	}
@@ -195,15 +191,27 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     public boolean wantsViewInteraction() {return false;}
 
     @Override
-    public void interactWith(Interactable other) {}
-    
-    @Override
     public boolean takeCellSpace() {return true;}
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
         ((ICWarInteractionVisitor)v).interactWith(this);
     }
+    
+    @Override
+	public void interactWith(Interactable other) {
+		if (!isDisplacementOccurs()) {
+			other.acceptInteraction(handler);
+	    }
+	}
+    
+    private class ICWarsUnitInteractionHandler implements ICWarInteractionVisitor {
+
+		@Override
+		public void interactWith(Cell cell) {
+			defenseStars = ((ICWarsCell)cell).getDefense();
+		}
+	}
 
 
 }

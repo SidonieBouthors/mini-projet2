@@ -53,10 +53,10 @@ public abstract class ICWarsArea extends Area {
     	for (Unit unit:units) {
     		Vector position = unit.getPosition();
     		if (unit.getFaction()!=faction
-    			&& position.x < maxX
-    			&& position.x > minX
-    			&& position.y < maxY
-    			&& position.y > minY
+    			&& position.x <= maxX
+    			&& position.x >= minX
+    			&& position.y <= maxY
+    			&& position.y >= minY
     			&& !(position.x == attackerPosition.x 
     				&& position.y == attackerPosition.y)) {
     			unitIndexes.add(index);
@@ -69,7 +69,6 @@ public abstract class ICWarsArea extends Area {
     public void attackUnit(int unitIndex, int receivedDamage) {
     	Unit unit = units.get(unitIndex);
     	int damage = receivedDamage - unit.getDefense();
-    	System.out.println(damage);
     	if (damage > 0) {
     		unit.damage(damage);
     	}

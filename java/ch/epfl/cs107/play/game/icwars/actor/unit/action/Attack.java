@@ -26,6 +26,7 @@ public class Attack extends Action{
 		this.key = Keyboard.A;
 		this.cursor=new ImageGraphics (ResourcePath.getSprite ("icwars/UIpackSheet"),1f, 1f, new RegionOfInterest(4*18 , 26*18 ,16 ,16));
 		this.attackableUnitIndexes = new ArrayList<Integer>();
+		cursor.setDepth(1);
 	}
 	
 	@Override

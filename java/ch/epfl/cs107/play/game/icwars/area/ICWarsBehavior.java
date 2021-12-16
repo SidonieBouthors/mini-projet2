@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.icwars.area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.window.Window;
 
@@ -108,7 +109,6 @@ public class ICWarsBehavior extends AreaBehavior {
 		public void acceptInteraction(AreaInteractionVisitor v) {
 			((ICWarInteractionVisitor)v).interactWith(this);
 		}
-
 	}
 }
 

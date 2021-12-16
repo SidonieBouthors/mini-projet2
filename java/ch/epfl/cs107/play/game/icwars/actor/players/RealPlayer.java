@@ -54,8 +54,6 @@ public class RealPlayer extends ICWarsPlayer{
 
 		super.update(deltaTime);
 		
-		System.out.println(state.toString());
-		
 		switch (state) {
 			case IDLE:
 				break;
@@ -79,8 +77,9 @@ public class RealPlayer extends ICWarsPlayer{
 					selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
 					selectedUnit.setUsed(true);
 					selectedUnit.createRange();
-					state = PlayerState.NORMAL;}
+					state = PlayerState.ACTION_SELECTION;}
 				}
+				break;
 			case ACTION_SELECTION:
 				List<Action> actions = selectedUnit.getActions();
 				for (Action act:actions) {
@@ -130,6 +129,11 @@ public class RealPlayer extends ICWarsPlayer{
 		if (state != PlayerState.IDLE) {
 			sprite.draw(canvas);
 			gui.draw(canvas);
+			if (state == PlayerState.ACTION) {
+				for (Action action:selectedUnit.getActions()) {
+		        	action.draw(canvas);
+		        }
+			}
 		}
 	}
 	@Override
