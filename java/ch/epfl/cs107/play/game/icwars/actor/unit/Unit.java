@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.icwars.actor;
+package ch.epfl.cs107.play.game.icwars.actor.unit;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
@@ -7,7 +7,8 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Path;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.icwars.ICWarsBehavior.ICWarsCell;
+import ch.epfl.cs107.play.game.icwars.area.ICWarsBehavior.ICWarsCell;
+import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsRange;
 import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
@@ -37,7 +38,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
 
     public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
-        this.sprite = new Sprite(this.getName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
+        this.sprite = new Sprite(this.getSpriteName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
         this.coordinates = coordinates;
         sprite.setDepth(0);
     }
@@ -104,9 +105,11 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * Getter for spriteName
      * @return spriteName
      */
-    public String getName() {
+    public String getSpriteName() {
         return spriteName;
     }
+    
+    public abstract String getName();
     /**
      * Unit gets damaged by specified amount of HP
      * @param damage

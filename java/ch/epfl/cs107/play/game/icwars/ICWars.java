@@ -5,9 +5,9 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
-import ch.epfl.cs107.play.game.icwars.actor.Soldier;
-import ch.epfl.cs107.play.game.icwars.actor.Tank;
-import ch.epfl.cs107.play.game.icwars.actor.Unit;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Soldier;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Tank;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
 import ch.epfl.cs107.play.game.icwars.actor.players.RealPlayer;

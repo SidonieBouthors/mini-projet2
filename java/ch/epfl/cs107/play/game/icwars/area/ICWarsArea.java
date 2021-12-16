@@ -5,9 +5,9 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.icwars.ICWars;
-import ch.epfl.cs107.play.game.icwars.ICWarsBehavior;
+import ch.epfl.cs107.play.game.icwars.area.ICWarsBehavior;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
-import ch.epfl.cs107.play.game.icwars.actor.Unit;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -52,11 +52,13 @@ public abstract class ICWarsArea extends Area {
     	int index = 0;
     	for (Unit unit:units) {
     		Vector position = unit.getPosition();
-    		if (unit.getFaction()==faction
+    		if (unit.getFaction()!=faction
     			&& position.x < maxX
     			&& position.x > minX
     			&& position.y < maxY
-    			&& position.y > minY) {
+    			&& position.y > minY
+    			&& !(position.x == attackerPosition.x 
+    				&& position.y == attackerPosition.y)) {
     			unitIndexes.add(index);
     		}
     		index++;
@@ -67,6 +69,7 @@ public abstract class ICWarsArea extends Area {
     public void attackUnit(int unitIndex, int receivedDamage) {
     	Unit unit = units.get(unitIndex);
     	int damage = receivedDamage - unit.getDefense();
+    	System.out.println(damage);
     	if (damage > 0) {
     		unit.damage(damage);
     	}

@@ -6,7 +6,7 @@ import java.util.List;
 import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
-import ch.epfl.cs107.play.game.icwars.actor.Unit;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
@@ -31,9 +31,15 @@ public class Attack extends Action{
 	@Override
 	public void doAction(float dt, ICWarsPlayer player, Keyboard keyboard) {
 		//call ICWarsArea method to return indexes of attackable units
-		((ICWarsArea)area).getAttackable(unit.getPosition(), unit.getRadius(), unit.getFaction());
+		attackableUnitIndexes = ((ICWarsArea)area).getAttackable(unit.getPosition(), unit.getRadius(), unit.getFaction());
+		
+		if (attackableUnitIndexes.size()==0 || keyboard.get(Keyboard.TAB).isPressed()) {
+			player.centerCamera();
+			player.setState(PlayerState.ACTION_SELECTION);
+		}
+		
 		//RIGHT key pressed
-		if(keyboard.get(39).isPressed()) {
+		if(keyboard.get(Keyboard.RIGHT).isPressed()) {
 			if(targetNumber < attackableUnitIndexes.size()-1) {
 				targetNumber++;
 			}
@@ -42,7 +48,7 @@ public class Attack extends Action{
 			}
 		}
 		//LEFT key pressed
-		if(keyboard.get(37).isPressed()) {
+		if(keyboard.get(Keyboard.LEFT).isPressed()) {
 			if(targetNumber > 0) {
 				targetNumber--;
 			}
@@ -51,7 +57,7 @@ public class Attack extends Action{
 			}
 		}
 		//ENTER key pressed
-		if(keyboard.get(10).isPressed()) {
+		if(keyboard.get(Keyboard.ENTER).isPressed()) {
 			int targetUnitIndex = attackableUnitIndexes.get(targetNumber);
 			((ICWarsArea)area).attackUnit(targetUnitIndex, unit.getDamage());
 			unit.setUsed(true);

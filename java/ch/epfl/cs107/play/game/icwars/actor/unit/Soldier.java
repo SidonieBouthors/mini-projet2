@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.icwars.actor;
+package ch.epfl.cs107.play.game.icwars.actor.unit;
 
 import java.util.ArrayList;
 
@@ -21,11 +21,15 @@ public class Soldier extends Unit {
         actions.add(new Wait(this, owner));
 		actions.add(new Attack(this, owner));
     }
-    public String getName() {
+    @Override
+    public String getSpriteName() {
             if (Faction.ENEMY == this.faction) {
                 return "icwars/enemySoldier";
             } else {
                 return "icwars/friendlySoldier";
             }
+    }
+    public String getName() {
+    	return "Soldier";
     }
 }

@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.icwars.actor;
+package ch.epfl.cs107.play.game.icwars.actor.unit;
 import java.util.ArrayList;
 
 import ch.epfl.cs107.play.game.areagame.Area;
@@ -26,11 +26,15 @@ public class Tank extends Unit {
             return new DiscreteCoordinates(2,5);
         } else { return new DiscreteCoordinates(4,5); }
     }
-    public String getName() {
+    @Override
+    public String getSpriteName() {
         if (Faction.ENEMY == this.faction) {
             return "icwars/enemyTank";
         } else {
             return "icwars/friendlyTank";
         }
+    }
+    public String getName() {
+    	return "Tank";
     }
 }
