@@ -17,6 +17,9 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 	protected List<Unit> units;
 	protected List<Unit> deadUnits;
+	//Special list to avoid modification while iterating on units.
+	protected List<Unit> toRemove;
+
 	private ICWarsPlayerGUI gui;
 	protected PlayerState state;
 	protected Unit selectedUnit;
@@ -117,13 +120,18 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	}
 	
 	protected void deleteDeadunits() {
+
+		List<Unit> toRemove = new ArrayList<>();
+
 		for(Unit unit:units) {
 			if (unit.getHP()==0) {
 				getOwnerArea().unregisterActor(unit);
+				toRemove.add(unit);
 				deadUnits.add(unit);
-				units.remove(unit);
+
 			}
 		}
+		units.removeAll(toRemove);
 	}
 	
 	@Override
