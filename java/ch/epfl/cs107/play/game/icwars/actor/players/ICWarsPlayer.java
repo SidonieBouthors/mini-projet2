@@ -17,6 +17,9 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 	protected List<Unit> units;
 	protected List<Unit> deadUnits;
+	//Special list to avoid modification while iterating on units.
+	protected List<Unit> toRemove;
+
 	private ICWarsPlayerGUI gui;
 	protected PlayerState state;
 	protected Unit selectedUnit;
