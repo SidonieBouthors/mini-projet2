@@ -54,6 +54,8 @@ public class RealPlayer extends ICWarsPlayer{
 
 		super.update(deltaTime);
 		
+		deleteDeadunits();
+		
 		switch (state) {
 			case IDLE:
 				break;
@@ -95,6 +97,8 @@ public class RealPlayer extends ICWarsPlayer{
 		}
 	}
 
+
+
 	/**
 	 * Orientate and Move this player in the given orientation if the given button is down
 	 *
@@ -121,6 +125,16 @@ public class RealPlayer extends ICWarsPlayer{
 		super.enterArea(area, position);
 		area.setViewCandidate(this);
 		resetMotion();
+	}	
+	
+	private void deleteDeadunits() {
+		for(Unit unit:units) {
+			if (unit.getHP()==0) {
+				getOwnerArea().unregisterActor(unit);
+				deadUnits.add(unit);
+				units.remove(unit);
+			}
+		}
 	}
 
 	@Override

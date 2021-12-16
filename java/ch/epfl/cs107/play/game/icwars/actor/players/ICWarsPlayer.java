@@ -15,7 +15,8 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
-	protected ArrayList<Unit> units;
+	protected List<Unit> units;
+	protected List<Unit> deadUnits;
 	private ICWarsPlayerGUI gui;
 	protected PlayerState state;
 	protected Unit selectedUnit;
@@ -24,8 +25,9 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction);
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
-		gui = new ICWarsPlayerGUI(10.f,this);
-		state = PlayerState.IDLE;
+		this.deadUnits = new ArrayList<Unit>();
+		this.gui = new ICWarsPlayerGUI(10.f,this);
+		this.state = PlayerState.IDLE;
 		this.coordinates=coordinates;
 		this.faction=faction;
 	}
