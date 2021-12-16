@@ -126,16 +126,6 @@ public class RealPlayer extends ICWarsPlayer{
 		area.setViewCandidate(this);
 		resetMotion();
 	}	
-	
-	private void deleteDeadunits() {
-		for(Unit unit:units) {
-			if (unit.getHP()==0) {
-				getOwnerArea().unregisterActor(unit);
-				deadUnits.add(unit);
-				units.remove(unit);
-			}
-		}
-	}
 
 	@Override
 	public void draw(Canvas canvas) {
