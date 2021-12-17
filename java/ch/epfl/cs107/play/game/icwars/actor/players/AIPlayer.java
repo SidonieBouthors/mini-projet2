@@ -78,18 +78,22 @@ public class AIPlayer extends ICWarsPlayer{
 				break;
 			case MOVE_UNIT:
 				moveCloseToEnemy();
-				if (selectedUnit.changePosition(this.getCurrentMainCellCoordinates())){
-					selectedUnit.createRange();
-					actionIndex = 0;
-					state = PlayerState.ACTION_SELECTION;
+				if (waitFor(0.2f, deltaTime)){
+					if (selectedUnit.changePosition(this.getCurrentMainCellCoordinates())){
+						selectedUnit.createRange();
+						actionIndex = 0;
+						state = PlayerState.ACTION_SELECTION;
+					}
 				}
 				break;
 			case ACTION_SELECTION:
-				if (actionIndex < selectedUnit.getActions().size()) {
-					currentAction = selectedUnit.getActions().get(actionIndex);
-					state = PlayerState.ACTION;
-				} else {
-					state = PlayerState.SELECT_CELL;
+				if (waitFor(0.2f, deltaTime)){
+					if (actionIndex < selectedUnit.getActions().size()) {
+						currentAction = selectedUnit.getActions().get(actionIndex);
+						state = PlayerState.ACTION;
+					} else {
+						state = PlayerState.SELECT_CELL;
+					}
 				}
 				break;
 			case ACTION:
