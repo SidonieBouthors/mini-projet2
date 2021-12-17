@@ -140,7 +140,12 @@ public class AIPlayer extends ICWarsPlayer{
 	    int radius = selectedUnit.getRadius();
 
 	   	//set x to x position of target enemy
-	    x = (int)enemyUnitPosition.x;
+		if (enemyUnitPosition != null) {
+			x = enemyUnitPosition.x;
+			y = enemyUnitPosition.y;
+		}
+
+
 	    //while x not within radius
 	    while( x > unitPosition.x +  radius
         	|| x < unitPosition.x - radius ) {
@@ -155,7 +160,7 @@ public class AIPlayer extends ICWarsPlayer{
 	    }
 	    
 	    //set y to y position of target enemy
-	    y = (int)enemyUnitPosition.y;
+
 	    //while y not within radius
 	    while( y > unitPosition.y + radius
         	|| y < unitPosition.y - radius ) {
