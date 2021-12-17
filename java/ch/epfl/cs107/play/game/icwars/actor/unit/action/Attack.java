@@ -67,6 +67,10 @@ public class Attack extends Action{
 		}	
 	}
 	
+	public void doAutoAction(float dt, ICWarsPlayer player) {
+		
+	}
+	
 	@Override
 	public void draw(Canvas canvas) {
 		if (attackableUnitIndexes.size() != 0) {

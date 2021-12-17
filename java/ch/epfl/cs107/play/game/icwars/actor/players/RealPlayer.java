@@ -78,7 +78,6 @@ public class RealPlayer extends ICWarsPlayer{
 			case MOVE_UNIT:
 				if (keyboard.get(Keyboard.ENTER).isPressed()) {
 					if (selectedUnit.changePosition(this.getCurrentMainCellCoordinates())){
-					selectedUnit.changePosition(this.getCurrentMainCellCoordinates());
 					selectedUnit.setUsed(true);
 					selectedUnit.createRange();
 					state = PlayerState.ACTION_SELECTION;}
@@ -143,6 +142,7 @@ public class RealPlayer extends ICWarsPlayer{
 			}
 		}
 	}
+	
 	@Override
 	public void interactWith(Interactable other) {
 		if (!isDisplacementOccurs()) {

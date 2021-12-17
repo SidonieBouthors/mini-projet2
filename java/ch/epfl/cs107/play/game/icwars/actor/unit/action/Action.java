@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.icwars.actor.unit.action;
 import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
+import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.window.Keyboard;
 
@@ -27,5 +28,7 @@ public abstract class Action implements Graphics{
 	}
 	
 	public abstract void doAction ( float dt , ICWarsPlayer player , Keyboard keyboard );
+
+	public abstract void doAutoAction(float dt, ICWarsPlayer player);
 
 }
