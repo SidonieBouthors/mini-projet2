@@ -32,7 +32,7 @@ public class Attack extends Action{
 	@Override
 	public void doAction(float dt, ICWarsPlayer player, Keyboard keyboard) {
 		//call ICWarsArea method to return indexes of attackable units
-		attackableUnitIndexes = ((ICWarsArea)area).getAttackable(unit.getPosition(), unit.getRadius(), unit.getFaction());
+		attackableUnitIndexes = ((ICWarsArea)area).getAttackable(unit.getCoordinates(), unit.getRadius(), unit.getFaction());
 		
 		if (attackableUnitIndexes.size()==0 || keyboard.get(Keyboard.TAB).isPressed()) {
 			player.centerCamera();
@@ -67,8 +67,24 @@ public class Attack extends Action{
 		}	
 	}
 	
-	public void doAutoAction(float dt, ICWarsPlayer player) {
+	@Override
+	public boolean doAutoAction(float dt, ICWarsPlayer player) {
+		//call ICWarsArea method to return indexes of attackable units
+		attackableUnitIndexes = ((ICWarsArea)area).getAttackable(unit.getCoordinates(), unit.getRadius(), unit.getFaction());	
 		
+		if (attackableUnitIndexes.size()==0) {
+			player.centerCamera();
+			player.setState(PlayerState.ACTION_SELECTION);
+			return false;
+		}
+		else {
+			int targetUnitIndex = attackableUnitIndexes.get(0);
+			((ICWarsArea)area).attackUnit(targetUnitIndex, unit.getDamage());
+			unit.setUsed(true);
+			player.centerCamera();
+			player.setState(PlayerState.NORMAL);
+			return true;
+		}
 	}
 	
 	@Override

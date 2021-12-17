@@ -76,7 +76,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * @return coordinates
      */
     public DiscreteCoordinates getCoordinates() {
-        return coordinates;
+        return getCurrentMainCellCoordinates();
     }
     
     public List<Action> getActions(){

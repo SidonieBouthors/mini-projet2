@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Soldier;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Tank;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
+import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
 import ch.epfl.cs107.play.game.icwars.actor.players.RealPlayer;
@@ -23,8 +24,8 @@ public class ICWars extends AreaGame {
 	
 	private final static int NUMBERS_OF_LEVELS = 2;
 	private int currentLevelPassed;
-	private RealPlayer enemyPlayer;
-	private RealPlayer allyPlayer;
+	private ICWarsPlayer enemyPlayer;
+	private ICWarsPlayer allyPlayer;
 	private final String[] areas = {"icwars/Level0", "icwars/Level1"};
 	private Unit unit;
 	private int areaIndex;
@@ -68,7 +69,7 @@ public class ICWars extends AreaGame {
 		Soldier enemySoldier = new Soldier(area, new DiscreteCoordinates(9, 5),Faction.ENEMY);
 	
 		allyPlayer = new RealPlayer(area, playerCoords,Faction.ALLY, allyTank, allySoldier);
-		enemyPlayer = new RealPlayer(area,enemyCoords,Faction.ENEMY,enemySoldier,enemyTank);
+		enemyPlayer = new AIPlayer(area,enemyCoords,Faction.ENEMY,enemySoldier,enemyTank);
 	
 		enemyPlayer.enterArea(area, enemyCoords);
 		allyPlayer.enterArea(area, playerCoords);

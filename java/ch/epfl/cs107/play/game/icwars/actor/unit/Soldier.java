@@ -18,8 +18,9 @@ public class Soldier extends Unit {
         currentHP=maxHP;
         createRange();
         actions = new ArrayList<Action>();
+        actions.add(new Attack(this, owner));
         actions.add(new Wait(this, owner));
-		actions.add(new Attack(this, owner));
+		
     }
     @Override
     public String getSpriteName() {

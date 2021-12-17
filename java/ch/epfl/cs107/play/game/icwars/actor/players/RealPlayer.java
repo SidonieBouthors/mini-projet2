@@ -31,7 +31,6 @@ public class RealPlayer extends ICWarsPlayer{
 	private Action currentAction;
 
 	
-	
 	public RealPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction, units);
 		if (faction == Faction.ALLY) {
@@ -60,7 +59,7 @@ public class RealPlayer extends ICWarsPlayer{
 		
 		switch (state) {
 			case IDLE:
-				break;
+				break; 
 			case NORMAL:
 				if (keyboard.get(Keyboard.ENTER).isPressed()) {
 					this.state = PlayerState.SELECT_CELL;
@@ -78,7 +77,6 @@ public class RealPlayer extends ICWarsPlayer{
 			case MOVE_UNIT:
 				if (keyboard.get(Keyboard.ENTER).isPressed()) {
 					if (selectedUnit.changePosition(this.getCurrentMainCellCoordinates())){
-					selectedUnit.setUsed(true);
 					selectedUnit.createRange();
 					state = PlayerState.ACTION_SELECTION;}
 				}

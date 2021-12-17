@@ -25,6 +25,8 @@ public abstract class ICWarsArea extends Area {
      * Note it set the Behavior as needed !
      */
     protected abstract void createArea();
+    
+
 
     /// EnigmeArea extends Area
 
@@ -42,8 +44,25 @@ public abstract class ICWarsArea extends Area {
     	registerActor(unit);
     	units.add(unit);
     }
+    public void removeUnit(Unit unit) {
+    	unregisterActor(unit);
+    	units.remove(unit);
+    }
     
-    public List<Integer> getAttackable(Vector attackerPosition, int radius, Faction faction) {
+    public DiscreteCoordinates getClosestEnemyPosition(Faction faction, DiscreteCoordinates unitPosition){
+        int radius =0;
+        while( (radius < getHeight() || radius < getWidth()) && getAttackable(unitPosition, radius, faction).size()==0){
+            radius++;
+        }
+        if(getAttackable(unitPosition, radius, faction).size()>0){
+			// returning the closest position
+            return units.get(getAttackable(unitPosition, radius, faction).get(0)).getCoordinates();
+        }
+        return null;
+            
+    }
+    
+    public List<Integer> getAttackable(DiscreteCoordinates attackerPosition, int radius, Faction faction) {
     	List<Integer> unitIndexes = new ArrayList<Integer>();
     	int maxX = (int)attackerPosition.x + radius;
     	int minX = (int)attackerPosition.x - radius;
@@ -90,5 +109,13 @@ public abstract class ICWarsArea extends Area {
             return true;
         }
         return false;
+    }
+    public boolean unitAt(int x, int y){
+	    for (Unit unit: units) {
+	    	if (unit.getCoordinates().x == x && unit.getCoordinates().y ==y) {
+	    		return true;
+	    	}
+	    }
+    return false;
     }
 }

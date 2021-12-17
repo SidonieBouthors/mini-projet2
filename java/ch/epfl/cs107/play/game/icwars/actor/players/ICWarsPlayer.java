@@ -21,7 +21,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	//Special list to avoid modification while iterating on units.
 	protected List<Unit> toRemove;
 
-	private ICWarsPlayerGUI gui;
+	
 	protected PlayerState state;
 	protected Unit selectedUnit;
 	protected DiscreteCoordinates coordinates;
@@ -30,7 +30,6 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		super(owner, coordinates, faction);
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
 		this.deadUnits = new ArrayList<Unit>();
-		this.gui = new ICWarsPlayerGUI(10.f,this);
 		this.state = PlayerState.IDLE;
 		this.coordinates=coordinates;
 		this.faction=faction;
@@ -72,6 +71,11 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		}
 	}
 
+	// getCurrentMainCellCoordinates is in protected.
+	public DiscreteCoordinates getCoordinates(){
+	    return getCurrentCells().get(0);
+	}
+
 	/**
 	 * Getter for state of Player
 	 * Non intrusive getter : An object ICWarsPlayerState is immutable.
@@ -79,14 +83,6 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	 */
 	public PlayerState getState() {
 		return state;
-	}
-	/**
-	 * Getter for current cell occupied by Player
-	 * Non intrusive getter : An object Discrete Coordinates is immutable.
-	 * @return currentMainCellCoordinates
-	 */
-	public DiscreteCoordinates getCoordinates() {
-		return getCurrentMainCellCoordinates();
 	}
 	/**
 	 * Centre the camera on the player
@@ -126,10 +122,11 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 			for (Iterator<Unit> iterator = units.iterator(); iterator.hasNext();) {
 				Unit unit = iterator.next();
-				if(unit.getHP() == 2) {
+				if(unit.getHP() == 0) {
+					((ICWarsArea)getOwnerArea()).removeUnit(unit);
 					iterator.remove();
 					deadUnits.add(unit);
-					unit.leaveArea();
+					
 				}
 			}
 			// Il faut update la liste des acteurs qui sont selectionnable par le curseur pour en enlever les morts
