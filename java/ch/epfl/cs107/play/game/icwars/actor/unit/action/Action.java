@@ -13,6 +13,11 @@ public abstract class Action implements Graphics{
 	protected String name;
 	protected int key;
 	
+	/**
+	 * Action Constructor
+	 * @param unit	(Unit): unit associated with the action
+	 * @param area	(Area): area on which action occurs
+	 */
 	Action(Unit unit, Area area){
 		this.unit = unit;
 		this.area = area;
@@ -33,14 +38,14 @@ public abstract class Action implements Graphics{
 		return name;
 	}
 	/**
-	 * Trigger the events linked to this action as chosen by player
+	 * Trigger the events linked to this action (as chosen by player)
 	 * @param dt		(float)
 	 * @param player	(ICWarsPlayer): player triggering the action
 	 * @param keyboard	(Keyboard): keyboard used to trigger events
 	 */
 	public abstract void doAction ( float dt , ICWarsPlayer player , Keyboard keyboard );
 	/**
-	 * Trigger the events linked to this action automatically
+	 * Trigger the events linked to this action (automatically)
 	 * @param dt				(float)
 	 * @param player			(ICWarsPlayer): player triggering action (AI)
 	 * @return actionExecuted	(boolean): whether the action was able to be executed or not

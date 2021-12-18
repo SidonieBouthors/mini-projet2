@@ -54,6 +54,7 @@ public class AIPlayer extends ICWarsPlayer{
 		switch (state) {
 			case IDLE:
 				//Reinitialise list of units that have to play
+				toPlayUnits.clear();
 				toPlayUnits.addAll(units);
 				break;
 			case NORMAL:

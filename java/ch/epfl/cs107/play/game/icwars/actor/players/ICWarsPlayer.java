@@ -91,15 +91,14 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	 * Iterates over list of units and remove any unit who has no more HP
 	 */
 	protected void deleteDeadUnits() {
-			for (Iterator<Unit> iterator = units.iterator(); iterator.hasNext();) {
-				Unit unit = iterator.next();
-				if(unit.getHP() == 0) {
-					((ICWarsArea)getOwnerArea()).removeUnit(unit);
-					iterator.remove();
-					deadUnits.add(unit);
-				}
+		for (Iterator<Unit> iterator = units.iterator(); iterator.hasNext();) {
+			Unit unit = iterator.next();
+			if(unit.getHP() == 0) {
+				((ICWarsArea)getOwnerArea()).removeUnit(unit);
+				iterator.remove();
+				deadUnits.add(unit);
 			}
-			// Il faut update la liste des acteurs qui sont selectionnable par le curseur pour en enlever les morts
+		}
 	}
 	
 	/**
