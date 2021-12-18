@@ -1,9 +1,12 @@
 package ch.epfl.cs107.play.game.icwars;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
+import ch.epfl.cs107.play.game.areagame.actor.Foreground;
+import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
 import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
@@ -16,6 +19,7 @@ import ch.epfl.cs107.play.game.icwars.area.Level0;
 import ch.epfl.cs107.play.game.icwars.area.Level1;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
@@ -32,6 +36,7 @@ public class ICWars extends AreaGame {
 	private List<ICWarsPlayer> playerForTheNext;
 	private ICWarsPlayer currentPlayer;
 	private GameState gameState;
+	private ICWarsArea area;
 	
 	/**
 	 * Add all the areas
@@ -58,7 +63,7 @@ public class ICWars extends AreaGame {
 	 */
 	private void initArea(String areaKey) {
 
-		ICWarsArea area = (ICWarsArea)setCurrentArea(areaKey, true);
+		area = (ICWarsArea)setCurrentArea(areaKey, true);
 		DiscreteCoordinates playerCoords = area.getPlayerSpawnPosition();
 		DiscreteCoordinates enemyCoords = area.getEnemyPlayerSpawnPosition();
 	  
@@ -71,7 +76,7 @@ public class ICWars extends AreaGame {
 		Tank enemyTank = new Tank(area, new DiscreteCoordinates(8, 5),Faction.ENEMY);
 		Soldier enemySoldier = new Soldier(area, new DiscreteCoordinates(9, 5),Faction.ENEMY);
 	
-		allyPlayer = new RealPlayer(area, playerCoords,Faction.ALLY, allyTank, allySoldier);
+		allyPlayer = new AIPlayer(area, playerCoords,Faction.ALLY, allyTank, allySoldier);
 		enemyPlayer = new AIPlayer(area,enemyCoords,Faction.ENEMY,enemySoldier,enemyTank);
 	
 		enemyPlayer.enterArea(area, enemyCoords);
@@ -93,7 +98,7 @@ public class ICWars extends AreaGame {
 
 		switch(gameState) {
 		case INIT:
-			//init
+			initArea(areas[areaIndex]);
 			playerForThisOne.add(allyPlayer);
             playerForThisOne.add(enemyPlayer);
 			gameState = GameState.CHOOSE_PLAYER;
@@ -117,26 +122,32 @@ public class ICWars extends AreaGame {
 			}
 			break;
 		case END_PLAYER_TURN:
-			if (currentPlayer.isDefeated()) {
-				currentPlayer.leaveArea();
-			}
-			else {
+			//if (currentPlayer.isDefeated()) {
+				
+			//}
+			//else {
 				currentPlayer.setUnitsUsable();
 				playerForTheNext.add(currentPlayer);
 				gameState = GameState.CHOOSE_PLAYER;
-			}
+			//}
 			//veiller a ce que toutes ses unités redeviennent utilisables
 			break;
 		case END_TURN:
-			for (ICWarsPlayer player: playerForThisOne) {
-				if (player.isDefeated()) {
-					playerForThisOne.remove(player);
-				}
-			}
+			
 			for(ICWarsPlayer player: playerForTheNext) {
 				playerForThisOne.add(player);
 			}
-			//supprimer tout les joueurs défait (de liste des joueurs en attente et diu jeu)
+			playerForTheNext.clear();
+			System.out.println(playerForThisOne.toString());
+		
+			for (Iterator<ICWarsPlayer> iterator = playerForThisOne.iterator(); iterator.hasNext();) {
+				ICWarsPlayer player = iterator.next();
+            	if(player.isDefeated()) {
+					System.out.println("Defeated");
+					iterator.remove();
+                    currentPlayer.leaveArea();
+            	}
+            }
 			if (playerForThisOne.size() <2) {
 				gameState = GameState.END;
 			}
@@ -145,8 +156,8 @@ public class ICWars extends AreaGame {
 			}
 			break;
 		case END:
-			if (areaIndex < areas.length) {
-				switchArea();
+			if (areaIndex + 1 < areas.length) {
+				areaIndex++;
 				gameState = GameState.INIT;
 			} else {
 				end();
@@ -170,7 +181,10 @@ public class ICWars extends AreaGame {
 	}
 	
 	@Override
-	public void end() {}
+	public void end() {
+		//Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, null);
+		//gameOver.draw(getWindow());
+	}
 
 	@Override
 	public String getTitle() {return "ICWars";}
