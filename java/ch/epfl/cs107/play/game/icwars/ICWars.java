@@ -20,6 +20,7 @@ import ch.epfl.cs107.play.game.icwars.area.Level1;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
@@ -76,7 +77,7 @@ public class ICWars extends AreaGame {
 		Tank enemyTank = new Tank(area, new DiscreteCoordinates(8, 5),Faction.ENEMY);
 		Soldier enemySoldier = new Soldier(area, new DiscreteCoordinates(9, 5),Faction.ENEMY);
 	
-		allyPlayer = new AIPlayer(area, playerCoords,Faction.ALLY, allyTank, allySoldier);
+		allyPlayer = new RealPlayer(area, playerCoords,Faction.ALLY, allyTank, allySoldier);
 		enemyPlayer = new AIPlayer(area,enemyCoords,Faction.ENEMY,enemySoldier,enemyTank);
 	
 		enemyPlayer.enterArea(area, enemyCoords);
@@ -182,8 +183,11 @@ public class ICWars extends AreaGame {
 	
 	@Override
 	public void end() {
-		//Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, null);
-		//gameOver.draw(getWindow());
+		Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, playerForThisOne.get(0));
+		area.setViewCandidate(playerForThisOne.get(0));
+		gameOver.setAnchor(new Vector(-6,-5));
+
+		gameOver.draw(getWindow());
 	}
 
 	@Override
