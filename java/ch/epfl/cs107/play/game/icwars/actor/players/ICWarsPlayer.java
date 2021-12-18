@@ -97,7 +97,6 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 					((ICWarsArea)getOwnerArea()).removeUnit(unit);
 					iterator.remove();
 					deadUnits.add(unit);
-					units.remove(unit);
 					System.out.println("removed");
 				}
 			}
