@@ -97,7 +97,6 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 					((ICWarsArea)getOwnerArea()).removeUnit(unit);
 					iterator.remove();
 					deadUnits.add(unit);
-					System.out.println("removed");
 				}
 			}
 			// Il faut update la liste des acteurs qui sont selectionnable par le curseur pour en enlever les morts
