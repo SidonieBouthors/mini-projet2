@@ -53,7 +53,6 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		ACTION_SELECTION(4),
 		ACTION(5);
 		private int state;
-		
 		PlayerState(int state) {
 			this.state=state;
 		}

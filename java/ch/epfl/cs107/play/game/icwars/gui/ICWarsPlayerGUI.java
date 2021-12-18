@@ -20,22 +20,35 @@ public class ICWarsPlayerGUI implements Graphics{
 	private ICWarsActionsPanel actionPanel;
 	private ICWarsInfoPanel infoPanel;
 	
-	
+	/**
+	 * 
+	 * @param cameraScaleFactor
+	 * @param player
+	 */
 	public ICWarsPlayerGUI ( float cameraScaleFactor , ICWarsPlayer player ) {
-		assert (player.getClass() == RealPlayer.class);
-		this.player=(RealPlayer) player;
+		this.player=(RealPlayer)player;
 		this.actionPanel = new ICWarsActionsPanel(cameraScaleFactor);
 		this.infoPanel = new ICWarsInfoPanel(cameraScaleFactor);
 	}
 	
+	/**
+	 * 
+	 * @param unit
+	 */
 	public void setSelectedUnit(Unit unit) {
 		selectedUnit = unit;
 	}
-	
+	/**
+	 * 
+	 * @param unit
+	 */
 	public void setCurrentUnit(Unit unit) {
 		currentUnit = unit;
 	}
-	
+	/**
+	 * 
+	 * @param type
+	 */
 	public void setCurrentCellType (CellType type) {
 		currentCellType = type;
 	}
@@ -45,17 +58,18 @@ public class ICWarsPlayerGUI implements Graphics{
 
 		cursorCoordinates = player.getCoordinates();
 
+		//draw range and path
 		if (selectedUnit != null 
 			&& player.getState() == PlayerState.MOVE_UNIT) {
 			selectedUnit.drawRangeAndPathTo(cursorCoordinates, canvas);
 		}
-		
+		//draw action panel
 		if (selectedUnit != null 
 			&& player.getState() == PlayerState.ACTION_SELECTION) {
 			actionPanel.setActions(selectedUnit.getActions());
 			actionPanel.draw(canvas);
 		}
-		
+		//draw info panel
 		if (player.getState() == PlayerState.NORMAL 
 			|| player.getState() == PlayerState.SELECT_CELL) {
 			infoPanel.setCurrentCell(currentCellType);

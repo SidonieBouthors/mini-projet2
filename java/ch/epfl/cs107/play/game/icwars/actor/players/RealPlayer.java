@@ -56,6 +56,8 @@ public class RealPlayer extends ICWarsPlayer{
 		
 		switch (state) {
 			case IDLE:
+				selectedUnit = null;
+				gui.setCurrentUnit(null);
 				break; 
 			case NORMAL:
 				if (keyboard.get(Keyboard.ENTER).isPressed()) {
@@ -161,9 +163,6 @@ public class RealPlayer extends ICWarsPlayer{
 			gui.setCurrentCellType(((ICWarsCell)cell).getCellType());
 		}
 		
-		@Override
-		public void interactWith(RealPlayer player) {
-		}
 	}
 }
 
