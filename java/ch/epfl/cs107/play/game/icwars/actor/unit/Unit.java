@@ -31,21 +31,19 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     protected int maxDamage;
     protected int radius;
     protected ICWarsRange range;
-    protected DiscreteCoordinates coordinates;
     protected boolean used;
-    protected int defenseStars;
+    protected int defenceStars;
     protected List<Action> actions;
     private final ICWarsUnitInteractionHandler handler;
 
     public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
         this.sprite = new Sprite(this.getSpriteName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
-        this.coordinates = coordinates;
         sprite.setDepth(0);
         handler = new ICWarsUnitInteractionHandler();
     }
     /***
-     * Create range of a unit
+     * Create the range of a unit (ICWarsRange)
      */
     public void createRange () {
 
@@ -71,16 +69,53 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
             }
         }
     }
+    
+    /***
+    Draw the unit's range and a path from the unit position to
+    destination
+    * @param destination path destination
+    * @param canvas canvas
+    */
+    public void drawRangeAndPathTo(DiscreteCoordinates destination , Canvas canvas) {
+    	range.draw(canvas);
+    	Queue <Orientation > path = range.shortestPath(getCurrentMainCellCoordinates (),destination);
+    	//Draw path only if it exists (destination inside the range)
+	    if (path != null){
+	    	new Path(getCurrentMainCellCoordinates ().toVector (),path).draw(canvas);
+	    }
+    }
+    /**
+     * Unit gets damaged by specified amount of HP
+     * @param damage	(int): amount of HP to remove from unit
+     */
+    public void damage(int damage){
+        if ((currentHP - damage) < 0) { currentHP=0; } 
+        else { currentHP -= damage; }
+    }
+    /**
+     * Unit gets repaired by specified amount of HP
+     * @param repair	(int): amount of HP to add to unit
+     */
+    public void repair(int repair) {
+        if ((currentHP + repair) > maxHP) { currentHP = maxHP; } 
+        else { currentHP += repair; }
+    }
+
+    /**
+     * Getter for actions
+     * - Non intrusive getter: unmodifiableList(List) is immutable
+     * @return actions
+     */
+    public List<Action> getActions(){
+    	return Collections.unmodifiableList(actions);
+    }
     /**
      * Getter for coordinates
+     * - Non intrusive getter: DiscreteCoordinates is immutable
      * @return coordinates
      */
     public DiscreteCoordinates getCoordinates() {
         return getCurrentMainCellCoordinates();
-    }
-    
-    public List<Action> getActions(){
-    	return Collections.unmodifiableList(actions);
     }
     /**
      * Getter for radius
@@ -110,44 +145,23 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     public String getSpriteName() {
         return spriteName;
     }
-    
+    /**
+     * Getter for unit name
+     * @return unitName	(String): unit name
+     */
     public abstract String getName();
     /**
-     * Unit gets damaged by specified amount of HP
-     * @param damage
+     * Getter for current defence of the Unit
+     * @return defence	(int): number of defence stars currently protecting unit
      */
-    public void damage(int damage){
-        if ((currentHP - damage) < 0) {
-            currentHP=0;
-        } else {
-            currentHP -= damage;
-        }
-    }
+	public int getDefence() {
+		return defenceStars;
+	}
     /**
-     * Unit gets repaired by specified amount of HP
-     * @param repair
+     * Getter for used (whether a unit has already been used)
+     * @return used	(boolean): whether the unit is used
      */
-    public void repair(int repair) {
-        if ((currentHP += repair) > maxHP) {
-            currentHP = maxHP;
-        } else {
-            currentHP += repair;
-        }
-    }
-    /***
-    Draw the unit's range and a path from the unit position to
-    destination
-    * @param destination path destination
-    * @param canvas canvas
-    */
-    public void drawRangeAndPathTo(DiscreteCoordinates destination , Canvas canvas) {
-    	range.draw(canvas);
-    	Queue <Orientation > path = range.shortestPath(getCurrentMainCellCoordinates (),destination);
-    	//Draw path only if it exists (destination inside the range)
-	    if (path != null){
-	    	new Path(getCurrentMainCellCoordinates ().toVector (),path).draw(canvas);
-	    }
-    }
+    public boolean getUsed(){return used;}
     /**
      * Setter for used 
      * (sets whether a unit has been used and modifies its sprite accordingly)
@@ -158,12 +172,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
         if(used == true){sprite.setAlpha(0.5f);} 
         else {sprite.setAlpha(1.f);}
     }
-    /**
-     * Getter for used (whether a unit has already been used)
-     * @return used
-     */
-    public boolean getUsed(){return used;}
-    
+
     @Override
     public boolean changePosition(DiscreteCoordinates newPosition) {
     	if (range.nodeExists(newPosition) && super.changePosition(newPosition)) {
@@ -172,13 +181,9 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     	return false;
     }
     
-	public int getDefense() {
-		return defenseStars;
-	}
-    
     @Override
     public void draw(Canvas canvas) {
-        sprite.draw(canvas);
+    	sprite.draw(canvas);
     }
     
     @Override
@@ -206,12 +211,9 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
 	}
     
     private class ICWarsUnitInteractionHandler implements ICWarInteractionVisitor {
-
 		@Override
 		public void interactWith(Cell cell) {
-			defenseStars = ((ICWarsCell)cell).getDefense();
+			defenceStars = ((ICWarsCell)cell).getDefense();
 		}
 	}
-
-
 }

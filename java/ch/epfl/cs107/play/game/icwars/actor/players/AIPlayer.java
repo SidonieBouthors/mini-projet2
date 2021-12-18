@@ -1,20 +1,13 @@
 package ch.epfl.cs107.play.game.icwars.actor.players;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import javax.naming.directory.NoSuchAttributeException;
-
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
-import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
-import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
-import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -23,21 +16,19 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class AIPlayer extends ICWarsPlayer{
 
 	private Sprite sprite;
-	boolean counting;
-	float counter;
-	private Action currentAction;
+	private boolean counting;
+	private float counter;
 	private int actionIndex;
-	private final static int MOVE_DURATION = 8;
-	private List<Unit> toPlayUnits;
-	private List<DiscreteCoordinates> enemyUnitsCoordinates;
+	private Action currentAction;
+	private List<Unit> toPlayUnits;//List of units that have not yet played. Reinitialised each turn
 	
 	public AIPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction, units);
-			if (faction == Faction.ALLY) {
-				sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
-			} else {
-				sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
-			}
+		if (faction == Faction.ALLY) {
+			sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
+		} else {
+			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
+		}
 		sprite.setDepth(1);
 		toPlayUnits = new ArrayList<Unit>();
 	}
@@ -46,28 +37,31 @@ public class AIPlayer extends ICWarsPlayer{
 	public void update(float deltaTime) {
 		
 		super.update(deltaTime);
-		
-		deleteDeadunits();
-		
+		deleteDeadUnits();
 		Keyboard keyboard = getOwnerArea().getKeyboard();
 		
+		//Check for TAB pressed
 		if (keyboard.get(Keyboard.TAB).isPressed()) {
 					this.state = PlayerState.IDLE;
 		}
 		
 		switch (state) {
 			case IDLE:
+				//Reinitialise list of units that have to play
 				toPlayUnits.addAll(units);
 				break;
 			case NORMAL:
-				
+				//If there are still units that need to play, SELECT_CELL
 				if (toPlayUnits.size() != 0) {
 					this.state = PlayerState.SELECT_CELL;
-				} else {
+				} 
+				//Otherwise the player has finished its turn, IDLE
+				else {
 					this.state = PlayerState.IDLE;
 				}
 				break;
 			case SELECT_CELL:
+				//Select the next unit that needs to play and remove it from list
 				selectedUnit = toPlayUnits.get(0);
 				toPlayUnits.remove(selectedUnit);
 				if (selectedUnit != null && selectedUnit.getUsed() == false) {
@@ -77,8 +71,11 @@ public class AIPlayer extends ICWarsPlayer{
 				}
 				break;
 			case MOVE_UNIT:
+				//Move player cursor as close as possible to the closest enemy
 				moveCloseToEnemy();
+				//Wait
 				if (waitFor(0.2f, deltaTime)){
+					//Move selectedUnit to player cursor
 					if (selectedUnit.changePosition(this.getCurrentMainCellCoordinates())){
 						selectedUnit.createRange();
 						actionIndex = 0;
@@ -87,16 +84,22 @@ public class AIPlayer extends ICWarsPlayer{
 				}
 				break;
 			case ACTION_SELECTION:
+				//Wait
 				if (waitFor(0.2f, deltaTime)){
+					//Select an action if possible
 					if (actionIndex < selectedUnit.getActions().size()) {
 						currentAction = selectedUnit.getActions().get(actionIndex);
 						state = PlayerState.ACTION;
-					} else {
+					} 
+					//If there are no more possible actions, play next unit
+					else {
 						state = PlayerState.SELECT_CELL;
 					}
 				}
 				break;
 			case ACTION:
+				//Try to execute action
+				//If this is not possible, go back to action selection and try next action
 				if (!currentAction.doAutoAction(deltaTime, this)) {
 					actionIndex++;
 					state = PlayerState.ACTION_SELECTION;
@@ -131,22 +134,33 @@ public class AIPlayer extends ICWarsPlayer{
 	        sprite.draw(canvas);
         }
 	}
+	
+	/**
+	 * Move the player cursor as close as possible to the closest enemy
+	 * While staying in range of the current selectedUnit
+	 */
 	private void moveCloseToEnemy(){
+		//get the selectedUnit position and the position of the closest enemy
 		DiscreteCoordinates unitPosition = selectedUnit.getCoordinates();
 	    DiscreteCoordinates enemyUnitPosition = ((ICWarsArea)getOwnerArea()).getClosestEnemyPosition(selectedUnit.getFaction(), unitPosition);
 	    
-	    int x=0;
-	    int y=0;
+	    
 	    int radius = selectedUnit.getRadius();
-
-	   	//set x to x position of target enemy
+	    int x;
+	    int y;
+	    
+	   	//set x and y to position of target enemy
 		if (enemyUnitPosition != null) {
 			x = enemyUnitPosition.x;
 			y = enemyUnitPosition.y;
+		} 
+		//if there is no target enemy, set x and y to current position
+		else {
+			x = unitPosition.x;
+			y = unitPosition.y;
 		}
 
-
-	    //while x not within radius
+		//Adjust x position until it is within radius
 	    while( x > unitPosition.x +  radius
         	|| x < unitPosition.x - radius ) {
 	    	//increase x if x is too small
@@ -159,9 +173,7 @@ public class AIPlayer extends ICWarsPlayer{
         	}
 	    }
 	    
-	    //set y to y position of target enemy
-
-	    //while y not within radius
+	    //Adjust y position until it is within radius
 	    while( y > unitPosition.y + radius
         	|| y < unitPosition.y - radius ) {
 	    	//increase y if y is too small
@@ -173,18 +185,24 @@ public class AIPlayer extends ICWarsPlayer{
         		y -= 1;
         	}
         } 
-	    while(((ICWarsArea)getOwnerArea()).unitAt(x,y) 
+	    
+	    //Adjust position until it is a free cell (not occupied by another unit)
+	    //switching between x and y directions
+	    boolean directionSwitch = true;
+	    while(((ICWarsArea)getOwnerArea()).isUnitAt(x,y) 
 	    		&& (selectedUnit.getCoordinates().x !=x 
 	    		|| selectedUnit.getCoordinates().y !=y)){
-	    	if (x < unitPosition.x) {
-        		x += 1;
-        	} else {
-        		x -= 1;
-        	}
+	    	if (directionSwitch) {
+		    	if (x < unitPosition.x) {x++;} 
+		    	else {x--;}
+	    	} else {
+	    		if (y < unitPosition.y) {y++;}
+	    		else {y--;}
+	    	}
+	    	directionSwitch = !directionSwitch;
 	    }
+	    
+	    //Move player cursor to new position
 	    changePosition(new DiscreteCoordinates( x , y ));
 	}
-
-	
-
 }

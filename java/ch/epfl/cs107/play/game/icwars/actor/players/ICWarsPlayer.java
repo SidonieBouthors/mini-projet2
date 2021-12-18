@@ -11,47 +11,31 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
-import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 	protected List<Unit> units;
 	protected List<Unit> deadUnits;
-	//Special list to avoid modification while iterating on units.
-	protected List<Unit> toRemove;
-
-	
+	protected List<Unit> toRemove; //Special list to avoid modification while iterating on units.
 	protected PlayerState state;
 	protected Unit selectedUnit;
-	protected DiscreteCoordinates coordinates;
 	
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction);
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
 		this.deadUnits = new ArrayList<Unit>();
 		this.state = PlayerState.IDLE;
-		this.coordinates=coordinates;
-		this.faction=faction;
 	}
+	
 	@Override
 	public void update(float deltaTime){
 	    super.update(deltaTime);
         if(this.isDisplacementOccurs()){
             for(int i =0; i < units.size();++i){
-                if( units.get(i).getHP() ==0 ){
-                    units.remove(i);
-                }
+                if( units.get(i).getHP() ==0 ){ units.remove(i); }
             }
 	    }
-	}
-	
-	public void startTurn() {
-		this.state = PlayerState.NORMAL;
-		centerCamera();
-		for (Unit unit:units) {
-			unit.setUsed(false);
-		}
 	}
 	
 	/**
@@ -70,19 +54,14 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 			this.state=state;
 		}
 	}
-
-	// getCurrentMainCellCoordinates is in protected.
-	public DiscreteCoordinates getCoordinates(){
-	    return getCurrentCells().get(0);
-	}
-
+	
 	/**
-	 * Getter for state of Player
-	 * Non intrusive getter : An object ICWarsPlayerState is immutable.
-	 * @return state
+	 * Starts player turn
 	 */
-	public PlayerState getState() {
-		return state;
+	public void startTurn() {
+		this.state = PlayerState.NORMAL;
+		centerCamera();
+		setUnitsUsable();
 	}
 	/**
 	 * Centre the camera on the player
@@ -92,53 +71,49 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	}
 	/**
 	 * Checks if player has been defeated
-	 * @return whether the player is defeated
+	 * @return defeated	(boolean): whether the player is defeated
 	 */
 	public boolean isDefeated() {
-		if(units.size() == 0) {
-			return true;
-		} else { return false;}
+		if(units.size() == 0) { return true; } 
+		else { return false; }
 	}
 	/**
-	 * Set all unit.used to false (all units not used)
+	 * Set all unit used to false (make all units not used)
 	 */
 	public void setUnitsUsable() {
-		for (Unit unit : units) {
-			unit.setUsed(false);
-		}
+		for (Unit unit : units) { unit.setUsed(false); }
 	}
 	/**
-	 * Setter for player state
-	 * @param state
+	 * Iterates over list of units and remove any unit who has no more HP
 	 */
-	public void setState(PlayerState state) {
-		this.state=state;
-		
-	}
-	
-	protected void deleteDeadunits() {
-
-
-
+	protected void deleteDeadUnits() {
 			for (Iterator<Unit> iterator = units.iterator(); iterator.hasNext();) {
 				Unit unit = iterator.next();
 				if(unit.getHP() == 0) {
 					((ICWarsArea)getOwnerArea()).removeUnit(unit);
 					iterator.remove();
 					deadUnits.add(unit);
-					
 				}
 			}
 			// Il faut update la liste des acteurs qui sont selectionnable par le curseur pour en enlever les morts
-
 	}
-	
-	@Override
-	public void onLeaving(List<DiscreteCoordinates> coordinates) {
-		if (state == PlayerState.SELECT_CELL) {
-			state = PlayerState.NORMAL;
-		}
-	}
+	/**
+	 * Getter for coordinates of player
+	 * - Non intrusive getter : DiscreteCoordinates is immutable.
+	 * @return coordinates	(DiscreteCoordinates): current coordinates of player
+	 */
+	public DiscreteCoordinates getCoordinates(){ return getCurrentCells().get(0); }
+	/**
+	 * Getter for state of Player
+	 * - Non intrusive getter : PlayerState is immutable.
+	 * @return state	(PlayerState): current state of player
+	 */
+	public PlayerState getState() { return state; }
+	/**
+	 * Setter for player state
+	 * @param state	(PlayerState)
+	 */
+	public void setState(PlayerState state) { this.state=state;	}
 	
 	@Override
     public void enterArea(Area area, DiscreteCoordinates position){
@@ -158,8 +133,13 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
         }
         area.unregisterActor(this);
     }
-	
-    	
+    
+    @Override
+	public void onLeaving(List<DiscreteCoordinates> coordinates) {
+		if (state == PlayerState.SELECT_CELL) {
+			state = PlayerState.NORMAL;
+		}
+	}	
     
     @Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {return null;}
@@ -172,11 +152,5 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 	@Override
 	public void interactWith(Interactable other) {}
-	
-	@Override
-    public boolean isCellInteractable() {return true;}
-	
-	@Override
-	public boolean isViewInteractable() {return false;}
 
 }

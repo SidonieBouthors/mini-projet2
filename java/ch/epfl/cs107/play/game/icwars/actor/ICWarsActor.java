@@ -24,6 +24,9 @@ public class ICWarsActor extends MovableAreaEntity {
         super.update(deltaTime);
     }
 
+    /**
+     * Enum of existing Factions
+     */
     public enum Faction {
         ALLY(1),
         ENEMY(2);
@@ -36,7 +39,7 @@ public class ICWarsActor extends MovableAreaEntity {
     
     /**
      * Getter for faction of Actor
-     * Non Intrusive getter : an object ICWarsFaction is immutable.
+     * - Non Intrusive getter : ICWarsFaction is immutable.
      * @return faction
      */
     public Faction getFaction() {

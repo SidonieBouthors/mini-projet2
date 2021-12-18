@@ -26,8 +26,7 @@ public class RealPlayer extends ICWarsPlayer{
 	private Sprite sprite;
 	private ICWarsPlayerGUI gui;
 	private final ICWarsPlayerInteractionHandler handler;
-	/// Animation duration in frame number
-	private final static int MOVE_DURATION = 8;
+	private final static int MOVE_DURATION = 8; //Animation duration in frame number
 	private Action currentAction;
 
 	
@@ -55,7 +54,7 @@ public class RealPlayer extends ICWarsPlayer{
 
 		super.update(deltaTime);
 		
-		deleteDeadunits();
+		deleteDeadUnits();
 		
 		switch (state) {
 			case IDLE:
@@ -129,7 +128,7 @@ public class RealPlayer extends ICWarsPlayer{
 
 	@Override
 	public void draw(Canvas canvas) {
-		// Si le STATE est IDLE alors ne pas draw le cursor
+		//Draw cursor if not IDLE
 		if (state != PlayerState.IDLE) {
 			sprite.draw(canvas);
 			gui.draw(canvas);

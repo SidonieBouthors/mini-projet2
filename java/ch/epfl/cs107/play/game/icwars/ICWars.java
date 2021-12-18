@@ -5,13 +5,12 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
-import ch.epfl.cs107.play.game.icwars.actor.unit.Soldier;
-import ch.epfl.cs107.play.game.icwars.actor.unit.Tank;
-import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
 import ch.epfl.cs107.play.game.icwars.actor.players.RealPlayer;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Soldier;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Tank;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.game.icwars.area.Level0;
 import ch.epfl.cs107.play.game.icwars.area.Level1;
@@ -27,7 +26,7 @@ public class ICWars extends AreaGame {
 	private ICWarsPlayer enemyPlayer;
 	private ICWarsPlayer allyPlayer;
 	private final String[] areas = {"icwars/Level0", "icwars/Level1"};
-	private Unit unit;
+	//private Unit unit;
 	private int areaIndex;
 	private List<ICWarsPlayer> playerForThisOne;
 	private List<ICWarsPlayer> playerForTheNext;
@@ -53,6 +52,10 @@ public class ICWars extends AreaGame {
 		return false;
 	}
 	
+	/**
+	 * Initialise the area given by key, add all players and their units, etc...
+	 * @param areaKey
+	 */
 	private void initArea(String areaKey) {
 
 		ICWarsArea area = (ICWarsArea)setCurrentArea(areaKey, true);
@@ -172,6 +175,9 @@ public class ICWars extends AreaGame {
 	@Override
 	public String getTitle() {return "ICWars";}
 
+	/**
+	 * 
+	 */
 	protected void switchArea() {
 
 		currentPlayer.leaveArea();
