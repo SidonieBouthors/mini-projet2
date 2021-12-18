@@ -1,18 +1,18 @@
 package ch.epfl.cs107.play.game.icwars.gui;
 
+import java.awt.Color;
+import java.util.List;
+
 import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.actor.ShapeGraphics;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
-import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
-import ch.epfl.cs107.play.game.icwars.area.ICWarsBehavior;
-import ch.epfl.cs107.play.math.*;
 import ch.epfl.cs107.play.math.Polygon;
 import ch.epfl.cs107.play.math.Shape;
+import ch.epfl.cs107.play.math.TextAlign;
+import ch.epfl.cs107.play.math.Transform;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
-
-import java.awt.*;
-import java.util.List;
 
 
 public class ICWarsActionsPanel implements Graphics {
