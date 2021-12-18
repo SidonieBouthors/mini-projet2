@@ -200,12 +200,14 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((ICWarInteractionVisitor)v).interactWith(this);
+    	if (currentHP != 0) {
+    		((ICWarInteractionVisitor)v).interactWith(this);
+    	}
     }
     
     @Override
 	public void interactWith(Interactable other) {
-		if (!isDisplacementOccurs()) {
+		if (!isDisplacementOccurs() && currentHP!=0) {
 			other.acceptInteraction(handler);
 	    }
 	}
