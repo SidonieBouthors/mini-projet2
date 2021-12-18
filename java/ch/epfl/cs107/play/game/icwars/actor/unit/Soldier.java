@@ -10,13 +10,20 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Soldier extends Unit {
 	
+	/**
+     * Default Soldier Constructor
+     * @param owner			(Area): owner area
+     * @param coordinates	(DiscreteCoordinates): starting coordinates
+     * @param faction		(Faction): faction
+     */
     public Soldier(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
-        maxHP =5;
-        maxDamage =2;
-        radius =2;
-        currentHP=maxHP;
+        maxHP = 5;
+        maxDamage = 2;
+        radius = 2;
+        currentHP = maxHP;
         createRange();
+        //create actions
         actions = new ArrayList<Action>();
         actions.add(new Attack(this, owner));
         actions.add(new Wait(this, owner));
@@ -30,6 +37,10 @@ public class Soldier extends Unit {
                 return "icwars/friendlySoldier";
             }
     }
+    /**
+     * Getter for name
+     * @return name
+     */
     public String getName() {
     	return "Soldier";
     }

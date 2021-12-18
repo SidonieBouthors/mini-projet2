@@ -14,6 +14,12 @@ public class ICWarsActor extends MovableAreaEntity {
 
     protected Faction faction;
 
+    /**
+     * Default ICWarsActor Constructor
+     * @param owner			(Area): owner area
+     * @param coordinates	(DiscreteCoordinates): starting coordinates
+     * @param faction		(Faction): faction of actor
+     */
     public ICWarsActor(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner,Orientation.UP,coordinates);
         this.faction=faction;

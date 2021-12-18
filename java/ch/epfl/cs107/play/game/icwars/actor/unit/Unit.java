@@ -36,6 +36,12 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     protected List<Action> actions;
     private final ICWarsUnitInteractionHandler handler;
 
+    /**
+     * Default Unit Constructor
+     * @param owner			(Area): owner area
+     * @param coordinates	(DiscreteCoordinates): starting coordinates
+     * @param faction		(Faction): faction of unit
+     */
     public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
         this.sprite = new Sprite(this.getSpriteName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
@@ -73,8 +79,8 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     /***
     Draw the unit's range and a path from the unit position to
     destination
-    * @param destination path destination
-    * @param canvas canvas
+    * @param destination	(DiscreteCoordinates): path destination
+    * @param canvas 		(Canvas): canvas
     */
     public void drawRangeAndPathTo(DiscreteCoordinates destination , Canvas canvas) {
     	range.draw(canvas);
@@ -115,7 +121,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * @return coordinates
      */
     public DiscreteCoordinates getCoordinates() {
-        return getCurrentMainCellCoordinates();
+    	return getCurrentMainCellCoordinates();
     }
     /**
      * Getter for radius
@@ -161,7 +167,9 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * Getter for used (whether a unit has already been used)
      * @return used	(boolean): whether the unit is used
      */
-    public boolean getUsed(){return used;}
+    public boolean getUsed(){
+    	return used;
+    	}
     /**
      * Setter for used 
      * (sets whether a unit has been used and modifies its sprite accordingly)

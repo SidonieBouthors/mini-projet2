@@ -8,37 +8,34 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
-
-import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
-import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsBehavior.ICWarsCell;
+import ch.epfl.cs107.play.game.icwars.gui.ICWarsPlayerGUI;
+import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
 public class RealPlayer extends ICWarsPlayer{
 	
-	private Sprite sprite;
 	private ICWarsPlayerGUI gui;
 	private final ICWarsPlayerInteractionHandler handler;
 	private final static int MOVE_DURATION = 8; //Animation duration in frame number
 	private Action currentAction;
 
-	
+	/**
+	 * Default RealPlayer Constructor
+	 * @param owner			(Area): area that the RealPlayer belongs to
+	 * @param coordinates	(DiscreteCoordinates): starting coordinates
+	 * @param faction		(Faction): faction of the RealPlayer
+	 * @param units			(Unit[]): array of units belonging to the RealPlayer
+	 */
 	public RealPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction, units);
-		if (faction == Faction.ALLY) {
-			sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
-		} else {
-			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
-		}
+		
 		gui = new ICWarsPlayerGUI(10.f,this);
-		sprite.setDepth(1);
 		handler = new ICWarsPlayerInteractionHandler();
 	}
 	

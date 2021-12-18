@@ -8,20 +8,23 @@ import java.util.List;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
 
 public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
+	protected Sprite sprite;
 	protected List<Unit> units;
 	protected List<Unit> deadUnits;
 	protected PlayerState state;
 	protected Unit selectedUnit;
 	
 	/**
-	 * ICWarsPlayer Constructor
+	 * Default ICWarsPlayer Constructor
 	 * @param owner			(Area): area that the ICWarsPlayer belongs to
 	 * @param coordinates	(DiscreteCoordinates): starting coordinates
 	 * @param faction		(Faction): faction of the ICWarsPlayer
@@ -29,6 +32,12 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	 */
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction);
+		if (faction == Faction.ALLY) {
+			sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
+		} else {
+			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
+		}
+		sprite.setDepth(1);
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
 		this.deadUnits = new ArrayList<Unit>();
 		this.state = PlayerState.IDLE;

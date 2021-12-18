@@ -9,6 +9,11 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class Wait extends Action{
 
+	/**
+	 * Wait Constructor
+	 * @param unit	(Unit): unit to wait
+	 * @param area	(Area): area on which waiting occurs
+	 */
 	public Wait(Unit unit, Area area) {
 		super(unit, area);
 		name = "(W)ait";

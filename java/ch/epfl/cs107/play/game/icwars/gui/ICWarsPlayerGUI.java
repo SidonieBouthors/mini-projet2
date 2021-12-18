@@ -21,9 +21,9 @@ public class ICWarsPlayerGUI implements Graphics{
 	private ICWarsInfoPanel infoPanel;
 	
 	/**
-	 * 
-	 * @param cameraScaleFactor
-	 * @param player
+	 * Default ICWarsPlayerGUI Constructor
+	 * @param cameraScaleFactor	(float)
+	 * @param player			(ICWarsPlayer)
 	 */
 	public ICWarsPlayerGUI ( float cameraScaleFactor , ICWarsPlayer player ) {
 		this.player=(RealPlayer)player;
@@ -32,21 +32,21 @@ public class ICWarsPlayerGUI implements Graphics{
 	}
 	
 	/**
-	 * 
+	 * Setter for selectedUnit (unit selected by player)
 	 * @param unit
 	 */
 	public void setSelectedUnit(Unit unit) {
 		selectedUnit = unit;
 	}
 	/**
-	 * 
+	 * Setter for currentUnit (unit over which player is)
 	 * @param unit
 	 */
 	public void setCurrentUnit(Unit unit) {
 		currentUnit = unit;
 	}
 	/**
-	 * 
+	 * Setter for type of current cell (cell over which player is)
 	 * @param type
 	 */
 	public void setCurrentCellType (CellType type) {

@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
 public class AIPlayer extends ICWarsPlayer{
 
-	private Sprite sprite;
 	private boolean counting;
 	private float counter;
 	private int actionIndex;
@@ -31,12 +28,6 @@ public class AIPlayer extends ICWarsPlayer{
 	 */
 	public AIPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction, units);
-		if (faction == Faction.ALLY) {
-			sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
-		} else {
-			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
-		}
-		sprite.setDepth(1);
 		toPlayUnits = new ArrayList<Unit>();
 	}
 

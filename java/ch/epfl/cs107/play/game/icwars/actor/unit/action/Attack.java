@@ -18,8 +18,13 @@ public class Attack extends Action{
 
 	private ImageGraphics cursor;
 	private List<Integer> attackableUnitIndexes;
-	int targetNumber=0;
+	private int targetNumber = 0;
 	
+	/**
+	 * Attack Constructor
+	 * @param unit	(Unit): attacking unit
+	 * @param area	(Area): area on which attack occurs
+	 */
 	public Attack(Unit unit, Area area) {
 		super(unit, area);
 		this.name = "(A)ttack";
@@ -34,7 +39,9 @@ public class Attack extends Action{
 		//call ICWarsArea method to return indexes of attackable units
 		attackableUnitIndexes = ((ICWarsArea)area).getAttackable(unit.getCoordinates(), unit.getRadius(), unit.getFaction());
 		
-		if (attackableUnitIndexes.size()==0 || keyboard.get(Keyboard.TAB).isPressed()) {
+		//TAB key pressed or no attackable units
+		if (attackableUnitIndexes.size()==0 
+			|| keyboard.get(Keyboard.TAB).isPressed()) {
 			player.centerCamera();
 			player.setState(PlayerState.ACTION_SELECTION);
 		}
@@ -59,8 +66,10 @@ public class Attack extends Action{
 		}
 		//ENTER key pressed
 		if(keyboard.get(Keyboard.ENTER).isPressed()) {
+			//select target unit and attack it
 			int targetUnitIndex = attackableUnitIndexes.get(targetNumber);
 			((ICWarsArea)area).attackUnit(targetUnitIndex, unit.getDamage());
+			
 			unit.setUsed(true);
 			player.centerCamera();
 			player.setState(PlayerState.NORMAL);
@@ -72,12 +81,14 @@ public class Attack extends Action{
 		//call ICWarsArea method to return indexes of attackable units
 		attackableUnitIndexes = ((ICWarsArea)area).getAttackable(unit.getCoordinates(), unit.getRadius(), unit.getFaction());	
 		
+		//if there are no attackable units
 		if (attackableUnitIndexes.size()==0) {
 			player.centerCamera();
 			player.setState(PlayerState.ACTION_SELECTION);
 			return false;
 		}
 		else {
+			//select target unit and attack it
 			int targetUnitIndex = attackableUnitIndexes.get(0);
 			((ICWarsArea)area).attackUnit(targetUnitIndex, unit.getDamage());
 			unit.setUsed(true);

@@ -8,7 +8,6 @@ import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Unit;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Window;
 
 public abstract class ICWarsArea extends Area {
@@ -29,14 +28,29 @@ public abstract class ICWarsArea extends Area {
         return CAMERA_SCALE_FACTOR;
     }
 
+    /**
+     * Getter for Player Spawn Position
+     * @return player spawn position	(DiscreteCoordinates)
+     */
     public abstract DiscreteCoordinates getPlayerSpawnPosition();
+    /**
+     * Getter for Enemy Player Spawn Position
+     * @return enemy player spawn position	(DiscreteCoordinates)
+     */
     public abstract DiscreteCoordinates getEnemyPlayerSpawnPosition();
     
-    
+    /**
+     * Add Unit to Area (Register and add to list of units)
+     * @param unit
+     */
     public void addUnit(Unit unit) {
     	registerActor(unit);
     	units.add(unit);
     }
+    /**
+     * Remove Unit from Area (Unregister and remove from list)
+     * @param unit
+     */
     public void removeUnit(Unit unit) {
     	unregisterActor(unit);
     	units.remove(unit);
@@ -59,6 +73,7 @@ public abstract class ICWarsArea extends Area {
         }
         return null;
     }
+    
     /**
      * Finds the units attackable by an attacking unit
      * @param attackerPosition			(DiscreteCoordinates) : coordinates of attacking unit
@@ -68,18 +83,14 @@ public abstract class ICWarsArea extends Area {
      */
     public List<Integer> getAttackable(DiscreteCoordinates attackerPosition, int radius, Faction faction) {
     	List<Integer> unitIndexes = new ArrayList<Integer>();
-    	int maxX = (int)attackerPosition.x + radius;
-    	int minX = (int)attackerPosition.x - radius;
-    	int maxY = (int)attackerPosition.y + radius;
-    	int minY = (int)attackerPosition.y - radius;
     	int index = 0;
     	for (Unit unit:units) {
-    		Vector position = unit.getPosition();
+    		DiscreteCoordinates position = unit.getCoordinates();
     		if (unit.getFaction()!=faction
-    			&& position.x <= maxX
-    			&& position.x >= minX
-    			&& position.y <= maxY
-    			&& position.y >= minY
+    			&& position.x <= attackerPosition.x + radius
+    			&& position.x >= attackerPosition.x - radius
+    			&& position.y <= attackerPosition.y + radius
+    			&& position.y >= attackerPosition.y - radius
     			&& !(position.x == attackerPosition.x 
     				&& position.y == attackerPosition.y)) {
     			unitIndexes.add(index);
@@ -122,6 +133,7 @@ public abstract class ICWarsArea extends Area {
     	Unit unit = units.get(unitIndex);
     	setViewCandidate(unit);
     }
+    
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         if (super.begin(window, fileSystem)) {

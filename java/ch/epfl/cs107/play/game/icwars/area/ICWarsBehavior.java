@@ -24,6 +24,9 @@ public class ICWarsBehavior extends AreaBehavior {
 		}
 	}
 	
+	/**
+	 * Enum of Cell Types
+	 */
 	public enum CellType {
 		//https://stackoverflow.com/questions/25761438/understanding-bufferedimage-getrgb-output-values
 		NONE(0, 0),
@@ -75,11 +78,17 @@ public class ICWarsBehavior extends AreaBehavior {
 			super(x, y); 
 			this.type = type;
 		}
-		
+		/**
+		 * Getter for Defense
+		 * @return defense	(int): amount of defense stars
+		 */
 		public int getDefense() {
 			return type.getDefenseStar();
 		}
-		
+		/**
+		 * Getter for Cell Type
+		 * @return cell type	(CellType)
+		 */
 		public CellType getCellType() {
 			return type;
 		}
