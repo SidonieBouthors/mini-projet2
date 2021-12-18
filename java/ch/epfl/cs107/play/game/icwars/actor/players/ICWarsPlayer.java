@@ -17,10 +17,16 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 	protected List<Unit> units;
 	protected List<Unit> deadUnits;
-	protected List<Unit> toRemove; //Special list to avoid modification while iterating on units.
 	protected PlayerState state;
 	protected Unit selectedUnit;
 	
+	/**
+	 * ICWarsPlayer Constructor
+	 * @param owner			(Area): area that the ICWarsPlayer belongs to
+	 * @param coordinates	(DiscreteCoordinates): starting coordinates
+	 * @param faction		(Faction): faction of the ICWarsPlayer
+	 * @param units			(Unit[]): array of units belonging to the ICWarsPlayer
+	 */
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction);
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
@@ -32,9 +38,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	public void update(float deltaTime){
 	    super.update(deltaTime);
         if(this.isDisplacementOccurs()){
-            for(int i =0; i < units.size();++i){
-                if( units.get(i).getHP() ==0 ){ units.remove(i); }
-            }
+            deleteDeadUnits();
 	    }
 	}
 	
@@ -97,6 +101,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 			}
 			// Il faut update la liste des acteurs qui sont selectionnable par le curseur pour en enlever les morts
 	}
+	
 	/**
 	 * Getter for coordinates of player
 	 * - Non intrusive getter : DiscreteCoordinates is immutable.

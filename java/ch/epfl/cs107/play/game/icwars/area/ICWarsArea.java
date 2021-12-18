@@ -133,5 +133,6 @@ public abstract class ICWarsArea extends Area {
             return true;
         }
         return false;
-    }  
+    }
+ 
 }

@@ -54,8 +54,6 @@ public class RealPlayer extends ICWarsPlayer{
 
 		super.update(deltaTime);
 		
-		deleteDeadUnits();
-		
 		switch (state) {
 			case IDLE:
 				break; 

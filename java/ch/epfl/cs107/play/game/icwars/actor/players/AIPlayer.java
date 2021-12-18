@@ -22,6 +22,13 @@ public class AIPlayer extends ICWarsPlayer{
 	private Action currentAction;
 	private List<Unit> toPlayUnits;//List of units that have not yet played. Reinitialised each turn
 	
+	/**
+	 * AIPlayer Constructor
+	 * @param owner			(Area): area that the AIPlayer belongs to
+	 * @param coordinates	(DiscreteCoordinates): starting coordinates
+	 * @param faction		(Faction): faction of the AIPlayer
+	 * @param units			(Unit[]): array of units belonging to the AIPlayer
+	 */
 	public AIPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction, units);
 		if (faction == Faction.ALLY) {
@@ -37,7 +44,6 @@ public class AIPlayer extends ICWarsPlayer{
 	public void update(float deltaTime) {
 		
 		super.update(deltaTime);
-		deleteDeadUnits();
 		Keyboard keyboard = getOwnerArea().getKeyboard();
 		
 		//Check for TAB pressed
@@ -163,40 +169,30 @@ public class AIPlayer extends ICWarsPlayer{
 		//Adjust x position until it is within radius
 	    while( x > unitPosition.x +  radius
         	|| x < unitPosition.x - radius ) {
-	    	//increase x if x is too small
-        	if (x < unitPosition.x) {
-        		x += 1;
-        	}
-        	//decrease x if x is too big
-        	else if (x > unitPosition.x) {
-        		x -= 1;
-        	}
+	    	//increase x if x is too small / decrease x if x is too big
+        	if (x < unitPosition.x) { x++; }
+        	else if (x > unitPosition.x) { x--; }
 	    }
 	    
 	    //Adjust y position until it is within radius
 	    while( y > unitPosition.y + radius
         	|| y < unitPosition.y - radius ) {
-	    	//increase y if y is too small
-        	if (y < unitPosition.y) {
-        		y += 1;
-        	}
-        	//decrease y if y is too big
-        	else if (y > unitPosition.y) {
-        		y -= 1;
-        	}
+	    	//increase y if y is too small / decrease y if y is too big
+        	if (y < unitPosition.y) { y++; }
+        	else if (y > unitPosition.y) { y--; }
         } 
 	    
 	    //Adjust position until it is a free cell (not occupied by another unit)
-	    //switching between x and y directions
+	    //switching between incrementing x and y directions
 	    boolean directionSwitch = true;
 	    while(((ICWarsArea)getOwnerArea()).isUnitAt(x,y) 
 	    		&& (selectedUnit.getCoordinates().x !=x 
-	    		|| selectedUnit.getCoordinates().y !=y)){
+	    			|| selectedUnit.getCoordinates().y !=y)){
 	    	if (directionSwitch) {
-		    	if (x < unitPosition.x) {x++;} 
+		    	if (x < unitPosition.x) { x++; } 
 		    	else {x--;}
 	    	} else {
-	    		if (y < unitPosition.y) {y++;}
+	    		if (y < unitPosition.y) { y++; }
 	    		else {y--;}
 	    	}
 	    	directionSwitch = !directionSwitch;
