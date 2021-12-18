@@ -37,7 +37,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	@Override
 	public void update(float deltaTime){
 	    super.update(deltaTime);
-        if(this.isDisplacementOccurs()){
+        if(!this.isDisplacementOccurs()){
             deleteDeadUnits();
 	    }
 	}
@@ -97,6 +97,8 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 					((ICWarsArea)getOwnerArea()).removeUnit(unit);
 					iterator.remove();
 					deadUnits.add(unit);
+					units.remove(unit);
+					System.out.println("removed");
 				}
 			}
 			// Il faut update la liste des acteurs qui sont selectionnable par le curseur pour en enlever les morts
