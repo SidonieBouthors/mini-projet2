@@ -24,6 +24,22 @@ public abstract class Action implements Graphics{
 	}
 	
 	/**
+	 * Trigger the events linked to this action (as chosen by player)
+	 * @param dt		(float)
+	 * @param player	(ICWarsPlayer): player triggering the action
+	 * @param keyboard	(Keyboard): keyboard used to trigger events
+	 */
+	public abstract void doAction ( float dt , ICWarsPlayer player , Keyboard keyboard );
+	/**
+	 * Trigger the events linked to this action (automatically)
+	 * @param dt				(float)
+	 * @param player			(ICWarsPlayer): player triggering action (AI)
+	 * @return actionExecuted	(boolean): whether the action was able to be executed or not
+	 */
+	public abstract boolean doAutoAction(float dt, ICWarsPlayer player);
+	
+	//****Getters and Setter****
+	/**
 	 * Getter for action key
 	 * @return key	(int): key associated to this action
 	 */
@@ -53,20 +69,4 @@ public abstract class Action implements Graphics{
 	 * @return area	(Area)
 	 */
 	protected Area getArea() {return area;}
-	
-	/**
-	 * Trigger the events linked to this action (as chosen by player)
-	 * @param dt		(float)
-	 * @param player	(ICWarsPlayer): player triggering the action
-	 * @param keyboard	(Keyboard): keyboard used to trigger events
-	 */
-	public abstract void doAction ( float dt , ICWarsPlayer player , Keyboard keyboard );
-	/**
-	 * Trigger the events linked to this action (automatically)
-	 * @param dt				(float)
-	 * @param player			(ICWarsPlayer): player triggering action (AI)
-	 * @return actionExecuted	(boolean): whether the action was able to be executed or not
-	 */
-	public abstract boolean doAutoAction(float dt, ICWarsPlayer player);
-
 }

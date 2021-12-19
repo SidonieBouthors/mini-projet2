@@ -107,6 +107,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		}
 	}
 	
+	//****Getters and Setters****
 	/**
 	 * Getter for coordinates of player
 	 * - Non intrusive getter : DiscreteCoordinates is immutable.

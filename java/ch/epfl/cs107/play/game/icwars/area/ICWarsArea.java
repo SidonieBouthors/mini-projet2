@@ -63,14 +63,16 @@ public abstract class ICWarsArea extends Area {
      * @return enemyPosition	(DiscreteCoordinates) : coordinates of closest enemy (may be null if none found)
      */
     public DiscreteCoordinates getClosestEnemyPosition(Faction faction, DiscreteCoordinates coordinates){
-        int radius =0;
+        //make the radius bigger until an attackable enemy is within radius
+    	int radius =0;
         while( (radius < getHeight() || radius < getWidth()) && getAttackable(coordinates, radius, faction).size()==0){
             radius++;
         }
         if(getAttackable(coordinates, radius, faction).size()>0){
-			// returning the closest position
+			// returning the position of attackable enemy found
             return units.get(getAttackable(coordinates, radius, faction).get(0)).getCoordinates();
         }
+        //if no attackable enemy found, return null
         return null;
     }
     
@@ -84,15 +86,14 @@ public abstract class ICWarsArea extends Area {
     public List<Integer> getAttackable(DiscreteCoordinates attackerPosition, int radius, Faction faction) {
     	List<Integer> unitIndexes = new ArrayList<Integer>();
     	int index = 0;
+    	//add the index of all enemy units within range to a unitIndexes
     	for (Unit unit:units) {
     		DiscreteCoordinates position = unit.getCoordinates();
     		if (unit.getFaction()!=faction
     			&& position.x <= attackerPosition.x + radius
     			&& position.x >= attackerPosition.x - radius
     			&& position.y <= attackerPosition.y + radius
-    			&& position.y >= attackerPosition.y - radius
-    			&& !(position.x == attackerPosition.x 
-    				&& position.y == attackerPosition.y)) {
+    			&& position.y >= attackerPosition.y - radius) {
     			unitIndexes.add(index);
     		}
     		index++;

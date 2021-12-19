@@ -12,12 +12,15 @@ import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
 public class AIPlayer extends ICWarsPlayer{
-
-	private boolean counting;
+	
+	//For waitFor()
+	private boolean counting; 
 	private float counter;
+	//Selecting actions
 	private int actionIndex;
 	private Action currentAction;
-	private List<Unit> toPlayUnits;//List of units that have not yet played. Reinitialised each turn
+	//List of units that have not yet played this turn
+	private List<Unit> toPlayUnits; 
 	
 	/**
 	 * AIPlayer Constructor
@@ -72,7 +75,7 @@ public class AIPlayer extends ICWarsPlayer{
 				//Move player cursor as close as possible to the closest enemy
 				moveCloseToEnemy();
 				//Wait
-				if (waitFor(0.2f, deltaTime)){
+				if (waitFor(0.3f, deltaTime)){
 					//Move selectedUnit to player cursor
 					if (getSelectedUnit().changePosition(this.getCurrentMainCellCoordinates())){
 						getSelectedUnit().createRange();
@@ -83,7 +86,7 @@ public class AIPlayer extends ICWarsPlayer{
 				break;
 			case ACTION_SELECTION:
 				//Wait
-				if (waitFor(0.2f, deltaTime)){
+				if (waitFor(0.3f, deltaTime)){
 					//Select an action if possible
 					if (actionIndex < getSelectedUnit().getActions().size()) {
 						currentAction = getSelectedUnit().getActions().get(actionIndex);
@@ -106,6 +109,13 @@ public class AIPlayer extends ICWarsPlayer{
 		}
 	}
 	
+	@Override 
+	public void draw(Canvas canvas){
+		if (getState() != PlayerState.IDLE) {
+	        getSprite().draw(canvas);
+        }
+	}
+	
 	/**
 	* Ensures that value time elapsed before returning true
 	* @param dt elapsed time
@@ -126,38 +136,28 @@ public class AIPlayer extends ICWarsPlayer{
 	return false;
 	}
 
-	@Override 
-	public void draw(Canvas canvas){
-		if (getState() != PlayerState.IDLE) {
-	        getSprite().draw(canvas);
-        }
-	}
-	
 	/**
 	 * Move the player cursor as close as possible to the closest enemy
 	 * While staying in range of the current selectedUnit
 	 */
 	private void moveCloseToEnemy(){
-		//get the selectedUnit position and the position of the closest enemy
+		//get the selectedUnit position, the position of the closest enemy and the radius
 		DiscreteCoordinates unitPosition = getSelectedUnit().getCoordinates();
 	    DiscreteCoordinates enemyUnitPosition = ((ICWarsArea)getOwnerArea()).getClosestEnemyPosition(getSelectedUnit().getFaction(), unitPosition);
-	    
-	    
 	    int radius = getSelectedUnit().getRadius();
 	    int x;
 	    int y;
 	    
 	   	//set x and y to position of target enemy
+	    //if there is no target enemy, set x and y to current position
 		if (enemyUnitPosition != null) {
 			x = enemyUnitPosition.x;
 			y = enemyUnitPosition.y;
-		} 
-		//if there is no target enemy, set x and y to current position
+		}
 		else {
 			x = unitPosition.x;
 			y = unitPosition.y;
 		}
-
 		//Adjust x position until it is within radius
 	    while( x > unitPosition.x +  radius
         	|| x < unitPosition.x - radius ) {
@@ -165,7 +165,6 @@ public class AIPlayer extends ICWarsPlayer{
         	if (x < unitPosition.x) { x++; }
         	else if (x > unitPosition.x) { x--; }
 	    }
-	    
 	    //Adjust y position until it is within radius
 	    while( y > unitPosition.y + radius
         	|| y < unitPosition.y - radius ) {
@@ -173,7 +172,6 @@ public class AIPlayer extends ICWarsPlayer{
         	if (y < unitPosition.y) { y++; }
         	else if (y > unitPosition.y) { y--; }
         } 
-	    
 	    //Adjust position until it is a free cell (not occupied by another unit)
 	    //switching between incrementing x and y directions
 	    boolean directionSwitch = true;
@@ -189,7 +187,6 @@ public class AIPlayer extends ICWarsPlayer{
 	    	}
 	    	directionSwitch = !directionSwitch;
 	    }
-	    
 	    //Move player cursor to new position
 	    changePosition(new DiscreteCoordinates( x , y ));
 	}

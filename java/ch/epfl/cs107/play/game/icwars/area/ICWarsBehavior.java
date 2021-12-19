@@ -37,14 +37,19 @@ public class ICWarsBehavior extends AreaBehavior {
 		MOUNTAIN (-256, 4),
 		CITY(-1,2);
 
-		final int type;
-		final int defense;
-
+		private final int type;
+		private final int defense;
+		
 		CellType(int type, int defense){
 			this.type = type;
 			this.defense = defense;
 		}
-
+		
+		/**
+		 * int to CellType
+		 * @param type	(int)
+		 * @return type	(CellType)
+		 */
 		public static CellType toType(int type){
 			for(CellType ict : CellType.values()){
 				if(ict.type == type)
@@ -54,7 +59,10 @@ public class ICWarsBehavior extends AreaBehavior {
 			System.out.println(type);
 			return NONE;
 		}
-		
+		/**
+		 * Getter for defense stars
+		 * @return defense stars	(int)
+		 */
 		public int getDefenseStar() {
 			return this.defense;
 		}
@@ -65,7 +73,7 @@ public class ICWarsBehavior extends AreaBehavior {
 	 * Cell adapted to the ICWars game
 	 */
 	public class ICWarsCell extends AreaBehavior.Cell {
-		/// Type of the cell following the enum
+		// Type of the cell 
 		private final CellType type;
 
 		/**
@@ -78,6 +86,8 @@ public class ICWarsBehavior extends AreaBehavior {
 			super(x, y); 
 			this.type = type;
 		}
+		
+		//****Getters****
 		/**
 		 * Getter for Defense
 		 * @return defense	(int): amount of defense stars

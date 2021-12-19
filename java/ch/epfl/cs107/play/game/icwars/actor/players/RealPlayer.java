@@ -93,38 +93,6 @@ public class RealPlayer extends ICWarsPlayer{
 		}
 	}
 
-
-
-	/**
-	 * Orientate and Move this player in the given orientation if the given button is down
-	 *
-	 * @param orientation (Orientation): given orientation, not null
-	 * @param b           (Button): button corresponding to the given orientation, not null
-	 */
-	private void moveIfPressed(Orientation orientation, Button b) {
-		PlayerState state = getState();
-		if (state == PlayerState.NORMAL 
-			|| state == PlayerState.SELECT_CELL 
-			|| state == PlayerState.MOVE_UNIT) {
-			if (b.isDown()) {
-				if (!isDisplacementOccurs()) {
-					gui.setCurrentUnit(null);
-					orientate(orientation);
-					move(MOVE_DURATION);
-					
-				}
-			}
-		}
-	}
-	
-	@Override
-	public void enterArea(Area area, DiscreteCoordinates position) {
-		super.enterArea(area, position);
-		area.setViewCandidate(this);
-		resetMotion();
-	}	
-
-
 	@Override
 	public void draw(Canvas canvas) {
 		//Draw cursor if not IDLE
@@ -139,7 +107,34 @@ public class RealPlayer extends ICWarsPlayer{
 			}
 		}
 	}
+
+	/**
+	 * Orientate and Move this player in the given orientation if the given button is down
+	 * @param orientation (Orientation): given orientation, not null
+	 * @param b           (Button): button corresponding to the given orientation, not null
+	 */
+	private void moveIfPressed(Orientation orientation, Button b) {
+		PlayerState state = getState();
+		if (state == PlayerState.NORMAL 
+			|| state == PlayerState.SELECT_CELL 
+			|| state == PlayerState.MOVE_UNIT) {
+			if (b.isDown()) {
+				if (!isDisplacementOccurs()) {
+					gui.setCurrentUnit(null);
+					orientate(orientation);
+					move(MOVE_DURATION);
+				}
+			}
+		}
+	}
 	
+	@Override
+	public void enterArea(Area area, DiscreteCoordinates position) {
+		super.enterArea(area, position);
+		area.setViewCandidate(this);
+		resetMotion();
+	}	
+
 	@Override
 	public void interactWith(Interactable other) {
 		if (!isDisplacementOccurs()) {
@@ -157,7 +152,6 @@ public class RealPlayer extends ICWarsPlayer{
 				gui.setSelectedUnit(unit);
 			}
 		}
-		
 		@Override
 		public void interactWith(Cell cell) {
 			gui.setCurrentCellType(((ICWarsCell)cell).getCellType());
