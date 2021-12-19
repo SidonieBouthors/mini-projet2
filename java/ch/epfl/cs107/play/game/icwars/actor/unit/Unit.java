@@ -24,7 +24,6 @@ import java.util.Collections;
 public abstract class Unit extends ICWarsActor implements Interactor,Interactable {
     
     private Sprite sprite;
-    private String spriteName;
     private int currentHP;
     private int maxHP;
     private int maxDamage;
@@ -177,10 +176,29 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
         if(used == true){sprite.setAlpha(0.5f);} 
         else {sprite.setAlpha(1.f);}
     }
+    /**
+     * Setter for actions (Protected)
+     * @param actions	(List<Action>)
+     */
     protected void setActions(List<Action> actions) {this.actions = actions;}
+    /**
+     * Setter for radius (Protected)
+     * @param radius	(int)
+     */
     protected void setRadius(int radius) { this.radius = radius;}
+    /**
+     * Setter for max damage (Protected)
+     * @param damage	(int)
+     */
     protected void setMaxDamage(int damage) { this.maxDamage = damage;}
+    /**
+     * Setter for max HP (Protected)
+     * @param HP	(int)
+     */
     protected void setMaxHP(int HP) { this.maxHP = HP;}
+    /**
+     * Setter to set currentHP to maxHP
+     */
     protected void setCurrentHPToMax() {this.currentHP = maxHP; }
 
     @Override
