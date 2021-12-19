@@ -38,7 +38,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
 		}
 		sprite.setDepth(1);
-		this.units = new ArrayList<Unit>(Arrays.asList(units));
+		this.units = new ArrayList<>(Arrays.asList(units));
 		this.state = PlayerState.IDLE;
 	}
 	
@@ -54,15 +54,15 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	 * Enum of all possible Player states
 	 */
 	public enum PlayerState {
-		IDLE(0),
-		NORMAL(1),
-		SELECT_CELL(2),
-		MOVE_UNIT(3),
-		ACTION_SELECTION(4),
-		ACTION(5);
+		IDLE(),
+		NORMAL(),
+		SELECT_CELL(),
+		MOVE_UNIT(),
+		ACTION_SELECTION(),
+		ACTION();
 		private int state;
-		PlayerState(int state) {
-			this.state=state;
+		PlayerState() {
+
 		}
 	}
 	
@@ -85,8 +85,7 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	 * @return defeated	(boolean): whether the player is defeated
 	 */
 	public boolean isDefeated() {
-		if(units.size() == 0) { return true; } 
-		else { return false; }
+		return units.size() == 0;
 	}
 	/**
 	 * Set all unit used to false (make all units not used)

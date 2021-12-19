@@ -65,8 +65,8 @@ public class ICWars extends AreaGame {
 		DiscreteCoordinates playerCoords = area.getPlayerSpawnPosition();
 		DiscreteCoordinates enemyCoords = area.getEnemyPlayerSpawnPosition();
 	  
-		playerForThisOne = new ArrayList<ICWarsPlayer>();
-		playerForTheNext = new ArrayList<ICWarsPlayer>();
+		playerForThisOne = new ArrayList<>();
+		playerForTheNext = new ArrayList<>();
 	  
 		//create units
 		Tank allyTank = new Tank(area, new DiscreteCoordinates(2, 5),Faction.ALLY);
@@ -129,9 +129,8 @@ public class ICWars extends AreaGame {
 			gameState = GameState.CHOOSE_PLAYER;
 			break;
 		case END_TURN:
-			for(ICWarsPlayer player: playerForTheNext) {
-				playerForThisOne.add(player);
-			}
+
+			playerForThisOne.addAll(playerForTheNext);
 			playerForTheNext.clear();
 			System.out.println(playerForThisOne.toString());
 		
@@ -164,16 +163,15 @@ public class ICWars extends AreaGame {
 	 * Enum of Game States
 	 */
 	public enum GameState {
-		INIT(0),
-		CHOOSE_PLAYER(1),
-		START_PLAYER_TURN(2),
-		PLAYER_TURN(3),
-		END_PLAYER_TURN(4),
-		END_TURN(5),
-		END(6);
-		private int state;
-		GameState(int state) {
-			this.state=state;
+		INIT(),
+		CHOOSE_PLAYER(),
+		START_PLAYER_TURN(),
+		PLAYER_TURN(),
+		END_PLAYER_TURN(),
+		END_TURN(),
+		END();
+
+		GameState() {
 		}
 	}
 	

@@ -134,7 +134,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      */
     public int getDamage() {
     	return maxDamage;
-    };
+    }
     /**
      * Getter for currentHP
      * @return currentHP
@@ -173,7 +173,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      */
     public void setUsed(boolean used) {
         this.used=used;
-        if(used == true){sprite.setAlpha(0.5f);} 
+        if(used){sprite.setAlpha(0.5f);}
         else {sprite.setAlpha(1.f);}
     }
     /**
@@ -203,10 +203,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
 
     @Override
     public boolean changePosition(DiscreteCoordinates newPosition) {
-    	if (range.nodeExists(newPosition) && super.changePosition(newPosition)) {
-    		return true;
-    	}
-    	return false;
+        return range.nodeExists(newPosition) && super.changePosition(newPosition);
     }
     
     @Override
