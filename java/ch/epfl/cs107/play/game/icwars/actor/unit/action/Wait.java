@@ -16,13 +16,13 @@ public class Wait extends Action{
 	 */
 	public Wait(Unit unit, Area area) {
 		super(unit, area);
-		name = "(W)ait";
-		key = Keyboard.W;
+		this.setName("(W)ait");
+		this.setKey(Keyboard.W);
 	}
 	
 	@Override
 	public void doAction(float dt, ICWarsPlayer player, Keyboard keyboard) {
-		unit.setUsed(true);
+		getUnit().setUsed(true);
 		player.setState(PlayerState.NORMAL);
 	}
 	
@@ -31,7 +31,7 @@ public class Wait extends Action{
 
 	@Override
 	public boolean doAutoAction(float dt, ICWarsPlayer player) {
-		unit.setUsed(true);
+		getUnit().setUsed(true);
 		player.setState(PlayerState.NORMAL);
 		return true;
 	}

@@ -51,38 +51,39 @@ public class RealPlayer extends ICWarsPlayer{
 
 		super.update(deltaTime);
 		
-		switch (state) {
+		switch (getState()) {
 			case IDLE:
-				selectedUnit = null;
+				setSelectedUnit(null);
 				gui.setCurrentUnit(null);
 				break; 
 			case NORMAL:
 				if (keyboard.get(Keyboard.ENTER).isPressed()) {
-					this.state = PlayerState.SELECT_CELL;
+					setState(PlayerState.SELECT_CELL);
 				} else if (keyboard.get(Keyboard.TAB).isPressed()) {
-					this.state = PlayerState.IDLE;
+					setState(PlayerState.IDLE);
 				}
 				break;
 			case SELECT_CELL:
-				if (selectedUnit != null && selectedUnit.getUsed() == false) {
-					state = PlayerState.MOVE_UNIT;
+				if (getSelectedUnit() != null && getSelectedUnit().getUsed() == false) {
+					setState(PlayerState.MOVE_UNIT);
 				} else {
-					state = PlayerState.NORMAL;
+					setState(PlayerState.NORMAL);
 				}
 				break;
 			case MOVE_UNIT:
 				if (keyboard.get(Keyboard.ENTER).isPressed()) {
-					if (selectedUnit.changePosition(this.getCurrentMainCellCoordinates())){
-					selectedUnit.createRange();
-					state = PlayerState.ACTION_SELECTION;}
+					if (getSelectedUnit().changePosition(this.getCurrentMainCellCoordinates())){
+						getSelectedUnit().createRange();
+						setState(PlayerState.ACTION_SELECTION);
+					}
 				}
 				break;
 			case ACTION_SELECTION:
-				List<Action> actions = selectedUnit.getActions();
+				List<Action> actions = getSelectedUnit().getActions();
 				for (Action act:actions) {
 					if (keyboard.get(act.getKey()).isPressed()) {
 						currentAction = act;
-						state = PlayerState.ACTION;
+						setState(PlayerState.ACTION);
 					}
 				}
 				break;
@@ -101,6 +102,7 @@ public class RealPlayer extends ICWarsPlayer{
 	 * @param b           (Button): button corresponding to the given orientation, not null
 	 */
 	private void moveIfPressed(Orientation orientation, Button b) {
+		PlayerState state = getState();
 		if (state == PlayerState.NORMAL 
 			|| state == PlayerState.SELECT_CELL 
 			|| state == PlayerState.MOVE_UNIT) {
@@ -126,11 +128,12 @@ public class RealPlayer extends ICWarsPlayer{
 	@Override
 	public void draw(Canvas canvas) {
 		//Draw cursor if not IDLE
+		PlayerState state = getState();
 		if (state != PlayerState.IDLE) {
-			sprite.draw(canvas);
+			getSprite().draw(canvas);
 			gui.draw(canvas);
 			if (state == PlayerState.ACTION) {
-				for (Action action:selectedUnit.getActions()) {
+				for (Action action:getSelectedUnit().getActions()) {
 		        	action.draw(canvas);
 		        }
 			}
@@ -149,9 +152,9 @@ public class RealPlayer extends ICWarsPlayer{
 		@Override
 		public void interactWith(Unit unit) {
 			gui.setCurrentUnit(unit);
-			if (state == PlayerState.SELECT_CELL && unit.getFaction() == faction) {
-				selectedUnit = unit;
-				gui.setSelectedUnit(selectedUnit);
+			if (getState() == PlayerState.SELECT_CELL && unit.getFaction() == getFaction()) {
+				setSelectedUnit(unit);
+				gui.setSelectedUnit(unit);
 			}
 		}
 		

@@ -10,13 +10,13 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class ICWarsPlayerGUI implements Graphics{
-
-	private RealPlayer player;
-	protected Unit selectedUnit;
-	protected Unit currentUnit;
-	protected CellType currentCellType;
-	private DiscreteCoordinates cursorCoordinates;
+	
 	public final static float FONT_SIZE = 20f;
+	private RealPlayer player;
+	private Unit selectedUnit;
+	private Unit currentUnit;
+	private CellType currentCellType;
+	private DiscreteCoordinates cursorCoordinates;
 	private ICWarsActionsPanel actionPanel;
 	private ICWarsInfoPanel infoPanel;
 	

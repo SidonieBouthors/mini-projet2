@@ -23,17 +23,16 @@ import java.util.Collections;
  
 public abstract class Unit extends ICWarsActor implements Interactor,Interactable {
     
-    protected Sprite sprite;
-
-    protected String spriteName;
-    protected int currentHP;
-    protected int maxHP;
-    protected int maxDamage;
-    protected int radius;
-    protected ICWarsRange range;
-    protected boolean used;
-    protected int defenceStars;
-    protected List<Action> actions;
+    private Sprite sprite;
+    private String spriteName;
+    private int currentHP;
+    private int maxHP;
+    private int maxDamage;
+    private int radius;
+    private ICWarsRange range;
+    private boolean used;
+    private int defenceStars;
+    private List<Action> actions;
     private final ICWarsUnitInteractionHandler handler;
 
     /**
@@ -45,8 +44,8 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
         this.sprite = new Sprite(this.getSpriteName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
-        sprite.setDepth(0);
-        handler = new ICWarsUnitInteractionHandler();
+        this.sprite.setDepth(0);
+        this.handler = new ICWarsUnitInteractionHandler();
     }
     /***
      * Create the range of a unit (ICWarsRange)
@@ -148,9 +147,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * Getter for spriteName
      * @return spriteName
      */
-    public String getSpriteName() {
-        return spriteName;
-    }
+    public abstract String getSpriteName();
     /**
      * Getter for unit name
      * @return unitName	(String): unit name
@@ -180,6 +177,11 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
         if(used == true){sprite.setAlpha(0.5f);} 
         else {sprite.setAlpha(1.f);}
     }
+    protected void setActions(List<Action> actions) {this.actions = actions;}
+    protected void setRadius(int radius) { this.radius = radius;}
+    protected void setMaxDamage(int damage) { this.maxDamage = damage;}
+    protected void setMaxHP(int HP) { this.maxHP = HP;}
+    protected void setCurrentHPToMax() {this.currentHP = maxHP; }
 
     @Override
     public boolean changePosition(DiscreteCoordinates newPosition) {

@@ -27,8 +27,8 @@ public class Attack extends Action{
 	 */
 	public Attack(Unit unit, Area area) {
 		super(unit, area);
-		this.name = "(A)ttack";
-		this.key = Keyboard.A;
+		this.setName("(A)ttack");
+		this.setKey(Keyboard.A);
 		this.cursor=new ImageGraphics (ResourcePath.getSprite ("icwars/UIpackSheet"),1f, 1f, new RegionOfInterest(4*18 , 26*18 ,16 ,16));
 		this.attackableUnitIndexes = new ArrayList<Integer>();
 		cursor.setDepth(1);
@@ -37,7 +37,7 @@ public class Attack extends Action{
 	@Override
 	public void doAction(float dt, ICWarsPlayer player, Keyboard keyboard) {
 		//call ICWarsArea method to return indexes of attackable units
-		attackableUnitIndexes = ((ICWarsArea)area).getAttackable(unit.getCoordinates(), unit.getRadius(), unit.getFaction());
+		attackableUnitIndexes = ((ICWarsArea)getArea()).getAttackable(getUnit().getCoordinates(), getUnit().getRadius(), getUnit().getFaction());
 		
 		//TAB key pressed or no attackable units
 		if (attackableUnitIndexes.size()==0 
@@ -68,9 +68,9 @@ public class Attack extends Action{
 		if(keyboard.get(Keyboard.ENTER).isPressed()) {
 			//select target unit and attack it
 			int targetUnitIndex = attackableUnitIndexes.get(targetNumber);
-			((ICWarsArea)area).attackUnit(targetUnitIndex, unit.getDamage());
+			((ICWarsArea)getArea()).attackUnit(targetUnitIndex, getUnit().getDamage());
 			
-			unit.setUsed(true);
+			getUnit().setUsed(true);
 			player.centerCamera();
 			player.setState(PlayerState.NORMAL);
 		}	
@@ -79,7 +79,7 @@ public class Attack extends Action{
 	@Override
 	public boolean doAutoAction(float dt, ICWarsPlayer player) {
 		//call ICWarsArea method to return indexes of attackable units
-		attackableUnitIndexes = ((ICWarsArea)area).getAttackable(unit.getCoordinates(), unit.getRadius(), unit.getFaction());	
+		attackableUnitIndexes = ((ICWarsArea)getArea()).getAttackable(getUnit().getCoordinates(), getUnit().getRadius(), getUnit().getFaction());	
 		
 		//if there are no attackable units
 		if (attackableUnitIndexes.size()==0) {
@@ -90,8 +90,8 @@ public class Attack extends Action{
 		else {
 			//select target unit and attack it
 			int targetUnitIndex = attackableUnitIndexes.get(0);
-			((ICWarsArea)area).attackUnit(targetUnitIndex, unit.getDamage());
-			unit.setUsed(true);
+			((ICWarsArea)getArea()).attackUnit(targetUnitIndex, getUnit().getDamage());
+			getUnit().setUsed(true);
 			player.centerCamera();
 			player.setState(PlayerState.NORMAL);
 			return true;
@@ -102,7 +102,7 @@ public class Attack extends Action{
 	public void draw(Canvas canvas) {
 		if (attackableUnitIndexes.size() != 0) {
 			int targetUnitIndex = attackableUnitIndexes.get(targetNumber);
-			((ICWarsArea)area).centerCameraOnUnit(targetUnitIndex);
+			((ICWarsArea)getArea()).centerCameraOnUnit(targetUnitIndex);
 		}
 		cursor.setAnchor (canvas.getPosition ().add (1 ,0));
 		cursor.draw(canvas);

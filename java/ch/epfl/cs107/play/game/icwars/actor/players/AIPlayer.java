@@ -39,33 +39,33 @@ public class AIPlayer extends ICWarsPlayer{
 		
 		//Check for TAB pressed
 		if (keyboard.get(Keyboard.TAB).isPressed()) {
-					this.state = PlayerState.IDLE;
+					setState(PlayerState.IDLE);
 		}
 		
-		switch (state) {
+		switch (getState()) {
 			case IDLE:
 				//Reinitialise list of units that have to play
 				toPlayUnits.clear();
-				toPlayUnits.addAll(units);
+				toPlayUnits.addAll(getUnits());
 				break;
 			case NORMAL:
 				//If there are still units that need to play, SELECT_CELL
 				if (toPlayUnits.size() != 0) {
-					this.state = PlayerState.SELECT_CELL;
+					setState(PlayerState.SELECT_CELL);
 				} 
 				//Otherwise the player has finished its turn, IDLE
 				else {
-					this.state = PlayerState.IDLE;
+					setState(PlayerState.IDLE);
 				}
 				break;
 			case SELECT_CELL:
 				//Select the next unit that needs to play and remove it from list
-				selectedUnit = toPlayUnits.get(0);
-				toPlayUnits.remove(selectedUnit);
-				if (selectedUnit != null && selectedUnit.getUsed() == false) {
-					state = PlayerState.MOVE_UNIT;
+				setSelectedUnit(toPlayUnits.get(0));
+				toPlayUnits.remove(getSelectedUnit());
+				if (getSelectedUnit() != null && getSelectedUnit().getUsed() == false) {
+					setState(PlayerState.MOVE_UNIT);
 				} else {
-					state = PlayerState.NORMAL;
+					setState(PlayerState.NORMAL);
 				}
 				break;
 			case MOVE_UNIT:
@@ -74,10 +74,10 @@ public class AIPlayer extends ICWarsPlayer{
 				//Wait
 				if (waitFor(0.2f, deltaTime)){
 					//Move selectedUnit to player cursor
-					if (selectedUnit.changePosition(this.getCurrentMainCellCoordinates())){
-						selectedUnit.createRange();
+					if (getSelectedUnit().changePosition(this.getCurrentMainCellCoordinates())){
+						getSelectedUnit().createRange();
 						actionIndex = 0;
-						state = PlayerState.ACTION_SELECTION;
+						setState(PlayerState.ACTION_SELECTION);
 					}
 				}
 				break;
@@ -85,13 +85,13 @@ public class AIPlayer extends ICWarsPlayer{
 				//Wait
 				if (waitFor(0.2f, deltaTime)){
 					//Select an action if possible
-					if (actionIndex < selectedUnit.getActions().size()) {
-						currentAction = selectedUnit.getActions().get(actionIndex);
-						state = PlayerState.ACTION;
+					if (actionIndex < getSelectedUnit().getActions().size()) {
+						currentAction = getSelectedUnit().getActions().get(actionIndex);
+						setState(PlayerState.ACTION);
 					} 
 					//If there are no more possible actions, play next unit
 					else {
-						state = PlayerState.SELECT_CELL;
+						setState(PlayerState.SELECT_CELL);
 					}
 				}
 				break;
@@ -100,7 +100,7 @@ public class AIPlayer extends ICWarsPlayer{
 				//If this is not possible, go back to action selection and try next action
 				if (!currentAction.doAutoAction(deltaTime, this)) {
 					actionIndex++;
-					state = PlayerState.ACTION_SELECTION;
+					setState(PlayerState.ACTION_SELECTION);
 				}
 				break;
 		}
@@ -128,8 +128,8 @@ public class AIPlayer extends ICWarsPlayer{
 
 	@Override 
 	public void draw(Canvas canvas){
-		if (state != PlayerState.IDLE) {
-	        sprite.draw(canvas);
+		if (getState() != PlayerState.IDLE) {
+	        getSprite().draw(canvas);
         }
 	}
 	
@@ -139,11 +139,11 @@ public class AIPlayer extends ICWarsPlayer{
 	 */
 	private void moveCloseToEnemy(){
 		//get the selectedUnit position and the position of the closest enemy
-		DiscreteCoordinates unitPosition = selectedUnit.getCoordinates();
-	    DiscreteCoordinates enemyUnitPosition = ((ICWarsArea)getOwnerArea()).getClosestEnemyPosition(selectedUnit.getFaction(), unitPosition);
+		DiscreteCoordinates unitPosition = getSelectedUnit().getCoordinates();
+	    DiscreteCoordinates enemyUnitPosition = ((ICWarsArea)getOwnerArea()).getClosestEnemyPosition(getSelectedUnit().getFaction(), unitPosition);
 	    
 	    
-	    int radius = selectedUnit.getRadius();
+	    int radius = getSelectedUnit().getRadius();
 	    int x;
 	    int y;
 	    
@@ -178,8 +178,8 @@ public class AIPlayer extends ICWarsPlayer{
 	    //switching between incrementing x and y directions
 	    boolean directionSwitch = true;
 	    while(((ICWarsArea)getOwnerArea()).isUnitAt(x,y) 
-	    		&& (selectedUnit.getCoordinates().x !=x 
-	    			|| selectedUnit.getCoordinates().y !=y)){
+	    		&& (getSelectedUnit().getCoordinates().x !=x 
+	    			|| getSelectedUnit().getCoordinates().y !=y)){
 	    	if (directionSwitch) {
 		    	if (x < unitPosition.x) { x++; } 
 		    	else {x--;}

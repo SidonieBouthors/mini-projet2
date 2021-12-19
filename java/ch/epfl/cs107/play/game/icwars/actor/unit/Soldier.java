@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.icwars.actor.unit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
@@ -18,24 +19,26 @@ public class Soldier extends Unit {
      */
     public Soldier(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
-        maxHP = 5;
-        maxDamage = 2;
-        radius = 2;
-        currentHP = maxHP;
-        createRange();
+        this.setMaxHP(5);
+        this.setMaxDamage(2);
+        this.setRadius(2);
+        this.setCurrentHPToMax();
+        this.createRange();
         //create actions
-        actions = new ArrayList<Action>();
+        List<Action> actions = new ArrayList<Action>();
         actions.add(new Attack(this, owner));
         actions.add(new Wait(this, owner));
+        this.setActions(actions);
+        
 		
     }
     @Override
     public String getSpriteName() {
-            if (Faction.ENEMY == this.faction) {
-                return "icwars/enemySoldier";
-            } else {
-                return "icwars/friendlySoldier";
-            }
+        if (Faction.ENEMY == this.getFaction()) {
+            return "icwars/enemySoldier";
+        } else {
+            return "icwars/friendlySoldier";
+        }
     }
     /**
      * Getter for name

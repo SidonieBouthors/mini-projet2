@@ -12,7 +12,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class ICWarsActor extends MovableAreaEntity {
 
-    protected Faction faction;
+    private Faction faction;
 
     /**
      * Default ICWarsActor Constructor

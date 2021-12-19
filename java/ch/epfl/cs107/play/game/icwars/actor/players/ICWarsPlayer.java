@@ -2,6 +2,8 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,11 +19,10 @@ import ch.epfl.cs107.play.math.Vector;
 
 public class ICWarsPlayer extends ICWarsActor implements Interactor {
 
-	protected Sprite sprite;
-	protected List<Unit> units;
-	protected List<Unit> deadUnits;
-	protected PlayerState state;
-	protected Unit selectedUnit;
+	private Sprite sprite;
+	private List<Unit> units;
+	private PlayerState state;
+	private Unit selectedUnit;
 	
 	/**
 	 * Default ICWarsPlayer Constructor
@@ -39,7 +40,6 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 		}
 		sprite.setDepth(1);
 		this.units = new ArrayList<Unit>(Arrays.asList(units));
-		this.deadUnits = new ArrayList<Unit>();
 		this.state = PlayerState.IDLE;
 	}
 	
@@ -104,7 +104,6 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 			if(unit.getHP() == 0) {
 				((ICWarsArea)getOwnerArea()).removeUnit(unit);
 				iterator.remove();
-				deadUnits.add(unit);
 			}
 		}
 	}
@@ -120,12 +119,33 @@ public class ICWarsPlayer extends ICWarsActor implements Interactor {
 	 * - Non intrusive getter : PlayerState is immutable.
 	 * @return state	(PlayerState): current state of player
 	 */
-	public PlayerState getState() { return state; }
+	public PlayerState getState() { return this.state; }
 	/**
 	 * Setter for player state
 	 * @param state	(PlayerState)
 	 */
 	public void setState(PlayerState state) { this.state=state;	}
+	/**
+	 * Getter for sprite (Protected)
+	 * @return sprite	(Sprite)
+	 */
+	protected Sprite getSprite() {return this.sprite;}
+	/**
+	 * Getter for units (Protected)
+	 * @return	units	(List<Unit>): units
+	 */
+	protected List<Unit> getUnits() {return Collections.unmodifiableList(units);}
+	/**
+	 * Getter for selectedUnit (Protected)
+	 * @return	unit	(Unit): selectedUnit
+	 */
+	protected Unit getSelectedUnit() {return this.selectedUnit;}
+	/**
+	 * Setter for selectedUnit (Protected)
+	 * @param unit	(Unit) selectedUnit
+	 */
+	protected void setSelectedUnit(Unit unit) {this.selectedUnit = unit;}
+
 	
 	@Override
     public void enterArea(Area area, DiscreteCoordinates position){
