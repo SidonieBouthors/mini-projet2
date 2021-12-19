@@ -120,7 +120,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * @return coordinates
      */
     public DiscreteCoordinates getCoordinates() {
-    	return getCurrentMainCellCoordinates();
+    	return getCurrentCells().get(0);
     }
     /**
      * Getter for radius
