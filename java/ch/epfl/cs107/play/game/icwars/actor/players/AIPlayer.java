@@ -31,7 +31,7 @@ public class AIPlayer extends ICWarsPlayer{
 	 */
 	public AIPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction, units);
-		toPlayUnits = new ArrayList<Unit>();
+		toPlayUnits = new ArrayList<>();
 	}
 
 	@Override

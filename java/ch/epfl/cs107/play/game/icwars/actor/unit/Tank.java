@@ -30,12 +30,7 @@ public class Tank extends Unit {
         actions.add(new Wait(this, owner));
         this.setActions(actions);
     }
-    
-    public DiscreteCoordinates getSpawnPosition() {
-        if (this.getFaction() == Faction.ALLY) {
-            return new DiscreteCoordinates(2,5);
-        } else { return new DiscreteCoordinates(4,5); }
-    }
+
     
     @Override
     public String getSpriteName() {
