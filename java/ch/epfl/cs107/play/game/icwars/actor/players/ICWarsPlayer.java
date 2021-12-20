@@ -16,7 +16,7 @@ import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 
-public class ICWarsPlayer extends ICWarsActor implements Interactor {
+public abstract class ICWarsPlayer extends ICWarsActor implements Interactor {
 
 	private Sprite sprite;
 	private List<Unit> units;

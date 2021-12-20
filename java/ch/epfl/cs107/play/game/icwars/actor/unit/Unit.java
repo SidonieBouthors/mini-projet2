@@ -28,9 +28,9 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     private int maxHP;
     private int maxDamage;
     private int radius;
-    private ICWarsRange range;
-    private boolean used;
     private int defenceStars;
+    private boolean used;
+    private ICWarsRange range;
     private List<Action> actions;
     private final ICWarsUnitInteractionHandler handler;
 

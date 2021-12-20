@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
 import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
+import ch.epfl.cs107.play.game.icwars.actor.players.RealPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Soldier;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Tank;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
@@ -76,7 +77,7 @@ public class ICWars extends AreaGame {
 	
 		//create players
 		allyPlayer = new AIPlayer(area, playerCoords,Faction.ALLY, allyTank, allySoldier);
-		enemyPlayer = new AIPlayer(area,enemyCoords,Faction.ENEMY,enemySoldier,enemyTank);
+		enemyPlayer = new RealPlayer(area,enemyCoords,Faction.ENEMY,enemySoldier,enemyTank);
 	
 		enemyPlayer.enterArea(area, enemyCoords);
 		allyPlayer.enterArea(area, playerCoords);
@@ -95,7 +96,8 @@ public class ICWars extends AreaGame {
 			}
 		}
 		if (keyboard.get(Keyboard.R).isPressed()) {
-			initArea("icwars/Level0");
+			areaIndex = 0;
+			gameState = GameState.INIT;
 		}
 
 		switch(gameState) {
