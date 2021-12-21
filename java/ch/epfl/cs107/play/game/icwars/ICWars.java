@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.icwars.Menu.GameOver;
 import ch.epfl.cs107.play.game.icwars.Menu.OpeningMenu;
+import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+import ch.epfl.cs107.play.game.icwars.Menu.MenuText;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
 import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
@@ -21,6 +24,7 @@ import ch.epfl.cs107.play.game.icwars.area.Level0;
 import ch.epfl.cs107.play.game.icwars.area.Level1;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
@@ -53,7 +57,6 @@ public class ICWars extends AreaGame {
 		addArea(openingMenu);
 		addArea(new Level0());
 		addArea(new Level1());
-		addArea(new GameOver());
 	}
 
 	@Override
@@ -131,9 +134,9 @@ public class ICWars extends AreaGame {
 			if (areaIndex + 1 < areas.length) {
 				areaIndex++;
 				gameState = GameState.INIT;
-			} else {
-				gameState = GameState.GAME_OVER;
-				end();
+			} else { 
+				gameState=GameState.GAME_OVER;
+				end(); 
 			}
 		}
 		if (keyboard.get(Keyboard.R).isPressed() && gameState!=GameState.MENU) {
@@ -143,6 +146,7 @@ public class ICWars extends AreaGame {
 
 		switch(gameState) {
 		case MENU:
+
 			if (openingMenu.getFactionChosen() != null && openingMenu.getFactionChosen() != Faction.NONE) {
 				++areaIndex;
 				gameState = GameState.INIT;
@@ -199,11 +203,14 @@ public class ICWars extends AreaGame {
 				areaIndex++;
 				gameState = GameState.INIT;
 			}
-			else { end(); }
+			else { 
+				gameState=GameState.GAME_OVER;
+				end(); }
 			break;
 		case GAME_OVER:
 			break;
 		}
+		
 	}
 
 	/**
@@ -223,13 +230,18 @@ public class ICWars extends AreaGame {
 	
 	@Override
 	public void end() {
-		area = (ICWarsArea)setCurrentArea("icwars/GameOver", true);
+		//area = (ICWarsArea)setCurrentArea("icwars/GameOver", true);
 		/*
 		Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, playerForThisOne.get(0));
 		area.setViewCandidate(playerForThisOne.get(0));
 		gameOver.setAnchor(new Vector(-6,-5));
 		gameOver.draw(getWindow());
 		*/
+		if (!getWindow().isCloseRequested()){
+		MenuText gameOver = new MenuText(area, new DiscreteCoordinates(10,2), "icwars/gameOver",10,10,new Vector(-5,-5));
+		gameOver.draw(getWindow());
+		area.setViewCandidate(gameOver);
+		}
 	}
 
 	@Override

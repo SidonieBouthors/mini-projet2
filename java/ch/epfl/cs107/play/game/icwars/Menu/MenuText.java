@@ -20,6 +20,7 @@ public class MenuText extends ICWarsActor {
     public MenuText(Area owner, DiscreteCoordinates coordinates, String spriteName, float width, float height, Vector vector) {
         super(owner, coordinates, Faction.NONE);
         sprite = new Sprite(spriteName,width,height,this,null,vector);
+
     }
     
     /**
