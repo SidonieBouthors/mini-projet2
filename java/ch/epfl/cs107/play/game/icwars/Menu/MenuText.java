@@ -11,7 +11,7 @@ public class MenuText extends ICWarsActor {
     private Sprite sprite;
 
     /**
-     * Default ICWarsActor Constructor
+     * ICWarsActor Constructor
      *
      * @param owner       (Area): owner area
      * @param coordinates (DiscreteCoordinates): starting coordinates
@@ -20,6 +20,17 @@ public class MenuText extends ICWarsActor {
     public MenuText(Area owner, DiscreteCoordinates coordinates, String spriteName, float width, float height, Vector vector) {
         super(owner, coordinates, Faction.NONE);
         sprite = new Sprite(spriteName,width,height,this,null,vector);
+    }
+    
+    /**
+     * ICWarsActor Constructor (no Vector)
+     *
+     * @param owner       (Area): owner area
+     * @param coordinates (DiscreteCoordinates): starting coordinates
+     * @param vector (Vector) :  Adjusting position of the text
+     */
+    public MenuText(Area owner, DiscreteCoordinates coordinates, String spriteName, float width, float height) {
+        this(owner, coordinates, spriteName, width, height, new Vector(0,0));
     }
     
     @Override

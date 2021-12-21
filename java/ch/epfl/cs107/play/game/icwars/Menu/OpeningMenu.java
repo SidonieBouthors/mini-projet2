@@ -31,8 +31,8 @@ public class OpeningMenu extends ICWarsArea {
     protected void createArea() {
         menuPlayer = new MenuPlayer(this,new DiscreteCoordinates(7,1), ICWarsActor.Faction.NONE);
         
-        title = new MenuText(this, new DiscreteCoordinates(10, 1), "icwars/title", 5f, 1.3f, new Vector(0,0));
-        subtitle = new MenuText(this, new DiscreteCoordinates(6, 1), "icwars/subtitle", 6.3f, .5f,new Vector(0,0));
+        title = new MenuText(this, new DiscreteCoordinates(10, 1), "icwars/title", 5f, 1.3f);
+        subtitle = new MenuText(this, new DiscreteCoordinates(6, 1), "icwars/subtitle", 6.3f, .5f);
         instruction = new MenuText(this, new DiscreteCoordinates(9, 0), "icwars/selectTeam", 6f, .5f,new Vector(0,0.35f));
         
         registerActor(new Background(this));
@@ -56,22 +56,6 @@ public class OpeningMenu extends ICWarsArea {
     public ICWarsActor.Faction getFactionChosen() {
         return factionChosen;
     }
-
-    @Override
-    public DiscreteCoordinates getPlayerSpawnPosition() {
-        return DiscreteCoordinates.ORIGIN;
-    }
-
-    @Override
-    public DiscreteCoordinates getEnemyPlayerSpawnPosition() {
-        return DiscreteCoordinates.ORIGIN;
-    }
-
-    @Override
-    public DiscreteCoordinates getNeutralPlayerSpawnPosition() {
-        return DiscreteCoordinates.ORIGIN;
-    }
-
 
     private class MenuPlayer extends AnimatedPlayer{
 
@@ -99,12 +83,26 @@ public class OpeningMenu extends ICWarsArea {
                 }else if(unit.getFaction() == Faction.ENEMY){
                     factionChosen=Faction.ENEMY;
                 }
-                System.out.println("interagit");
 
             }
 
 
         }
+    }
+
+    @Override
+    public DiscreteCoordinates getPlayerSpawnPosition() {
+        return DiscreteCoordinates.ORIGIN;
+    }
+
+    @Override
+    public DiscreteCoordinates getEnemyPlayerSpawnPosition() {
+        return DiscreteCoordinates.ORIGIN;
+    }
+
+    @Override
+    public DiscreteCoordinates getNeutralPlayerSpawnPosition() {
+        return DiscreteCoordinates.ORIGIN;
     }
 
 }

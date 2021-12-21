@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+import ch.epfl.cs107.play.game.icwars.Menu.GameOver;
+import ch.epfl.cs107.play.game.icwars.Menu.OpeningMenu;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
-import ch.epfl.cs107.play.game.icwars.actor.players.AnimatedPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
@@ -20,27 +19,22 @@ import ch.epfl.cs107.play.game.icwars.actor.unit.Tank;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.game.icwars.area.Level0;
 import ch.epfl.cs107.play.game.icwars.area.Level1;
-import ch.epfl.cs107.play.game.icwars.Menu.OpeningMenu;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
 public class ICWars extends AreaGame {
 	
-	private final static int NUMBERS_OF_LEVELS = 2;
-	private int currentLevelPassed;
+	private ICWarsArea area;
 	private ICWarsPlayer enemyPlayer;
 	private ICWarsPlayer allyPlayer;
-	private final String[] areas = {"icwars/Menu1","icwars/Level0", "icwars/Level1"};
 	private ICWarsPlayer neutralPlayer;
+	private final String[] areas = {"icwars/Menu1","icwars/Level0", "icwars/Level1"};
 	private int areaIndex;
-	private List<ICWarsPlayer> playerForThisOne;
-	private List<ICWarsPlayer> playerForTheNext;
+	private List<ICWarsPlayer> playerForThisOne, playerForTheNext;
 	private ICWarsPlayer currentPlayer;
 	private GameState gameState;
-	private ICWarsArea area;
 	private DiscreteCoordinates playerCoords;
 	private DiscreteCoordinates enemyCoords;
 	private DiscreteCoordinates neutralCoords;
@@ -59,6 +53,7 @@ public class ICWars extends AreaGame {
 		addArea(openingMenu);
 		addArea(new Level0());
 		addArea(new Level1());
+		addArea(new GameOver());
 	}
 
 	@Override
@@ -81,14 +76,16 @@ public class ICWars extends AreaGame {
 
 		area = (ICWarsArea)setCurrentArea(areaKey, true);
 
-
 		playerForThisOne = new ArrayList<>();
 		playerForTheNext = new ArrayList<>();
 
 		if (area != openingMenu) {
+			
 			enemyCoords= area.getEnemyPlayerSpawnPosition();
 			neutralCoords = area.getNeutralPlayerSpawnPosition();
 			playerCoords = area.getPlayerSpawnPosition();
+			
+			//create units
 			allyTank = new Tank(area, new DiscreteCoordinates(playerCoords.x - 1, playerCoords.y), Faction.ALLY);
 			allySoldier = new Soldier(area, playerCoords, Faction.ALLY);
 			allyRocket = new Rocket(area, new DiscreteCoordinates(playerCoords.x + 1, playerCoords.y), Faction.ALLY);
@@ -98,6 +95,7 @@ public class ICWars extends AreaGame {
 			enemySoldier = new Soldier(area, enemyCoords, Faction.ENEMY);
 			enemyRocket = new Rocket(area, new DiscreteCoordinates(enemyCoords.x + 1, enemyCoords.y), Faction.ENEMY);
 			enemyAmbulance = new Ambulance(area, new DiscreteCoordinates(enemyCoords.x, enemyCoords.y + 1), Faction.ENEMY);
+			
 			neutralTank = new Tank(area, new DiscreteCoordinates(neutralCoords.x - 1, neutralCoords.y), Faction.NEUTRAL);
 			neutralSoldier = new Soldier(area, neutralCoords, Faction.NEUTRAL);
 			neutralRocket = new Rocket(area, new DiscreteCoordinates(neutralCoords.x + 1, neutralCoords.y), Faction.NEUTRAL);
@@ -105,19 +103,12 @@ public class ICWars extends AreaGame {
 			neutralPlayer = new AIPlayer(area, enemyCoords, Faction.NEUTRAL, neutralRocket, neutralSoldier, neutralTank, neutralAmbulance);
 
 			 if (openingMenu.getFactionChosen() == Faction.ENEMY) {
-
-
 				allyPlayer = new AIPlayer(area, playerCoords, Faction.ALLY, allyTank, allySoldier,allyAmbulance,allyRocket);
 				enemyPlayer = new RealPlayer(area, enemyCoords, Faction.ENEMY, enemySoldier, enemyTank,enemyAmbulance,enemyRocket);
-
-
 			 }
 			if (openingMenu.getFactionChosen() == Faction.ALLY){
-
-
 				allyPlayer = new RealPlayer(area, playerCoords, Faction.ALLY, allyTank, allySoldier,allyAmbulance,allyRocket);
 				enemyPlayer = new AIPlayer(area, enemyCoords, Faction.ENEMY, enemySoldier, enemyTank,enemyAmbulance,enemyRocket);
-
 			}
 			//add players to player list
 			playerForThisOne.add(allyPlayer);
@@ -127,23 +118,22 @@ public class ICWars extends AreaGame {
 			neutralPlayer.enterArea(area, neutralPlayer.getCoordinates());
 			enemyPlayer.enterArea(area, enemyPlayer.getCoordinates());
 			allyPlayer.enterArea(area, allyPlayer.getCoordinates());
-
 		}
-
-
-		//create units
 	 }
-
 	
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
 		//Dealing with ending of the game and switching levels
 		Keyboard keyboard= getCurrentArea().getKeyboard();
 		if (keyboard.get(Keyboard.N).isPressed()&& gameState!=GameState.MENU) {
 			if (areaIndex + 1 < areas.length) {
 				areaIndex++;
 				gameState = GameState.INIT;
+			} else {
+				gameState = GameState.GAME_OVER;
+				end();
 			}
 		}
 		if (keyboard.get(Keyboard.R).isPressed() && gameState!=GameState.MENU) {
@@ -158,7 +148,6 @@ public class ICWars extends AreaGame {
 				gameState = GameState.INIT;
 			}
 			break;
-
 		case INIT:
 			initArea(areas[areaIndex]);
 			gameState = GameState.CHOOSE_PLAYER;
@@ -190,12 +179,10 @@ public class ICWars extends AreaGame {
 
 			playerForThisOne.addAll(playerForTheNext);
 			playerForTheNext.clear();
-			System.out.println(playerForThisOne.toString());
 		
 			for (Iterator<ICWarsPlayer> iterator = playerForThisOne.iterator(); iterator.hasNext();) {
 				ICWarsPlayer player = iterator.next();
             	if(player.isDefeated()) {
-					System.out.println("Defeated");
 					iterator.remove();
                     currentPlayer.leaveArea();
             	}
@@ -214,6 +201,8 @@ public class ICWars extends AreaGame {
 			}
 			else { end(); }
 			break;
+		case GAME_OVER:
+			break;
 		}
 	}
 
@@ -221,25 +210,26 @@ public class ICWars extends AreaGame {
 	 * Enum of Game States
 	 */
 	public enum GameState {
-		MENU(),
-		INIT(),
-		CHOOSE_PLAYER(),
-		START_PLAYER_TURN(),
-		PLAYER_TURN(),
-		END_PLAYER_TURN(),
-		END_TURN(),
-		END();
-
-		GameState() {
-		}
+		MENU,
+		INIT,
+		CHOOSE_PLAYER,
+		START_PLAYER_TURN,
+		PLAYER_TURN,
+		END_PLAYER_TURN,
+		END_TURN,
+		END,
+		GAME_OVER;
 	}
 	
 	@Override
 	public void end() {
+		area = (ICWarsArea)setCurrentArea("icwars/GameOver", true);
+		/*
 		Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, playerForThisOne.get(0));
 		area.setViewCandidate(playerForThisOne.get(0));
 		gameOver.setAnchor(new Vector(-6,-5));
 		gameOver.draw(getWindow());
+		*/
 	}
 
 	@Override
@@ -247,7 +237,7 @@ public class ICWars extends AreaGame {
 
 	/**
 	 * Method to switch area (OBSOLETE)
-	 */
+	 
 	protected void switchArea() {
 
 		currentPlayer.leaveArea();
@@ -261,5 +251,5 @@ public class ICWars extends AreaGame {
 		if (currentLevelPassed >= NUMBERS_OF_LEVELS) {
 			end();
 		}
-	}
+	}*/
 }
