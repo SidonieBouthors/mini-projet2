@@ -30,6 +30,7 @@ public class ICWars extends AreaGame {
 	private int currentLevelPassed;
 	private ICWarsPlayer enemyPlayer;
 	private ICWarsPlayer allyPlayer;
+	private ICWarsPlayer neutralPlayer;
 	private final String[] areas = {"icwars/Level0", "icwars/Level1"};
 	private int areaIndex;
 	private List<ICWarsPlayer> playerForThisOne;
@@ -67,28 +68,41 @@ public class ICWars extends AreaGame {
 		area = (ICWarsArea)setCurrentArea(areaKey, true);
 		DiscreteCoordinates playerCoords = area.getPlayerSpawnPosition();
 		DiscreteCoordinates enemyCoords = area.getEnemyPlayerSpawnPosition();
-	  
+		DiscreteCoordinates neutralCoords = area.getNeutralPlayerSpawnPosition();
+		
 		playerForThisOne = new ArrayList<>();
 		playerForTheNext = new ArrayList<>();
 	  
 		//create units
-		Tank allyTank = new Tank(area, new DiscreteCoordinates(2, 5),Faction.ALLY);
-		Soldier allySoldier = new Soldier(area, new DiscreteCoordinates(3, 5),Faction.ALLY);
-		Rocket allyRocket = new Rocket(area, new DiscreteCoordinates(4,5),Faction.ALLY);
-		Ambulance allyAmbulance = new Ambulance(area, new DiscreteCoordinates(2,6), Faction.ALLY);
-		Tank enemyTank = new Tank(area, new DiscreteCoordinates(8, 5),Faction.ENEMY);
-		Soldier enemySoldier = new Soldier(area, new DiscreteCoordinates(9, 5),Faction.ENEMY);
-		Rocket enemyRocket = new Rocket(area, new DiscreteCoordinates(7,5), Faction.ENEMY);
-		Ambulance enemyAmbulance = new Ambulance(area, new DiscreteCoordinates(9,6), Faction.ENEMY);
+		Tank allyTank = new Tank(area, new DiscreteCoordinates(playerCoords.x - 1 , playerCoords.y),Faction.ALLY);
+		Soldier allySoldier = new Soldier(area, playerCoords,Faction.ALLY);
+		Rocket allyRocket = new Rocket(area, new DiscreteCoordinates(playerCoords.x + 1, playerCoords.y),Faction.ALLY);
+		Ambulance allyAmbulance = new Ambulance(area, new DiscreteCoordinates(playerCoords.x,playerCoords.y + 1), Faction.ALLY);
+		
+		Tank enemyTank = new Tank(area, new DiscreteCoordinates(enemyCoords.x - 1, enemyCoords.y),Faction.ENEMY);
+		Soldier enemySoldier = new Soldier(area, enemyCoords,Faction.ENEMY);
+		Rocket enemyRocket = new Rocket(area, new DiscreteCoordinates(enemyCoords.x + 1, enemyCoords.y), Faction.ENEMY);
+		Ambulance enemyAmbulance = new Ambulance(area, new DiscreteCoordinates(enemyCoords.x, enemyCoords.y + 1), Faction.ENEMY);
+		
+		Tank neutralTank = new Tank(area, new DiscreteCoordinates(neutralCoords.x -1, neutralCoords.y),Faction.NEUTRAL);
+		Soldier neutralSoldier = new Soldier(area, neutralCoords,Faction.NEUTRAL);
+		Rocket neutralRocket = new Rocket(area, new DiscreteCoordinates(neutralCoords.x + 1,neutralCoords.y), Faction.NEUTRAL);
+		Ambulance neutralAmbulance = new Ambulance(area, new DiscreteCoordinates(neutralCoords.x,neutralCoords.y + 1), Faction.NEUTRAL);
+		
 		//create players
 		allyPlayer = new RealPlayer(area, playerCoords,Faction.ALLY, allyRocket, allyTank, allySoldier, allyAmbulance);
 		enemyPlayer = new AIPlayer(area,enemyCoords,Faction.ENEMY, enemyRocket,enemySoldier,enemyTank, enemyAmbulance);
+		neutralPlayer = new AIPlayer(area,enemyCoords,Faction.NEUTRAL, neutralRocket, neutralSoldier, neutralTank, neutralAmbulance);
+		
 		//add players to player list
 		playerForThisOne.add(allyPlayer);
         playerForThisOne.add(enemyPlayer);
+        playerForThisOne.add(neutralPlayer);
+        
         //players enter area at appropriate coordinates
     	enemyPlayer.enterArea(area, enemyCoords);
 		allyPlayer.enterArea(area, playerCoords);
+		neutralPlayer.enterArea(area, neutralCoords);
 		
 		currentLevelPassed=0;
 	 }

@@ -38,7 +38,11 @@ public abstract class ICWarsArea extends Area {
      * @return enemy player spawn position	(DiscreteCoordinates)
      */
     public abstract DiscreteCoordinates getEnemyPlayerSpawnPosition();
-    
+    /**
+     * Getter for Neutral Player Spawn Position
+     * @return neutral player spawn position	(DiscreteCoordinates)
+     */
+    public abstract DiscreteCoordinates getNeutralPlayerSpawnPosition();
     /**
      * Add Unit to Area (Register and add to list of units)
      * @param unit
@@ -186,5 +190,7 @@ public abstract class ICWarsArea extends Area {
         }
         return false;
     }
+
+	
  
 }

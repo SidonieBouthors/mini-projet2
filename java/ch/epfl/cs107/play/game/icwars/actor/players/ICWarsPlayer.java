@@ -34,8 +34,10 @@ public abstract class ICWarsPlayer extends ICWarsActor implements Interactor {
 		super(owner, coordinates, faction);
 		if (faction == Faction.ALLY) {
 			sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
-		} else {
+		} else if (faction == Faction.ENEMY){
 			sprite = new Sprite("icwars/enemyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
+		} else {
+			sprite = new Sprite("icwars/neutralCursor", 1.f, 1.f, this, null, new Vector(0, 0));
 		}
 		sprite.setDepth(1);
 		this.units = new ArrayList<>(Arrays.asList(units));

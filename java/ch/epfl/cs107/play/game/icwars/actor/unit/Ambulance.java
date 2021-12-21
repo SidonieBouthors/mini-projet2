@@ -23,7 +23,7 @@ public class Ambulance extends Unit {
         this.setMaxHP(10);
         this.setRadius(3);
         this.setAttackRadius(4); //used as healRadius here
-        this.setMaxDamage(0);
+        this.setMaxDamage(1);
         this.setMaxHealing(3);
         this.setCurrentHPToMax();
         this.createRange();
@@ -39,8 +39,10 @@ public class Ambulance extends Unit {
     public String getSpriteName() {
         if (Faction.ENEMY == this.getFaction()) {
             return "icwars/enemyAmbulance";
-        } else {
+        } else if (Faction.ALLY == this.getFaction()){
             return "icwars/friendlyAmbulance";
+        } else {
+        	return "icwars/neutralAmbulance";
         }
     }
     /**

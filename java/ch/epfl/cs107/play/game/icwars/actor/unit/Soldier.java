@@ -37,8 +37,10 @@ public class Soldier extends Unit {
     public String getSpriteName() {
         if (Faction.ENEMY == this.getFaction()) {
             return "icwars/enemySoldier";
-        } else {
+        } else if (Faction.ALLY == this.getFaction()) {
             return "icwars/friendlySoldier";
+        } else {
+            return "icwars/neutralSoldier";
         }
     }
     /**

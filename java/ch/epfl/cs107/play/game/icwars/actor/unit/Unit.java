@@ -103,10 +103,8 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * @param repair	(int): amount of HP to add to unit
      */
     public void repair(int repair) {
-    	System.out.println("repair : "+ repair);
         if ((currentHP + repair) > maxHP) { currentHP = maxHP; } 
         else { currentHP += repair; }
-        System.out.println("new HP : "+ currentHP);
     }
 
     /**

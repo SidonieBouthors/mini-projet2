@@ -25,7 +25,7 @@ public class ICWarsInfoPanel implements Graphics {
     /// Sprite and text graphics line
     private final ShapeGraphics cellDetailsBackground, unitDetailsBackground;
     private final TextGraphics cellTypeText, cellDefenseText;
-    private final TextGraphics unitNameText, unitHealthText, unitDamageText;
+    private final TextGraphics unitNameText, unitHealthText, unitDamageText, unitHealingText;
     private final ImageGraphics woodSprite, plainSprite, citySprite, mountSprite, riverSprite, roadSprite;
 
     /**
@@ -63,11 +63,15 @@ public class ICWarsInfoPanel implements Graphics {
                 TextAlign.Horizontal.LEFT, TextAlign.Vertical.MIDDLE, 1.0f, 3001f);
 
         unitHealthText = new TextGraphics("", fontSize, Color.WHITE, null, 0.0f,
-                false, false, new Vector(0, -1.25f*fontSize-0.5f),
+                false, false, new Vector(0, -1.25f*fontSize-0.2f),
                 TextAlign.Horizontal.LEFT, TextAlign.Vertical.MIDDLE, 1.0f, 3001f);
 
         unitDamageText = new TextGraphics("", fontSize, Color.WHITE, null, 0.0f,
-                false, false, new Vector(0, -2.5f*fontSize-0.4f),
+                false, false, new Vector(0, -2.5f*fontSize-0.1f),
+                TextAlign.Horizontal.LEFT, TextAlign.Vertical.MIDDLE, 1.0f, 3001f);
+        
+        unitHealingText = new TextGraphics("", fontSize, Color.WHITE, null, 0.0f,
+                false, false, new Vector(0, -3.75f*fontSize-0.f),
                 TextAlign.Horizontal.LEFT, TextAlign.Vertical.MIDDLE, 1.0f, 3001f);
     }
 
@@ -159,6 +163,12 @@ public class ICWarsInfoPanel implements Graphics {
         unitDamageText.setRelativeTransform(characteristicsTransform);
         unitDamageText.setText("DMG: " + unit.getDamage());
         unitDamageText.draw(canvas);
+        
+        if (unit.getHealing() != 0) {
+        	unitHealingText.setRelativeTransform(characteristicsTransform);
+        	unitHealingText.setText("HEAL: " + unit.getHealing());
+        	unitHealingText.draw(canvas);
+        }
     }
 
 }

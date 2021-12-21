@@ -45,6 +45,28 @@ public class ICWarsBehavior extends AreaBehavior {
 			this.defense = defense;
 		}
 		
+		@Override
+		public String toString() {
+			switch(this) {
+			case NONE: 
+				return "None";
+			case ROAD:
+				return "Road";
+			case PLAIN:
+				return "Plain";
+			case WOOD:
+				return "Wood";
+			case RIVER:
+				return "River";
+			case MOUNTAIN:
+				return "Mount";
+			case CITY:
+				return "City";
+			default:
+				return "None";
+			}
+		}
+		
 		/**
 		 * int to CellType
 		 * @param type	(int)

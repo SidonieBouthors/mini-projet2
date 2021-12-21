@@ -37,8 +37,10 @@ public class Tank extends Unit {
     public String getSpriteName() {
         if (Faction.ENEMY == this.getFaction()) {
             return "icwars/enemyTank";
-        } else {
+        } else if (Faction.ALLY == this.getFaction()){
             return "icwars/friendlyTank";
+        } else {
+            return "icwars/neutralTank";
         }
     }
     /**

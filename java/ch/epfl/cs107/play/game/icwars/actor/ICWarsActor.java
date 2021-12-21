@@ -35,7 +35,8 @@ public class ICWarsActor extends MovableAreaEntity {
      */
     public enum Faction {
         ALLY(1),
-        ENEMY(2);
+        ENEMY(2),
+    	NEUTRAL(3);
 
         final int faction;
         Faction(int faction) {
