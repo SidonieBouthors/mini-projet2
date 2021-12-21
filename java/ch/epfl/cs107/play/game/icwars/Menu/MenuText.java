@@ -7,7 +7,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class MenuTank extends ICWarsActor {
+public class MenuText extends ICWarsActor {
     private Sprite sprite;
 
     /**
@@ -17,17 +17,15 @@ public class MenuTank extends ICWarsActor {
      * @param coordinates (DiscreteCoordinates): starting coordinates
      * @param faction     (Faction): faction of actor
      */
-    public MenuTank(Area owner, DiscreteCoordinates coordinates, Faction faction) {
-        super(owner, coordinates, faction);
-        sprite = new Sprite("icwars/enemyTank",4.f,4.f,this,null,new Vector(0,-1));
+    public MenuText(Area owner, DiscreteCoordinates coordinates, String spriteName, float width, float height) {
+        super(owner, coordinates, Faction.NONE);
+        sprite = new Sprite(spriteName,width,height,this,null,new Vector(0,0));
     }
-
-
+    
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);
     }
     @Override
     public boolean takeCellSpace() {return true;}
-
 }

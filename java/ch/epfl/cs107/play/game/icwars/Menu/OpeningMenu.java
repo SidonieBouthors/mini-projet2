@@ -17,6 +17,9 @@ public class OpeningMenu extends ICWarsArea {
     private AnimatedPlayer menuPlayer;
     private Tank allyMenuTank;
     private Tank enemyMenuTank;
+    private MenuText title;
+    private MenuText subtitle;
+    private MenuText instruction;
     private ICWarsActor.Faction factionChosen;
 
     @Override
@@ -27,9 +30,12 @@ public class OpeningMenu extends ICWarsArea {
 
     protected void createArea() {
         menuPlayer = new MenuPlayer(this,new DiscreteCoordinates(7,1), ICWarsActor.Faction.NONE);
-        System.out.println("c'est good");
+        
+        title = new MenuText(this, new DiscreteCoordinates(9, 1), "icwars/title", 5f, 1.3f);
+        subtitle = new MenuText(this, new DiscreteCoordinates(9, 1), "icwars/subtitle", 6.3f, .5f);
+        instruction = new MenuText(this, new DiscreteCoordinates(9, 1), "icwars/selectTeam", 6f, .4f);
+        
         registerActor(new Background(this));
-
 
         allyMenuTank = new Tank(this, new DiscreteCoordinates(1, 1), ICWarsActor.Faction.ALLY,3.f,3.f,new Vector(0,-0.75f));
         enemyMenuTank = new Tank(this, new DiscreteCoordinates(10, 1), ICWarsActor.Faction.ENEMY,3.f,3.f,new Vector(-2f,-0.75f));
@@ -37,9 +43,9 @@ public class OpeningMenu extends ICWarsArea {
         enemyMenuTank.enterArea(this, new DiscreteCoordinates(16, 1));
         allyMenuTank.enterArea(this, new DiscreteCoordinates(3,1));
         menuPlayer.enterArea(this,new DiscreteCoordinates(10,1));
-
-
-
+        title.enterArea(this,new DiscreteCoordinates(7,6));
+        subtitle.enterArea(this,new DiscreteCoordinates(7,5));
+        instruction.enterArea(this,new DiscreteCoordinates(7,1));
     }
 
     public ICWarsActor.Faction getFactionChosen() {
@@ -76,7 +82,6 @@ public class OpeningMenu extends ICWarsArea {
                 other.acceptInteraction(handler);
             }
         }
-
 
         private class ICWarsMenuPlayerInteractionHandler implements ICWarInteractionVisitor {
 
