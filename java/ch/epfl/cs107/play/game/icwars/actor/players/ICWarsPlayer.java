@@ -32,6 +32,7 @@ public abstract class ICWarsPlayer extends ICWarsActor implements Interactor {
 	 */
 	public ICWarsPlayer(Area owner, DiscreteCoordinates coordinates, Faction faction, Unit... units) {
 		super(owner, coordinates, faction);
+
 		if (faction == Faction.ALLY) {
 			sprite = new Sprite("icwars/allyCursor", 1.f, 1.f, this, null, new Vector(0, 0));
 		} else if (faction == Faction.ENEMY){
@@ -39,6 +40,7 @@ public abstract class ICWarsPlayer extends ICWarsActor implements Interactor {
 		} else {
 			sprite = new Sprite("icwars/neutralCursor", 1.f, 1.f, this, null, new Vector(0, 0));
 		}
+
 		sprite.setDepth(1);
 		this.units = new ArrayList<>(Arrays.asList(units));
 		this.state = PlayerState.IDLE;

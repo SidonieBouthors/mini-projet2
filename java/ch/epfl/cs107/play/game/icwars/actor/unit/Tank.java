@@ -7,6 +7,7 @@ import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Attack;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Wait;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
 
 
 public class Tank extends Unit {
@@ -31,12 +32,18 @@ public class Tank extends Unit {
         actions.add(new Wait(this, owner));
         this.setActions(actions);
     }
+    // Special Tank Just for Sprite : No actions, range etc.
+    public Tank (Area owner, DiscreteCoordinates coordinates, Faction faction, float spriteWidth, float spriteHeigth, Vector vector){
+        super(owner, coordinates, faction,spriteWidth,spriteHeigth,vector);
+        this.setMaxHP(10);
+        this.setCurrentHPToMax();
+    }
 
     
     @Override
     public String getSpriteName() {
         if (Faction.ENEMY == this.getFaction()) {
-            return "icwars/enemyTank";
+            return "icwars/enemyTankOrientateLeft";
         } else if (Faction.ALLY == this.getFaction()){
             return "icwars/friendlyTank";
         } else {

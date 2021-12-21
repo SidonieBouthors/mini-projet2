@@ -35,6 +35,8 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     private ICWarsRange range;
     private List<Action> actions;
     private final ICWarsUnitInteractionHandler handler;
+    private float spriteWidth;
+    private float spriteHeight;
 
     /**
      * Default Unit Constructor
@@ -44,10 +46,21 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      */
     public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates, faction);
-        this.sprite = new Sprite(this.getSpriteName(), 1.5f, 1.5f, this, null, new Vector(-0.25f, -0.25f));
+        spriteWidth=1.5f;
+        spriteHeight = 1.5f;
+        this.sprite = new Sprite(this.getSpriteName(), spriteWidth, spriteHeight, this, null, new Vector(-0.25f, -0.25f));
         this.sprite.setDepth(0);
         this.handler = new ICWarsUnitInteractionHandler();
     }
+    public Unit(Area owner, DiscreteCoordinates coordinates, Faction faction, float spriteWidth, float spriteHeight, Vector vector) {
+        super(owner, coordinates, faction);
+        this.spriteWidth = spriteWidth;
+        this.spriteHeight = spriteHeight;
+        this.sprite = new Sprite(this.getSpriteName(), spriteWidth, spriteHeight, this, null, vector);
+        this.sprite.setDepth(0);
+        this.handler = new ICWarsUnitInteractionHandler();
+    }
+
     /***
      * Create the range of a unit (ICWarsRange)
      */
@@ -75,6 +88,7 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
             }
         }
     }
+
     
     /***
     Draw the unit's range and a path from the unit position to
@@ -268,5 +282,6 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
 		public void interactWith(Cell cell) {
 			defenceStars = ((ICWarsCell)cell).getDefense();
 		}
+
 	}
 }

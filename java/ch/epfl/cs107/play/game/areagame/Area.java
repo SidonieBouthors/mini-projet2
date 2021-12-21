@@ -7,6 +7,7 @@ import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.game.actor.Draggable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+import ch.epfl.cs107.play.game.icwars.actor.players.AnimatedPlayer;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Transform;
@@ -336,15 +337,22 @@ public abstract class Area implements Playable, PauseMenu.Pausable {
     private void updateCamera () {
 
         // Update expected viewport center
-        if (viewCandidate != null) {
-            viewCenter = viewCandidate.getPosition();
-        }else { // Set default view to center
-        	viewCenter = new Vector(getWidth()/(float)2,getHeight()/(float)2);
+        if (viewCandidate!=null ) {
+            if (viewCandidate instanceof AnimatedPlayer){
+                viewCenter = new Vector(viewCandidate.getPosition().x,5);
+            } else {
+                viewCenter = viewCandidate.getPosition();
+            }
+
+        } else {
+            // Set default view to center
+            viewCenter = new Vector(getWidth()/(float)2,getHeight()/(float)2);
         }
         // Compute new viewport
         Transform viewTransform = Transform.I.scaled(getCameraScaleFactor()).translated(viewCenter);
         window.setRelativeTransform(viewTransform);
     }
+
 
     /**
      * Suspend method: Can be overridden, called before resume other

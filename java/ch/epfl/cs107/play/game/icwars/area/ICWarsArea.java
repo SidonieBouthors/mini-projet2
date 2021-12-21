@@ -177,13 +177,18 @@ public abstract class ICWarsArea extends Area {
     	Unit unit = units.get(unitIndex);
     	setViewCandidate(unit);
     }
+
+
     
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         if (super.begin(window, fileSystem)) {
-            // Set the behavior map
+            // Set the behavior map if it has
+
         	ICWarsBehavior = new ICWarsBehavior(window, getTitle());
             setBehavior(ICWarsBehavior);
+
+
             createArea();
             units = new ArrayList<Unit>();
             return true;

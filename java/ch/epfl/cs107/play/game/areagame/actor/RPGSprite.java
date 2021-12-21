@@ -137,11 +137,26 @@ public class RPGSprite extends Sprite {
 
 		for(int i = 0; i < nbFrames; i++){
 			int j = 0;
-			sprites[order[0].ordinal()][i]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(i*regionWidth, regionHeight*j++, regionWidth, regionHeight));
-			sprites[order[1].ordinal()][i]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(i*regionWidth, regionHeight*j++, regionWidth, regionHeight));
-			sprites[order[2].ordinal()][i]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(i*regionWidth, regionHeight*j++, regionWidth, regionHeight));
-			sprites[order[3].ordinal()][i]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(i*regionWidth, regionHeight*j, regionWidth, regionHeight));
-		}
+			sprites[order[0].ordinal()][i]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(j++*regionWidth, regionHeight*i, regionWidth, regionHeight));
+			sprites[order[1].ordinal()][i]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(j++*regionWidth, regionHeight*i, regionWidth, regionHeight));
+			sprites[order[2].ordinal()][i]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(j++*regionWidth, regionHeight*i, regionWidth, regionHeight));
+			sprites[order[3].ordinal()][i]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(j++*regionWidth, regionHeight*i, regionWidth, regionHeight));}
+		return sprites;
+	}
+
+	//Extracting for the static positions of the player
+	public static Sprite[] extractWithoutAnim(String name, int nbFrames, float width, float height, Positionable parent, int regionWidth, int regionHeight, int lignToextract, Vector anchor, Orientation[] order){
+		Sprite[] sprites = new Sprite[nbFrames];
+
+
+		sprites[order[0].ordinal()]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(	0,			 lignToextract-1, regionWidth, regionHeight), anchor);
+		sprites[order[1].ordinal()]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(		regionWidth, lignToextract-1, regionWidth, regionHeight), anchor);
+		sprites[order[2].ordinal()]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(2*regionWidth, lignToextract-1, regionWidth, regionHeight), anchor);
+		sprites[order[3].ordinal()]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(3*regionWidth, lignToextract-1, regionWidth, regionHeight), anchor);
+
+
+
+
 		return sprites;
 	}
 
