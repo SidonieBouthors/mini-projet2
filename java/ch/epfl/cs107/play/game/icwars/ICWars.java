@@ -221,17 +221,16 @@ public class ICWars extends AreaGame {
 	 * Enum of Game States
 	 */
 	public enum GameState {
-		MENU(),
-		INIT(),
-		CHOOSE_PLAYER(),
-		START_PLAYER_TURN(),
-		PLAYER_TURN(),
-		END_PLAYER_TURN(),
-		END_TURN(),
-		END();
+		MENU,
+		INIT,
+		CHOOSE_PLAYER,
+		START_PLAYER_TURN,
+		PLAYER_TURN,
+		END_PLAYER_TURN,
+		END_TURN,
+		END;
 
-		GameState() {
-		}
+
 	}
 	
 	@Override
