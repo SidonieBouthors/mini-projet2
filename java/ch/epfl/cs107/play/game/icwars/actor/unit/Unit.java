@@ -26,8 +26,8 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     private Sprite sprite;
     private int currentHP;
     private int maxHP;
-    private int maxDamage;
-    private int maxHealing;
+    private int maxDamage = 0;
+    private int maxHealing = 0;
     private int radius;
     private int attackRadius;
     private int defenceStars;
