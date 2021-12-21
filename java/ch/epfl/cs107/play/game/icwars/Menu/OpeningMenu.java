@@ -31,9 +31,9 @@ public class OpeningMenu extends ICWarsArea {
     protected void createArea() {
         menuPlayer = new MenuPlayer(this,new DiscreteCoordinates(7,1), ICWarsActor.Faction.NONE);
         
-        title = new MenuText(this, new DiscreteCoordinates(9, 1), "icwars/title", 5f, 1.3f);
-        subtitle = new MenuText(this, new DiscreteCoordinates(9, 1), "icwars/subtitle", 6.3f, .5f);
-        instruction = new MenuText(this, new DiscreteCoordinates(9, 1), "icwars/selectTeam", 6f, .4f);
+        title = new MenuText(this, new DiscreteCoordinates(10, 1), "icwars/title", 5f, 1.3f, new Vector(0,0));
+        subtitle = new MenuText(this, new DiscreteCoordinates(6, 1), "icwars/subtitle", 6.3f, .5f,new Vector(0,0));
+        instruction = new MenuText(this, new DiscreteCoordinates(9, 0), "icwars/selectTeam", 6f, .5f,new Vector(0,0.35f));
         
         registerActor(new Background(this));
 
@@ -46,9 +46,11 @@ public class OpeningMenu extends ICWarsArea {
         enemyMenuTank.enterArea(this, new DiscreteCoordinates(16, 1));
         allyMenuTank.enterArea(this, new DiscreteCoordinates(3,1));
         menuPlayer.enterArea(this,new DiscreteCoordinates(10,1));
-        title.enterArea(this,new DiscreteCoordinates(7,6));
-        subtitle.enterArea(this,new DiscreteCoordinates(7,5));
-        instruction.enterArea(this,new DiscreteCoordinates(7,1));
+        title.enterArea(this,new DiscreteCoordinates(7,7));
+
+        subtitle.enterArea(this,new DiscreteCoordinates(7,6));
+
+        instruction.enterArea(this,new DiscreteCoordinates(7,0));
     }
 
     public ICWarsActor.Faction getFactionChosen() {
