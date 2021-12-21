@@ -126,6 +126,7 @@ public class ICWars extends AreaGame {
 	
 	@Override
 	public void update(float deltaTime) {
+		
 		super.update(deltaTime);
 		
 		//Dealing with ending of the game and switching levels
@@ -136,7 +137,6 @@ public class ICWars extends AreaGame {
 				gameState = GameState.INIT;
 			} else { 
 				gameState=GameState.GAME_OVER;
-				end(); 
 			}
 		}
 		if (keyboard.get(Keyboard.R).isPressed() && gameState!=GameState.MENU) {
@@ -203,11 +203,10 @@ public class ICWars extends AreaGame {
 				areaIndex++;
 				gameState = GameState.INIT;
 			}
-			else { 
-				gameState=GameState.GAME_OVER;
-				end(); }
+			else { gameState=GameState.GAME_OVER;}
 			break;
 		case GAME_OVER:
+			end();
 			break;
 		}
 		
@@ -237,6 +236,9 @@ public class ICWars extends AreaGame {
 		gameOver.setAnchor(new Vector(-6,-5));
 		gameOver.draw(getWindow());
 		*/
+		for (ICWarsPlayer player:playerForThisOne) {
+			player.setState(PlayerState.IDLE);
+		}
 		if (!getWindow().isCloseRequested()){
 		MenuText gameOver = new MenuText(area, new DiscreteCoordinates(10,2), "icwars/gameOver",10,10,new Vector(-5,-5));
 		gameOver.draw(getWindow());

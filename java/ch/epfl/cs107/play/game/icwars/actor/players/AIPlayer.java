@@ -42,7 +42,7 @@ public class AIPlayer extends ICWarsPlayer{
 		
 		//Check for TAB pressed
 		if (keyboard.get(Keyboard.TAB).isPressed()) {
-					setState(PlayerState.IDLE);
+				setState(PlayerState.IDLE);
 		}
 		
 		switch (getState()) {
