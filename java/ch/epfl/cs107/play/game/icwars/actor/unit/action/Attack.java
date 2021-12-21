@@ -39,6 +39,11 @@ public class Attack extends Action{
 		//call ICWarsArea method to return indexes of attackable units
 		attackableUnitIndexes = ((ICWarsArea)getArea()).getAttackable(getUnit().getCoordinates(), getUnit().getAttackRadius(), getUnit().getFaction());
 		
+		//check if targetNumber is in bounds
+		if (targetNumber >= attackableUnitIndexes.size()) {
+			targetNumber = 0;
+		}
+		
 		//TAB key pressed or no attackable units
 		if (attackableUnitIndexes.size()==0 
 			|| keyboard.get(Keyboard.TAB).isPressed()) {

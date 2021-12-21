@@ -39,6 +39,11 @@ public class Heal extends Action{
 		//call ICWarsArea method to return indexes of attackable units
 		healableUnitIndexes = ((ICWarsArea)getArea()).getHealable(getUnit().getCoordinates(), getUnit().getAttackRadius(), getUnit().getFaction());
 		
+		//check if targetNumber is in bounds
+				if (targetNumber >= healableUnitIndexes.size()) {
+					targetNumber = 0;
+		}
+				
 		//TAB key pressed or no attackable units
 		if (healableUnitIndexes.size()==0 
 			|| keyboard.get(Keyboard.TAB).isPressed()) {

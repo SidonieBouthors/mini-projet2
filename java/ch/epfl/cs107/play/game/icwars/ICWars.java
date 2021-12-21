@@ -132,13 +132,6 @@ public class ICWars extends AreaGame {
 
 
 		//create units
-
-
-
-
-
-
-
 	 }
 
 	
