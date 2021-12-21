@@ -140,13 +140,13 @@ public class ICWars extends AreaGame {
 		super.update(deltaTime);
 		//Dealing with ending of the game and switching levels
 		Keyboard keyboard= getCurrentArea().getKeyboard();
-		if (keyboard.get(Keyboard.N).isPressed()) {
+		if (keyboard.get(Keyboard.N).isPressed()&& gameState!=GameState.MENU) {
 			if (areaIndex + 1 < areas.length) {
 				areaIndex++;
 				gameState = GameState.INIT;
 			}
 		}
-		if (keyboard.get(Keyboard.R).isPressed()) {
+		if (keyboard.get(Keyboard.R).isPressed() && gameState!=GameState.MENU) {
 			areaIndex = 1;
 			gameState = GameState.INIT;
 		}

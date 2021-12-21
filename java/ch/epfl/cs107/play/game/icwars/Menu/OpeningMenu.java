@@ -40,6 +40,9 @@ public class OpeningMenu extends ICWarsArea {
         allyMenuTank = new Tank(this, new DiscreteCoordinates(1, 1), ICWarsActor.Faction.ALLY,3.f,3.f,new Vector(0,-0.75f));
         enemyMenuTank = new Tank(this, new DiscreteCoordinates(10, 1), ICWarsActor.Faction.ENEMY,3.f,3.f,new Vector(-2f,-0.75f));
 
+        allyMenuTank = new Tank(this, new DiscreteCoordinates(1, 1), ICWarsActor.Faction.ALLY,3.f,3.f,new Vector(-0.25f,-0.75f));
+        enemyMenuTank = new Tank(this, new DiscreteCoordinates(10, 1), ICWarsActor.Faction.ENEMY,3.f,3.f,new Vector(-1.75f,-0.75f));
+
         enemyMenuTank.enterArea(this, new DiscreteCoordinates(16, 1));
         allyMenuTank.enterArea(this, new DiscreteCoordinates(3,1));
         menuPlayer.enterArea(this,new DiscreteCoordinates(10,1));
