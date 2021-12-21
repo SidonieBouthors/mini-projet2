@@ -7,6 +7,7 @@ import java.util.List;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+import ch.epfl.cs107.play.game.icwars.Menu.MenuText;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
 import ch.epfl.cs107.play.game.icwars.actor.players.AnimatedPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
@@ -153,6 +154,7 @@ public class ICWars extends AreaGame {
 
 		switch(gameState) {
 		case MENU:
+
 			if (openingMenu.getFactionChosen() != null && openingMenu.getFactionChosen() != Faction.NONE) {
 				++areaIndex;
 				gameState = GameState.INIT;
@@ -236,10 +238,10 @@ public class ICWars extends AreaGame {
 	@Override
 	public void end() {
 		if (!getWindow().isCloseRequested()){
-		Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, playerForThisOne.get(0));
-		area.setViewCandidate(playerForThisOne.get(0));
-		gameOver.setAnchor(new Vector(-6,-5));
-		gameOver.draw(getWindow());}
+		MenuText gameOver = new MenuText(area, new DiscreteCoordinates(10,2), "icwars/gameOver",10,10,new Vector(-5,-5));
+		gameOver.draw(getWindow());
+		area.setViewCandidate(gameOver);
+		}
 	}
 
 	@Override
