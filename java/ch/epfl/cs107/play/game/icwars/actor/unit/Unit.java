@@ -27,7 +27,9 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
     private int currentHP;
     private int maxHP;
     private int maxDamage;
+    private int maxHealing;
     private int radius;
+    private int attackRadius;
     private int defenceStars;
     private boolean used;
     private ICWarsRange range;
@@ -101,8 +103,10 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      * @param repair	(int): amount of HP to add to unit
      */
     public void repair(int repair) {
+    	System.out.println("repair : "+ repair);
         if ((currentHP + repair) > maxHP) { currentHP = maxHP; } 
         else { currentHP += repair; }
+        System.out.println("new HP : "+ currentHP);
     }
 
     /**
@@ -129,11 +133,25 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
         return radius;
     }
     /**
+     * Getter for attack radius
+     * @return radius
+     */
+    public int getAttackRadius() {
+        return attackRadius;
+    }
+    /**
      * Getter for maxDamage
      * @return maxDamage
      */
     public int getDamage() {
     	return maxDamage;
+    }
+    /**
+     * Getter for maxHealing
+     * @return maxHealing
+     */
+    public int getHealing() {
+    	return maxHealing;
     }
     /**
      * Getter for currentHP
@@ -187,10 +205,20 @@ public abstract class Unit extends ICWarsActor implements Interactor,Interactabl
      */
     protected void setRadius(int radius) { this.radius = radius;}
     /**
+     * Setter for attack radius (Protected)
+     * @param attackRadius	(int)
+     */
+    protected void setAttackRadius(int radius) { this.attackRadius = radius;}
+    /**
      * Setter for max damage (Protected)
      * @param damage	(int)
      */
     protected void setMaxDamage(int damage) { this.maxDamage = damage;}
+    /**
+     * Setter for max healing (Protected)
+     * @param healing	(int)
+     */
+    protected void setMaxHealing(int healing) { this.maxHealing = healing;}
     /**
      * Setter for max HP (Protected)
      * @param HP	(int)

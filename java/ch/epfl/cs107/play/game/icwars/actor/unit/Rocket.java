@@ -9,7 +9,7 @@ import ch.epfl.cs107.play.game.icwars.actor.unit.action.Wait;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 
-public class Tank extends Unit {
+public class Rocket extends Unit {
 
 	/**
      * Default Tank Constructor
@@ -17,12 +17,12 @@ public class Tank extends Unit {
      * @param coordinates	(DiscreteCoordinates): starting coordinates
      * @param faction		(Faction): faction
      */
-    public Tank(Area owner, DiscreteCoordinates coordinates, Faction faction) {
+    public Rocket(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates,faction);
-        this.setMaxHP(10);
-        this.setRadius(3);
-        this.setAttackRadius(4);
-        this.setMaxDamage(7);
+        this.setMaxHP(2);
+        this.setRadius(1);
+        this.setAttackRadius(5);
+        this.setMaxDamage(8);
         this.setCurrentHPToMax();
         this.createRange();
         //create actions
@@ -36,9 +36,9 @@ public class Tank extends Unit {
     @Override
     public String getSpriteName() {
         if (Faction.ENEMY == this.getFaction()) {
-            return "icwars/enemyTank";
+            return "icwars/enemyRocket";
         } else {
-            return "icwars/friendlyTank";
+            return "icwars/friendlyRocket";
         }
     }
     /**
@@ -46,6 +46,6 @@ public class Tank extends Unit {
      * @return name
      */
     public String getName() {
-    	return "Tank";
+    	return "Rocket";
     }
 }

@@ -5,11 +5,12 @@ import java.util.List;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Attack;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Heal;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Wait;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 
-public class Tank extends Unit {
+public class Ambulance extends Unit {
 
 	/**
      * Default Tank Constructor
@@ -17,17 +18,18 @@ public class Tank extends Unit {
      * @param coordinates	(DiscreteCoordinates): starting coordinates
      * @param faction		(Faction): faction
      */
-    public Tank(Area owner, DiscreteCoordinates coordinates, Faction faction) {
+    public Ambulance(Area owner, DiscreteCoordinates coordinates, Faction faction) {
         super(owner, coordinates,faction);
         this.setMaxHP(10);
         this.setRadius(3);
-        this.setAttackRadius(4);
-        this.setMaxDamage(7);
+        this.setAttackRadius(4); //used as healRadius here
+        this.setMaxDamage(0);
+        this.setMaxHealing(3);
         this.setCurrentHPToMax();
         this.createRange();
         //create actions
         List<Action> actions = new ArrayList<Action>();
-        actions.add(new Attack(this, owner));
+        actions.add(new Heal(this, owner));
         actions.add(new Wait(this, owner));
         this.setActions(actions);
     }
@@ -36,9 +38,9 @@ public class Tank extends Unit {
     @Override
     public String getSpriteName() {
         if (Faction.ENEMY == this.getFaction()) {
-            return "icwars/enemyTank";
+            return "icwars/enemyAmbulance";
         } else {
-            return "icwars/friendlyTank";
+            return "icwars/friendlyAmbulance";
         }
     }
     /**
@@ -46,6 +48,6 @@ public class Tank extends Unit {
      * @return name
      */
     public String getName() {
-    	return "Tank";
+    	return "Healer";
     }
 }

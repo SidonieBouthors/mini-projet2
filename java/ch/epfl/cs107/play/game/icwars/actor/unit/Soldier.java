@@ -22,6 +22,7 @@ public class Soldier extends Unit {
         this.setMaxHP(5);
         this.setMaxDamage(2);
         this.setRadius(2);
+        this.setAttackRadius(2);
         this.setCurrentHPToMax();
         this.createRange();
         //create actions

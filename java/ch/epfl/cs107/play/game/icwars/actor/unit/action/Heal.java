@@ -14,10 +14,10 @@ import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
-public class Attack extends Action{
+public class Heal extends Action{
 
 	private ImageGraphics cursor;
-	private List<Integer> attackableUnitIndexes;
+	private List<Integer> healableUnitIndexes;
 	private int targetNumber = 0;
 	
 	/**
@@ -25,22 +25,22 @@ public class Attack extends Action{
 	 * @param unit	(Unit): attacking unit
 	 * @param area	(Area): area on which attack occurs
 	 */
-	public Attack(Unit unit, Area area) {
+	public Heal(Unit unit, Area area) {
 		super(unit, area);
-		this.setName("(A)ttack");
-		this.setKey(Keyboard.A);
+		this.setName("(H)eal");
+		this.setKey(Keyboard.H);
 		this.cursor=new ImageGraphics (ResourcePath.getSprite ("icwars/UIpackSheet"),1f, 1f, new RegionOfInterest(4*18 , 26*18 ,16 ,16));
-		this.attackableUnitIndexes = new ArrayList<Integer>();
+		this.healableUnitIndexes = new ArrayList<Integer>();
 		cursor.setDepth(1);
 	}
 	
 	@Override
 	public void doAction(float dt, ICWarsPlayer player, Keyboard keyboard) {
 		//call ICWarsArea method to return indexes of attackable units
-		attackableUnitIndexes = ((ICWarsArea)getArea()).getAttackable(getUnit().getCoordinates(), getUnit().getAttackRadius(), getUnit().getFaction());
+		healableUnitIndexes = ((ICWarsArea)getArea()).getHealable(getUnit().getCoordinates(), getUnit().getAttackRadius(), getUnit().getFaction());
 		
 		//TAB key pressed or no attackable units
-		if (attackableUnitIndexes.size()==0 
+		if (healableUnitIndexes.size()==0 
 			|| keyboard.get(Keyboard.TAB).isPressed()) {
 			player.centerCamera();
 			player.setState(PlayerState.ACTION_SELECTION);
@@ -48,7 +48,7 @@ public class Attack extends Action{
 		
 		//RIGHT key pressed
 		if(keyboard.get(Keyboard.RIGHT).isPressed()) {
-			if(targetNumber < attackableUnitIndexes.size()-1) {
+			if(targetNumber < healableUnitIndexes.size()-1) {
 				targetNumber++;
 			}
 			else {
@@ -61,14 +61,14 @@ public class Attack extends Action{
 				targetNumber--;
 			}
 			else {
-				targetNumber = attackableUnitIndexes.size() - 1;
+				targetNumber = healableUnitIndexes.size() - 1;
 			}
 		}
 		//ENTER key pressed
 		if(keyboard.get(Keyboard.ENTER).isPressed()) {
 			//select target unit and attack it
-			int targetUnitIndex = attackableUnitIndexes.get(targetNumber);
-			((ICWarsArea)getArea()).attackUnit(targetUnitIndex, getUnit().getDamage());
+			int targetUnitIndex = healableUnitIndexes.get(targetNumber);
+			((ICWarsArea)getArea()).healUnit(targetUnitIndex, getUnit().getHealing());
 			
 			getUnit().setUsed(true);
 			player.centerCamera();
@@ -79,18 +79,18 @@ public class Attack extends Action{
 	@Override
 	public boolean doAutoAction(float dt, ICWarsPlayer player) {
 		//call ICWarsArea method to return indexes of attackable units
-		attackableUnitIndexes = ((ICWarsArea)getArea()).getAttackable(getUnit().getCoordinates(), getUnit().getAttackRadius(), getUnit().getFaction());	
+		healableUnitIndexes = ((ICWarsArea)getArea()).getHealable(getUnit().getCoordinates(), getUnit().getAttackRadius(), getUnit().getFaction());	
 		
 		//if there are no attackable units
-		if (attackableUnitIndexes.size()==0) {
+		if (healableUnitIndexes.size()==0) {
 			player.centerCamera();
 			player.setState(PlayerState.ACTION_SELECTION);
 			return false;
 		}
 		else {
-			//select target unit and attack it
-			int targetUnitIndex = attackableUnitIndexes.get(0);
-			((ICWarsArea)getArea()).attackUnit(targetUnitIndex, getUnit().getDamage());
+			//select target unit and heal it
+			int targetUnitIndex = healableUnitIndexes.get(0);
+			((ICWarsArea)getArea()).healUnit(targetUnitIndex, getUnit().getHealing());
 			getUnit().setUsed(true);
 			player.centerCamera();
 			player.setState(PlayerState.NORMAL);
@@ -100,8 +100,8 @@ public class Attack extends Action{
 	
 	@Override
 	public void draw(Canvas canvas) {
-		if (attackableUnitIndexes.size() != 0) {
-			int targetUnitIndex = attackableUnitIndexes.get(targetNumber);
+		if (healableUnitIndexes.size() != 0) {
+			int targetUnitIndex = healableUnitIndexes.get(targetNumber);
 			((ICWarsArea)getArea()).centerCameraOnUnit(targetUnitIndex);
 		}
 		cursor.setAnchor (canvas.getPosition ().add (1 ,0));

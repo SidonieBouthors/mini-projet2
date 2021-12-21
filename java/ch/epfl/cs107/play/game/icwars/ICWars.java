@@ -11,6 +11,8 @@ import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer.PlayerState;
 import ch.epfl.cs107.play.game.icwars.actor.players.RealPlayer;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Ambulance;
+import ch.epfl.cs107.play.game.icwars.actor.unit.Rocket;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Soldier;
 import ch.epfl.cs107.play.game.icwars.actor.unit.Tank;
 import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
@@ -72,15 +74,22 @@ public class ICWars extends AreaGame {
 		//create units
 		Tank allyTank = new Tank(area, new DiscreteCoordinates(2, 5),Faction.ALLY);
 		Soldier allySoldier = new Soldier(area, new DiscreteCoordinates(3, 5),Faction.ALLY);
+		Rocket allyRocket = new Rocket(area, new DiscreteCoordinates(4,5),Faction.ALLY);
+		Ambulance allyAmbulance = new Ambulance(area, new DiscreteCoordinates(2,6), Faction.ALLY);
 		Tank enemyTank = new Tank(area, new DiscreteCoordinates(8, 5),Faction.ENEMY);
 		Soldier enemySoldier = new Soldier(area, new DiscreteCoordinates(9, 5),Faction.ENEMY);
-	
+		Rocket enemyRocket = new Rocket(area, new DiscreteCoordinates(7,5), Faction.ENEMY);
+		Ambulance enemyAmbulance = new Ambulance(area, new DiscreteCoordinates(9,6), Faction.ENEMY);
 		//create players
-		allyPlayer = new AIPlayer(area, playerCoords,Faction.ALLY, allyTank, allySoldier);
-		enemyPlayer = new RealPlayer(area,enemyCoords,Faction.ENEMY,enemySoldier,enemyTank);
-	
-		enemyPlayer.enterArea(area, enemyCoords);
+		allyPlayer = new RealPlayer(area, playerCoords,Faction.ALLY, allyRocket, allyTank, allySoldier, allyAmbulance);
+		enemyPlayer = new AIPlayer(area,enemyCoords,Faction.ENEMY, enemyRocket,enemySoldier,enemyTank, enemyAmbulance);
+		//add players to player list
+		playerForThisOne.add(allyPlayer);
+        playerForThisOne.add(enemyPlayer);
+        //players enter area at appropriate coordinates
+    	enemyPlayer.enterArea(area, enemyCoords);
 		allyPlayer.enterArea(area, playerCoords);
+		
 		currentLevelPassed=0;
 	 }
 	
@@ -103,8 +112,6 @@ public class ICWars extends AreaGame {
 		switch(gameState) {
 		case INIT:
 			initArea(areas[areaIndex]);
-			playerForThisOne.add(allyPlayer);
-            playerForThisOne.add(enemyPlayer);
 			gameState = GameState.CHOOSE_PLAYER;
 			break;
 		case CHOOSE_PLAYER:

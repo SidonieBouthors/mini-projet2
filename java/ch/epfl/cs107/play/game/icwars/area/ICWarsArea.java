@@ -79,7 +79,7 @@ public abstract class ICWarsArea extends Area {
     /**
      * Finds the units attackable by an attacking unit
      * @param attackerPosition			(DiscreteCoordinates) : coordinates of attacking unit
-     * @param radius					(int) : radius of attacking unit
+     * @param radius					(int) : attack radius of attacking unit
      * @param faction					(Faction) : faction of attacking unit
      * @return attackableIndexList		(List<Integer>): list of indexes of attackable units
      */
@@ -102,6 +102,33 @@ public abstract class ICWarsArea extends Area {
     }
     
     /**
+     * Finds the units healable by an healing unit
+     * @param attackerPosition			(DiscreteCoordinates) : coordinates of healing unit
+     * @param radius					(int) : heal radius of healing unit
+     * @param faction					(Faction) : faction of attacking unit
+     * @return attackableIndexList		(List<Integer>): list of indexes of healable units
+     */
+    public List<Integer> getHealable(DiscreteCoordinates healerPosition, int radius, Faction faction) {
+    	List<Integer> unitIndexes = new ArrayList<Integer>();
+    	int index = 0;
+    	//add the index of all ally units within range to a unitIndexes
+    	for (Unit unit:units) {
+    		DiscreteCoordinates position = unit.getCoordinates();
+    		if (unit.getFaction()==faction
+    			&& !(position.x == healerPosition.x && position.y==healerPosition.y)
+    			&& position.x <= healerPosition.x + radius
+    			&& position.x >= healerPosition.x - radius
+    			&& position.y <= healerPosition.y + radius
+    			&& position.y >= healerPosition.y - radius
+    			) {
+    			unitIndexes.add(index);
+    		}
+    		index++;
+    	}
+    	return unitIndexes;
+    }
+    
+    /**
      * Deals specified amount of damage to unit at specified index
      * @param unitIndex			(int) : index of unit to attack
      * @param receivedDamage	(int) : amount of damage to deal to unit
@@ -113,6 +140,18 @@ public abstract class ICWarsArea extends Area {
     		unit.damage(damage);
     	}
     }
+    /**
+     * Deals specified amount of repair to unit at specified index
+     * @param unitIndex			(int) : index of unit to repair
+     * @param receivedDamage	(int) : amount of healing to deal to unit
+     */
+    public void healUnit(int unitIndex, int receivedHealing) {
+    	Unit unit = units.get(unitIndex);
+    	if (receivedHealing > 0) {
+    		unit.repair(receivedHealing);
+    	}
+    }
+    
     /**
      * Finds whether there is a unit at the specified coordinates
      * @param x			(int) : x coordinate
