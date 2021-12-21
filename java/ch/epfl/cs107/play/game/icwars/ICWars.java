@@ -236,10 +236,11 @@ public class ICWars extends AreaGame {
 	
 	@Override
 	public void end() {
+		if (!getWindow().isCloseRequested()){
 		Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, playerForThisOne.get(0));
 		area.setViewCandidate(playerForThisOne.get(0));
 		gameOver.setAnchor(new Vector(-6,-5));
-		gameOver.draw(getWindow());
+		gameOver.draw(getWindow());}
 	}
 
 	@Override
