@@ -15,6 +15,7 @@ Class RPG SPRITE :
 Class Animated Player :
 -
 - Joueur particulier du menu, muni des ses propres animations. Il est totalement réutilisable autre part. C'est un GhostPlayer un peu plus spécifique.
+- Une animation vélo est fournit avec pour se déplacer encore plus rapidement.
 
 Class Opening Menu :
 -

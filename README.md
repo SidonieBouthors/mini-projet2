@@ -1,4 +1,6 @@
-Mini Projet 2 
+Mini Projet 2
+-
+
 
 François Theron et Sidonie Bouthors
 
@@ -8,22 +10,22 @@ Menu interactif :
 -
 - Jouer le personnage a l'aide des flèches droite et gauche,
 Pour jouer l'équipe de votre choix "montez" dans le tank en vous arretant une seconde sur le tank. Cette étape peut etre skip au moyen de la touche N, vous vous verrez attribué l'equipe allié automatiquement.
-- Grâce à la touche N le personnage peut prendre un vélo ! Fantastique pas vrai ?
+- Grâce à la touche ESPACE le personnage peut prendre un vélo et avancer plus rapidement ! Fantastique pas vrai ?
 
 Jeu:
 -
-- Chaque joueur a 4 unités de types différent (Tank, Soldier, Rocket, Ambulance)
+- Chaque joueur a 4 unités de types différent (Tank, Soldier, Rocket, Ambulance).
 
 Les joueur allié peut :
 -
-- déplacer son curseur au moyen des flèches
-- selectionner une unité au moyen de ENTER
-- choisir alors une position d'arrivée dans le range (a l'aide des flèches) et appuyer de nouveau sur ENTER
+- déplacer son curseur au moyen des flèches.
+- selectionner une unité au moyen de ENTER.
+- choisir alors une position d'arrivée dans le range (a l'aide des flèches) et appuyer de nouveau sur ENTER.
 - Selectionner une action parmis celle proposée
 Action Wait: aucun effet
 Action Attack (tous units): Selectionner une unité enemie a l'aide des flèches et appuyer sur ENTER
-Action Heal (uniquement Ambulance): Selectionner une unité alliée a l'aide des flèches et appuyer sur ENTER
-- les units utilisés sont grisés (chacun peut être utilisé une fois par tour)
+Action Heal (uniquement Ambulance): Selectionner une unité alliée a l'aide des flèches et appuyer sur ENTER.
+- les units utilisés sont grisés (chacun peut être utilisé une fois par tour).
 - le joueur peut finir son tour à l'aide de la touche TAB.
 
 Mécanique du jeu :
@@ -32,7 +34,7 @@ Mécanique du jeu :
 
 IA :
 -
-- Le joueur ennemi joue automatiquement en rapprochant chacune de ses unité le plus possible d'un adversaire puis en l'attaquant (NOTE: l'ambulance soigne à la place)
+- Le joueur ennemi joue automatiquement en rapprochant chacune de ses unité le plus possible d'un adversaire puis en l'attaquant (NOTE: l'ambulance soigne à la place).
 
 Système de jeu :
 -
@@ -40,8 +42,8 @@ Système de jeu :
 
 Touches pour les curieux :
 -
-- TAB peut être utilisé pour finir le tour du joueur actuel a n'importe quel moment
-- N permet de démarrer la partie suivante (ne marche que sur le menu et la première aire, puisque ensuite il n'y a plus de partie suivante)
+- TAB peut être utilisé pour finir le tour du joueur actuel a n'importe quel moment.
+- N permet de démarrer la partie suivante (ne marche que sur le menu et la première aire, puisque ensuite il n'y a plus de partie suivante).
 - R permet de reset le jeu et donc de redémarrer à la première partie.
 
 Spécificités particulières des extensions :

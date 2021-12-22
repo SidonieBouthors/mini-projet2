@@ -34,7 +34,7 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
     public static Animation[] animBicycle;
     private Animation[] currentanimation;
 
-    public final int ANIMATION_DURATION = 8;
+    private static int ANIMATION_DURATION = 8;
 
     /**
      * Default AnimatedPlayer Constructor
@@ -50,6 +50,8 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
 
         animCharac = constructAnimation(spriteName);
         passiveSprite = constructPassiveSprite(spriteName);
+        passiveBicycle = constructPassiveSprite("player_bicycle");
+        animBicycle = constructAnimation("player_bicycle");
         this.area = (ICWarsArea) area;
 
 
@@ -98,6 +100,15 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
 
 
         Keyboard keyboard = getOwnerArea().getKeyboard();
+        if (keyboard.get(Keyboard.SPACE).isPressed() && currentanimation == animCharac) {
+            ANIMATION_DURATION = 5;
+            switchAnimation(passiveBicycle,animBicycle);
+
+
+        } else if (keyboard.get(Keyboard.SPACE).isPressed()) {
+            ANIMATION_DURATION = 8;
+            switchAnimation(passiveSprite,animCharac);
+        }
 
         //playing the corresponding animations when moving
         if (keyboard.get(Keyboard.DOWN).isDown() || keyboard.get(Keyboard.UP).isDown() || keyboard.get(Keyboard.LEFT).isDown() || keyboard.get(Keyboard.RIGHT).isDown()) {
