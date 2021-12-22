@@ -58,16 +58,12 @@ public abstract class ICWarsPlayer extends ICWarsActor implements Interactor {
 	 * Enum of all possible Player states
 	 */
 	public enum PlayerState {
-		IDLE(),
-		NORMAL(),
-		SELECT_CELL(),
-		MOVE_UNIT(),
-		ACTION_SELECTION(),
-		ACTION();
-		private int state;
-		PlayerState() {
-
-		}
+		IDLE,
+		NORMAL,
+		SELECT_CELL,
+		MOVE_UNIT,
+		ACTION_SELECTION,
+		ACTION;
 	}
 	
 	/**

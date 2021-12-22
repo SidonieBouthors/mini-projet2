@@ -1,16 +1,13 @@
 package ch.epfl.cs107.play.game.icwars;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.Iterator;
 import java.util.List;
 
-import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.icwars.Menu.GameOver;
-import ch.epfl.cs107.play.game.icwars.Menu.OpeningMenu;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.icwars.Menu.MenuText;
+import ch.epfl.cs107.play.game.icwars.Menu.OpeningMenu;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
 import ch.epfl.cs107.play.game.icwars.actor.players.AIPlayer;
 import ch.epfl.cs107.play.game.icwars.actor.players.ICWarsPlayer;
@@ -90,7 +87,7 @@ public class ICWars extends AreaGame {
 			neutralCoords = area.getNeutralPlayerSpawnPosition();
 			playerCoords = area.getPlayerSpawnPosition();
 			
-			//create units
+			//create units for all 3 players
 			allyTank = new Tank(area, new DiscreteCoordinates(playerCoords.x - 1, playerCoords.y), Faction.ALLY);
 			allySoldier = new Soldier(area, playerCoords, Faction.ALLY);
 			allyRocket = new Rocket(area, new DiscreteCoordinates(playerCoords.x + 1, playerCoords.y), Faction.ALLY);
@@ -107,7 +104,8 @@ public class ICWars extends AreaGame {
 			neutralAmbulance = new Ambulance(area, new DiscreteCoordinates(neutralCoords.x, neutralCoords.y + 1), Faction.NEUTRAL);
 			neutralPlayer = new AIPlayer(area, enemyCoords, Faction.NEUTRAL, neutralRocket, neutralSoldier, neutralTank, neutralAmbulance);
 
-			 if (openingMenu.getFactionChosen() == Faction.ENEMY) {
+			//Create AIPlayer and RealPlayer based on Faction selected in the Menu
+			if (openingMenu.getFactionChosen() == Faction.ENEMY) {
 				allyPlayer = new AIPlayer(area, playerCoords, Faction.ALLY, allyTank, allySoldier,allyAmbulance,allyRocket);
 				enemyPlayer = new RealPlayer(area, enemyCoords, Faction.ENEMY, enemySoldier, enemyTank,enemyAmbulance,enemyRocket);
 			 }
@@ -119,7 +117,7 @@ public class ICWars extends AreaGame {
 			playerForThisOne.add(allyPlayer);
 			playerForThisOne.add(enemyPlayer);
 			playerForThisOne.add(neutralPlayer);
-
+			//players enter area
 			neutralPlayer.enterArea(area, neutralPlayer.getCoordinates());
 			enemyPlayer.enterArea(area, enemyPlayer.getCoordinates());
 			allyPlayer.enterArea(area, allyPlayer.getCoordinates());
@@ -240,7 +238,7 @@ public class ICWars extends AreaGame {
 		if (!getWindow().isCloseRequested()){
 			for (ICWarsPlayer player:playerForThisOne) {
 				player.setState(PlayerState.IDLE);
-			}
+		}
 		MenuText gameOver = new MenuText(area, new DiscreteCoordinates(10,2), "icwars/gameOver",10,10,new Vector(-5,-5));
 		gameOver.draw(getWindow());
 		area.setViewCandidate(gameOver);
