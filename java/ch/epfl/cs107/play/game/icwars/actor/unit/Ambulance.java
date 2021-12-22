@@ -4,6 +4,7 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Action;
+import ch.epfl.cs107.play.game.icwars.actor.unit.action.Attack;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Heal;
 import ch.epfl.cs107.play.game.icwars.actor.unit.action.Wait;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -21,7 +22,7 @@ public class Ambulance extends Unit {
         super(owner, coordinates,faction);
         this.setMaxHP(10);
         this.setRadius(3);
-        this.setAttackRadius(4); //used as healRadius here
+        this.setAttackRadius(2); //used as healRadius too
         this.setMaxDamage(1);
         this.setMaxHealing(3);
         this.setCurrentHPToMax();
@@ -29,6 +30,7 @@ public class Ambulance extends Unit {
         //create actions
         List<Action> actions = new ArrayList<Action>();
         actions.add(new Heal(this, owner));
+        actions.add(new Attack(this, owner));
         actions.add(new Wait(this, owner));
         this.setActions(actions);
     }
