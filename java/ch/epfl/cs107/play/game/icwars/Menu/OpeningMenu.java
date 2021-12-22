@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.icwars.area.ICWarsArea;
 import ch.epfl.cs107.play.game.icwars.handler.ICWarInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.window.Keyboard;
 
 public class OpeningMenu extends ICWarsArea {
 
@@ -64,6 +65,15 @@ public class OpeningMenu extends ICWarsArea {
         public MenuPlayer(Area area, DiscreteCoordinates coordinates, Faction faction) {
             super(area, coordinates, faction);
             this.handler= new ICWarsMenuPlayerInteractionHandler();
+        }
+
+        @Override
+        public void update(float deltaTime) {
+            Keyboard keyboard = getOwnerArea().getKeyboard();
+            super.update(deltaTime);
+            if (keyboard.get(Keyboard.N).isPressed()) {
+                factionChosen = Faction.ALLY;
+            }
         }
 
         public void interactWith(Interactable other) {

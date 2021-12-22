@@ -4,4 +4,27 @@ François Théron et Sidonit Bouthors
 
 ELEMENTS AJOUTES:
 
+Class RPG SPRITE :
+
+- Modification dans Sprites[][] extractSprite, ajustement pour que les images soient extraites de gauche a droite.
+  car initialement c'etait de haut en bas.
+
+- Ajout de méthode Sprites [] extractspritesWithoutAnim + un parametre lignToExtract qui permet d'extrait la ligne que l'on souhaite plus particulièrement dans l'image.
+  (Ces modifications doivent etre changés si les sprites sheets n'ont pas le meme format)
+
+Class Unit et Tank :
+
+- Ajout de surcharge constructeur au regard du menu. Nous avions besoin des tanks pour leur "Image" plus que pour leur fonction attack etc.
+  C'est pour cela que ici et dans Unit il existe un constructeur avec des paramètres différents + optimisé (par exemple pas charger le range alors que l'on ne s'en servira pas)
+
+Class Animated Player :
+- Joueur particulier du menu, muni des ses propres animations. Il est totalement réutilisable autre part. C'est un GhostPlayer un peu plus spécifique.
+
+Class Opening Menu :
+- C'est une icwarsArea particulière étant donné qu'elle est fixe et qu'on ne veut pas qu'elle change selon les paramètres du jeu.
+  Elle possède un animated player particulier muni de certaines interactions spécifiques a cette Area. Cette animated player doit transmettre des
+  informations a l'area(choix de l'equipe jouée), pour faciliter leur communication mais aussi celle avec ICWars : c'est une classe imbriquée.
+
+
+
 Menu 

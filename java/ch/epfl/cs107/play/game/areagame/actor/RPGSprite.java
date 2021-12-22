@@ -148,13 +148,11 @@ public class RPGSprite extends Sprite {
 	public static Sprite[] extractWithoutAnim(String name, int nbFrames, float width, float height, Positionable parent, int regionWidth, int regionHeight, int lignToextract, Vector anchor, Orientation[] order){
 		Sprite[] sprites = new Sprite[nbFrames];
 
-
+		//extracting from to right only the numbers of lines you want
 		sprites[order[0].ordinal()]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(	0,			 lignToextract-1, regionWidth, regionHeight), anchor);
 		sprites[order[1].ordinal()]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(		regionWidth, lignToextract-1, regionWidth, regionHeight), anchor);
 		sprites[order[2].ordinal()]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(2*regionWidth, lignToextract-1, regionWidth, regionHeight), anchor);
 		sprites[order[3].ordinal()]  = new RPGSprite(name, width, height, parent, new RegionOfInterest(3*regionWidth, lignToextract-1, regionWidth, regionHeight), anchor);
-
-
 
 
 		return sprites;

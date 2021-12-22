@@ -28,7 +28,7 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
     private Sprite[] currentpassive;
     private String spriteName;
     private ICWarsArea area ;
-    private boolean hasChosenAFaction;
+
 
     public static Animation[] animCharac;
     public static Animation[] animBicycle;
@@ -54,7 +54,7 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
 
         currentanimation = animCharac;
         currentpassive = passiveSprite;
-        hasChosenAFaction=false;
+
 
 
 
