@@ -44,4 +44,6 @@ public class GameOver extends ICWarsArea {
         return DiscreteCoordinates.ORIGIN;
     }
 
+    
+
 }
