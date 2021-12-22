@@ -36,8 +36,12 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
 
     public final int ANIMATION_DURATION = 8;
 
-
-
+    /**
+     * Default AnimatedPlayer Constructor
+     * @param area			(Area)
+     * @param coordinates	(DiscreteCoordinates)
+     * @param faction		(Faction)
+     */
     public AnimatedPlayer(Area area, DiscreteCoordinates coordinates, Faction faction) {
         super(area, coordinates,faction);
 
@@ -46,10 +50,7 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
 
         animCharac = constructAnimation(spriteName);
         passiveSprite = constructPassiveSprite(spriteName);
-        passiveBicycle = constructPassiveSprite("player_bicycle");
-        animBicycle = constructAnimation("player_bicycle");
         this.area = (ICWarsArea) area;
-
 
 
 
@@ -57,27 +58,33 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
 
         currentanimation = animCharac;
         currentpassive = passiveSprite;
-
-
-
-
-
     }
+
+    /**
+     * Switch animation
+     * @param passive	(Sprite[])
+     * @param animation	(Animation[])
+     */
     public void switchAnimation(Sprite[] passive, Animation[] animation) {
         currentpassive = passive;
         currentanimation = animation;
     }
 
-    // Special method to construct passive Sprite of "player". If spriteName change you'll probably have to change parameters.
-
+    /**
+     * Construct passive Sprite of Player
+     * @param spriteName		(String)
+     * @return passiveAnimation
+     */
     private Sprite[] constructPassiveSprite(String spriteName) {
         return RPGSprite.extractWithoutAnim(spriteName, 4, 1, 1,this,
                 16, 16,1,new Vector(0,0), new Orientation[] {Orientation.DOWN,
                         Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
     }
-
-    // Special method to construct Animation of "player". If spriteName change you'll probably have to change parameters.
-
+    /**
+     * Construct animation of Player
+     * @param spriteName	(String)
+     * @return animations
+     */
     private Animation[] constructAnimation(String spriteName) {
         Sprite[][] sprite = RPGSprite.extractSprites(spriteName, 4, 1, 1,this,
                 16, 16, new Orientation[] {Orientation.DOWN,
@@ -105,23 +112,16 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        Keyboard keyboard = getOwnerArea().getKeyboard();
 
         if (isDisplacementOccurs()) {
             area.setViewCandidate(this);
-        }
-        if (keyboard.get(Keyboard.SPACE).isPressed() && currentanimation == animCharac) {
-            switchAnimation(passiveBicycle,animBicycle);
-
-        } else if (keyboard.get(Keyboard.SPACE).isPressed()) {
-            switchAnimation(passiveSprite,animCharac);
         }
 
         //Updating animations but no need to update passiveSprite
         currentanimation[getOrientation().ordinal()].update(deltaTime);
 
         //Dealing with movements
-
+        Keyboard keyboard = getOwnerArea().getKeyboard();
 
         moveIfPressed(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
 
@@ -171,8 +171,11 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
         return false;
     }
 
-
-
+    /**
+     * Enter Area
+     * @param area		(Area)
+     * @param position	(DiscreteCoordinates)
+     */
     public void enterArea(Area area, DiscreteCoordinates position) {
         area.registerActor(this);
         setCurrentPosition(position.toVector());
@@ -180,6 +183,10 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
         resetMotion();
         setOwnerArea(area);
     }
+    /**
+     * Exit Area
+     * @param area	(Area)
+     */
     public void exitArea(Area area){
         area.unregisterActor(this);
 

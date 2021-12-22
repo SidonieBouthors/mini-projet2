@@ -13,7 +13,7 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class AIPlayer extends ICWarsPlayer{
 	
-	//For waitFor()
+	//For the waitFor() method
 	private boolean counting; 
 	private float counter;
 	//Selecting actions

@@ -42,15 +42,13 @@ public class Heal extends Action{
 		//check if targetNumber is in bounds
 				if (targetNumber >= healableUnitIndexes.size()) {
 					targetNumber = 0;
-		}
-				
+		}	
 		//TAB key pressed or no attackable units
 		if (healableUnitIndexes.size()==0 
 			|| keyboard.get(Keyboard.TAB).isPressed()) {
 			player.centerCamera();
 			player.setState(PlayerState.ACTION_SELECTION);
 		}
-		
 		//RIGHT key pressed
 		if(keyboard.get(Keyboard.RIGHT).isPressed()) {
 			if(targetNumber < healableUnitIndexes.size()-1) {

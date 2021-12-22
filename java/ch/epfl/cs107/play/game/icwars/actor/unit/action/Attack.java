@@ -43,14 +43,12 @@ public class Attack extends Action{
 		if (targetNumber >= attackableUnitIndexes.size()) {
 			targetNumber = 0;
 		}
-		
 		//TAB key pressed or no attackable units
 		if (attackableUnitIndexes.size()==0 
 			|| keyboard.get(Keyboard.TAB).isPressed()) {
 			player.centerCamera();
 			player.setState(PlayerState.ACTION_SELECTION);
 		}
-		
 		//RIGHT key pressed
 		if(keyboard.get(Keyboard.RIGHT).isPressed()) {
 			if(targetNumber < attackableUnitIndexes.size()-1) {

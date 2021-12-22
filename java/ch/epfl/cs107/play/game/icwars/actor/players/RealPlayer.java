@@ -95,12 +95,12 @@ public class RealPlayer extends ICWarsPlayer{
 
 	@Override
 	public void draw(Canvas canvas) {
-		//Draw cursor if not IDLE
-		PlayerState state = getState();
-		if (state != PlayerState.IDLE) {
+		//Draw cursor and GUI if not IDLE
+		if (getState() != PlayerState.IDLE) {
 			getSprite().draw(canvas);
 			gui.draw(canvas);
-			if (state == PlayerState.ACTION) {
+			//Draw Action if state ACTION
+			if (getState() == PlayerState.ACTION) {
 				for (Action action:getSelectedUnit().getActions()) {
 		        	action.draw(canvas);
 		        }

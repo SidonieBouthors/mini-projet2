@@ -57,7 +57,8 @@ public class ICWarsInfoPanel implements Graphics {
                 false, false, new Vector(0, -2.5f*fontSize-0.7f),
                 TextAlign.Horizontal.LEFT, TextAlign.Vertical.MIDDLE, 1.0f, 3001f);
 
-
+        //Slight modifications in the way the attributes are positioned on the display
+        //to accommodate for the added Health Points display
         unitNameText = new TextGraphics("", fontSize, Color.WHITE, null, 0.0f,
                 false, false, new Vector(0, -0.3f),
                 TextAlign.Horizontal.LEFT, TextAlign.Vertical.MIDDLE, 1.0f, 3001f);
@@ -164,6 +165,7 @@ public class ICWarsInfoPanel implements Graphics {
         unitDamageText.setText("DMG: " + unit.getDamage());
         unitDamageText.draw(canvas);
         
+        //Show Healing points if non 0
         if (unit.getHealing() != 0) {
         	unitHealingText.setRelativeTransform(characteristicsTransform);
         	unitHealingText.setText("HEAL: " + unit.getHealing());
