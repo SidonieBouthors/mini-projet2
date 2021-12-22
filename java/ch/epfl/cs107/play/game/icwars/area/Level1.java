@@ -30,7 +30,9 @@ public class Level1 extends ICWarsArea {
 	public DiscreteCoordinates getNeutralPlayerSpawnPosition() {
 		return new DiscreteCoordinates(9,7);
 	}
-	
+
+
+
 	@Override
 	protected void createArea() {
 		registerActor(new Background(this));

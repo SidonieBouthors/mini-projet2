@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.icwars;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class ICWars extends AreaGame {
 		addArea(openingMenu);
 		addArea(new Level0());
 		addArea(new Level1());
+		addArea(new GameOver());
 	}
 
 	@Override
@@ -206,7 +208,11 @@ public class ICWars extends AreaGame {
 			else { gameState=GameState.GAME_OVER;}
 			break;
 		case GAME_OVER:
-			end();
+			int n=0;
+			if (n==0){
+				end();
+				++n;
+			}
 			break;
 		}
 		
@@ -229,7 +235,7 @@ public class ICWars extends AreaGame {
 	
 	@Override
 	public void end() {
-		//area = (ICWarsArea)setCurrentArea("icwars/GameOver", true);
+		area = (ICWarsArea)setCurrentArea("icwars/GameOver", true);
 		/*
 		Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, playerForThisOne.get(0));
 		area.setViewCandidate(playerForThisOne.get(0));
@@ -239,11 +245,11 @@ public class ICWars extends AreaGame {
 		for (ICWarsPlayer player:playerForThisOne) {
 			player.setState(PlayerState.IDLE);
 		}
-		if (!getWindow().isCloseRequested()){
+		/*if (!getWindow().isCloseRequested()){
 		MenuText gameOver = new MenuText(area, new DiscreteCoordinates(10,2), "icwars/gameOver",10,10,new Vector(-5,-5));
 		gameOver.draw(getWindow());
 		area.setViewCandidate(gameOver);
-		}
+		}*/
 	}
 
 	@Override

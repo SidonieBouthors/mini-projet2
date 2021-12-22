@@ -105,4 +105,6 @@ public class OpeningMenu extends ICWarsArea {
         return DiscreteCoordinates.ORIGIN;
     }
 
+
+
 }

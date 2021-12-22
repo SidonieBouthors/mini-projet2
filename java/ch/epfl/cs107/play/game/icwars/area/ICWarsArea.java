@@ -107,7 +107,7 @@ public abstract class ICWarsArea extends Area {
     
     /**
      * Finds the units healable by an healing unit
-     * @param attackerPosition			(DiscreteCoordinates) : coordinates of healing unit
+     * @param healerPosition			(DiscreteCoordinates) : coordinates of healing unit
      * @param radius					(int) : heal radius of healing unit
      * @param faction					(Faction) : faction of attacking unit
      * @return attackableIndexList		(List<Integer>): list of indexes of healable units
@@ -147,7 +147,7 @@ public abstract class ICWarsArea extends Area {
     /**
      * Deals specified amount of repair to unit at specified index
      * @param unitIndex			(int) : index of unit to repair
-     * @param receivedDamage	(int) : amount of healing to deal to unit
+     * @param receivedHealing	(int) : amount of healing to deal to unit
      */
     public void healUnit(int unitIndex, int receivedHealing) {
     	Unit unit = units.get(unitIndex);
@@ -174,8 +174,9 @@ public abstract class ICWarsArea extends Area {
      * @param unitIndex	(int) : index of unit to center camera on
      */
     public void centerCameraOnUnit(int unitIndex) {
+        if (unitIndex < units.size()){
     	Unit unit = units.get(unitIndex);
-    	setViewCandidate(unit);
+    	setViewCandidate(unit);}
     }
 
 
@@ -185,14 +186,13 @@ public abstract class ICWarsArea extends Area {
         if (super.begin(window, fileSystem)) {
             // Set the behavior map if it has
 
-        	ICWarsBehavior = new ICWarsBehavior(window, getTitle());
+            ICWarsBehavior = new ICWarsBehavior(window, getTitle());
             setBehavior(ICWarsBehavior);
-
-
             createArea();
             units = new ArrayList<Unit>();
             return true;
         }
+
         return false;
     }
 

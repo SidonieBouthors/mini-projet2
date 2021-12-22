@@ -10,7 +10,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class ICWarsActor extends MovableAreaEntity {
+public abstract class ICWarsActor extends MovableAreaEntity {
 
     private Faction faction;
 
