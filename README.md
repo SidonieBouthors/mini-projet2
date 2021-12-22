@@ -4,16 +4,16 @@ François Theron et Sidonie Bouthors
 
 DEROULEMENT D'UNE PARTIE
 
-Intro: 
-Animation d'un personnage montant dans un Tank
-Peut être skip a l'aide de la touche 
+Intro: Jouer le personnage a l'aide des flèches droite et gauche,
+Pour jouer l'équipe de votre choix "montez" dans le tank en vous
+arretant une mini seconde à l'extrémité du tank. Cette étape peut etre skip au moyen de la touche N, vous vous verrait attribué l'equipe allié automatiquement
 
 Jeu:
 Chaque joueur a 4 unités de types différent (Tank, Soldier, Rocket, Ambulance)
 
 Les joueur allié peut
 - déplacer son curseur au moyen des flèches
-- selctionner une unité au moyen de ENTER
+- selectionner une unité au moyen de ENTER
 - choisir alors une position d'arrivée dans le range (a l'aide des flèches) et appuyer de nouveau sur ENTER
 - Selectionner une action parmis celle proposée
 Action Wait: aucun effet
