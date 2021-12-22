@@ -12,13 +12,6 @@ Class RPG SPRITE :
 - Ajout de méthode Sprites [] extractspritesWithoutAnim + un parametre lignToExtract qui permet d'extrait la ligne que l'on souhaite plus particulièrement dans l'image.
   (Ces modifications doivent etre changés si les sprites sheets n'ont pas le meme format)
 
-Class Unit et Tank :
--
-- Ajout de surcharge constructeur au regard du menu. Nous avions besoin des tanks pour leur "Image" plus que pour leur fonction attack etc. pour la création du menu.
-  C'est pour cela que ici et dans Unit il existe un constructeur avec des paramètres différents + optimisé (par exemple pas charger le range alors que l'on ne s'en servira pas)
-
-- Séparation du rayon d'attaque et du rayon de déplacement : ces deux attribut on été desolidarisé notamment pour permettre de programmer la logique des Rocket (qui avancent peu mais tirent loin)
-
 Class Animated Player :
 -
 - Joueur particulier du menu, muni des ses propres animations. Il est totalement réutilisable autre part. C'est un GhostPlayer un peu plus spécifique.
@@ -29,12 +22,28 @@ Class Opening Menu :
   Elle possède un animated player particulier muni de certaines interactions spécifiques a cette Area. Cette animated player doit transmettre des
   informations a l'area(choix de l'equipe jouée), pour faciliter leur communication mais aussi celle avec ICWars : c'est une classe imbriquée.
 
+Joueur Supplémentaire :
+-
+- Nous avons ajouté un troisième joueur de faction NEUTRAL dont les unités sont de couleur verte. Ce joueur est toujours un AIPlayer car le Menu ne permet de choisir sa Faction que entre ALLY et ENEMY. Les 3 Factions de joueurs s'opposent toutes.
+
+Class Unit et Tank :
+-
+- Ajout de surcharge constructeur au regard du menu. Nous avions besoin des Tanks pour leur "Image" plus que pour leur fonction attack etc pour la création du menu.
+  C'est pour cela que ici et dans Unit il existe un constructeur avec des paramètres différents + optimisé (par exemple pas charger le range alors que l'on ne s'en servira pas)
+
+- Séparation du rayon d'attaque et du rayon de déplacement : ces deux attribut on été desolidarisé notamment pour permettre de programmer la logique des Rocket (qui avancent peu mais tirent loin)
+
+Modification du GUI :
+-
+- Nous avons légèrement modifié le GUI afin que le InfoPanel affiche les points de réparation des unités ayant des points de réparation non nuls (les Ambulances)
+- Note : les Ambulances ont donc 3 charactéristiques s'affichant et le reste des unités seulement 2
+
 Class Rocket & Ambulance (Unit supplémentaires):
 -
-- Extension supplémentaire pour donner plus de contenu au jeu.
+- Extension supplémentaire de 2 unités pour donner plus de contenu au jeu.
 - Caractériques Rocket : (HP : 2, Rayon : 2, Rayon d'attaque : 5, Puissance d'attaque : 8)
 - Caractéristiques Ambulance : (HP : 10, Rayon : 3, Rayon d'attaque/reparation : 2, Puissance d'attaque : 1, Puissance de réparation : 3)
-- Note : Nous avions originellement fait que l'ambulance n'aie pas d'action attaque mais avons décidé d'ajouter une attaque faible pour eviter une possible situation ou le joueur n'a plus qu'une ambulance en fin de partie et ne peut alors plus faire grand chose.
+- Note : Nous avions originellement fait que l'ambulance n'aie pas d'action attaque, mais avons décidé d'ajouter une attaque faible pour eviter une possible situation ou le joueur n'a plus qu'une ambulance en fin de partie et ne peut alors plus faire grand chose.
 - De plus l'IA choisira en priorité d'effectuer l'action reparation de l'ambulance, si cela est impossible elle essaira alors d'attaquer (ou wait si cela est a nouveau impossible)
 
 Class Healing :
@@ -48,7 +57,6 @@ Modification a la creation des Units:
 
 Game Over :
 -
-
 - Ajout d'un Game Over a la fin du jeu
 
 
