@@ -7,8 +7,7 @@ DEROULEMENT D'UNE PARTIE
 Menu interactif :
 -
 - Jouer le personnage a l'aide des flèches droite et gauche,
-Pour jouer l'équipe de votre choix "montez" dans le tank en vous
-arretant une mini seconde à l'extrémité du tank. Cette étape peut etre skip au moyen de la touche N, vous vous verrait attribué l'equipe allié automatiquement.
+Pour jouer l'équipe de votre choix "montez" dans le tank en vous arretant une seconde sur le tank. Cette étape peut etre skip au moyen de la touche N, vous vous verrez attribué l'equipe allié automatiquement.
 
 Jeu:
 -
@@ -28,7 +27,7 @@ Action Heal (uniquement Ambulance): Selectionner une unité alliée a l'aide des
 
 Mécanique du jeu :
 -
-- Mettre vos unités derrière des composants du jeu vous permettra de gagner en defense mais aussi de gagner la partie ! Utilisez votre curseur pour voir quelles sont les spots qui apportent le plus de défense.
+- Mettre vos unités sur certain des composants du jeu vous permettra de gagner en defense mais aussi de gagner la partie ! Utilisez votre curseur pour voir quelles sont les spots qui apportent le plus de défense.
 
 IA :
 -
@@ -47,8 +46,8 @@ Touches pour les curieux :
 
 Spécificités particulières des extensions :
 -
-- le Rocket aura la particularité de peu se déplacer mais pouvoir tirer loin et fort.
-- L'ambulance de soigner ses alliés.
+- La Rocket aura la particularité de peu se déplacer mais pouvoir tirer loin et fort.
+- L'ambulance permet de soigner ses alliés.
 - Au début de la partie le joueur regarde au loin, profitez en car une fois bougé il ne regardera plus le paysage. :)
   N'oubliez pas de le faire gagner pour qu'il revienne admirer le paysage plus souvent.
 
