@@ -21,6 +21,8 @@ Class Opening Menu :
 - C'est une icwarsArea particulière étant donné qu'elle est fixe et qu'on ne veut pas qu'elle change selon les paramètres du jeu.
   Elle possède un animated player particulier muni de certaines interactions spécifiques a cette Area. Cette animated player doit transmettre des
   informations a l'area(choix de l'equipe jouée), pour faciliter leur communication mais aussi celle avec ICWars : c'est une classe imbriquée.
+ - Ce menu permet au joueur de choisir sa faction entre 2 factions possible. Pour cela il monte dans un Tank.
+ - Note : Il faut positionner le joueur au fond du Tank et s'arrêter a cet emplacement pour selectionner la Faction. Simplement marcher a traver du Tank ou s'arreter vers l'avant de celui-ci ne fonctionne pas pour cela.
 
 Joueur Supplémentaire :
 -
