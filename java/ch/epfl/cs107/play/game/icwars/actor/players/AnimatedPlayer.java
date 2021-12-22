@@ -46,7 +46,10 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
 
         animCharac = constructAnimation(spriteName);
         passiveSprite = constructPassiveSprite(spriteName);
+        passiveBicycle = constructPassiveSprite("player_bicycle");
+        animBicycle = constructAnimation("player_bicycle");
         this.area = (ICWarsArea) area;
+
 
 
 
@@ -102,16 +105,23 @@ public class AnimatedPlayer extends ICWarsActor implements Interactor {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+        Keyboard keyboard = getOwnerArea().getKeyboard();
 
         if (isDisplacementOccurs()) {
             area.setViewCandidate(this);
+        }
+        if (keyboard.get(Keyboard.SPACE).isPressed() && currentanimation == animCharac) {
+            switchAnimation(passiveBicycle,animBicycle);
+
+        } else if (keyboard.get(Keyboard.SPACE).isPressed()) {
+            switchAnimation(passiveSprite,animCharac);
         }
 
         //Updating animations but no need to update passiveSprite
         currentanimation[getOrientation().ordinal()].update(deltaTime);
 
         //Dealing with movements
-        Keyboard keyboard = getOwnerArea().getKeyboard();
+
 
         moveIfPressed(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
 
