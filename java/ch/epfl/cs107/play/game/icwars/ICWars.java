@@ -235,21 +235,16 @@ public class ICWars extends AreaGame {
 	
 	@Override
 	public void end() {
-		area = (ICWarsArea)setCurrentArea("icwars/GameOver", true);
-		/*
-		Sprite gameOver = new Sprite("icwars/gameOver", 12, 10, playerForThisOne.get(0));
-		area.setViewCandidate(playerForThisOne.get(0));
-		gameOver.setAnchor(new Vector(-6,-5));
-		gameOver.draw(getWindow());
-		*/
-		for (ICWarsPlayer player:playerForThisOne) {
-			player.setState(PlayerState.IDLE);
-		}
-		/*if (!getWindow().isCloseRequested()){
+		//area = (ICWarsArea)setCurrentArea("icwars/GameOver", true);
+
+		if (!getWindow().isCloseRequested()){
+			for (ICWarsPlayer player:playerForThisOne) {
+				player.setState(PlayerState.IDLE);
+			}
 		MenuText gameOver = new MenuText(area, new DiscreteCoordinates(10,2), "icwars/gameOver",10,10,new Vector(-5,-5));
 		gameOver.draw(getWindow());
 		area.setViewCandidate(gameOver);
-		}*/
+		}
 	}
 
 	@Override
