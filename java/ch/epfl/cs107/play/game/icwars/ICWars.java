@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
-import ch.epfl.cs107.play.game.icwars.Menu.GameOver;
 import ch.epfl.cs107.play.game.icwars.Menu.MenuText;
 import ch.epfl.cs107.play.game.icwars.Menu.OpeningMenu;
 import ch.epfl.cs107.play.game.icwars.actor.ICWarsActor.Faction;
@@ -55,7 +54,6 @@ public class ICWars extends AreaGame {
 		addArea(openingMenu);
 		addArea(new Level0());
 		addArea(new Level1());
-		addArea(new GameOver());
 	}
 
 	@Override
@@ -206,11 +204,7 @@ public class ICWars extends AreaGame {
 			else { gameState=GameState.GAME_OVER;}
 			break;
 		case GAME_OVER:
-			int n=0;
-			if (n==0){
-				end();
-				++n;
-			}
+			end();
 			break;
 		}
 		
@@ -233,8 +227,6 @@ public class ICWars extends AreaGame {
 	
 	@Override
 	public void end() {
-		//area = (ICWarsArea)setCurrentArea("icwars/GameOver", true);
-
 		if (!getWindow().isCloseRequested()){
 			for (ICWarsPlayer player:playerForThisOne) {
 				player.setState(PlayerState.IDLE);
