@@ -20,7 +20,7 @@ Les joueur allié peut :
 - choisir alors une position d'arrivée dans le range (a l'aide des flèches) et appuyer de nouveau sur ENTER
 - Selectionner une action parmis celle proposée
 Action Wait: aucun effet
-Action Attack (tous units sauf Ambulance): Selectionner une unité enemie a l'aide des flèches et appuyer sur ENTER
+Action Attack (tous units): Selectionner une unité enemie a l'aide des flèches et appuyer sur ENTER
 Action Heal (uniquement Ambulance): Selectionner une unité alliée a l'aide des flèches et appuyer sur ENTER
 - les units utilisés sont grisés (chacun peut être utilisé une fois par tour)
 - le joueur peut finir son tour à l'aide de la touche TAB.
@@ -39,15 +39,14 @@ Système de jeu :
 
 Touches pour les curieux :
 -
-
 - TAB peut être utilisé pour finir le tour du joueur actuel a n'importe quel moment
 - N permet de démarrer la partie suivante (ne marche que sur le menu et la première aire, puisque ensuite il n'y a plus de partie suivante)
 - R permet de reset le jeu et donc de redémarrer à la première partie.
 
 Spécificités particulières des extensions :
 -
-- La Rocket aura la particularité de peu se déplacer mais pouvoir tirer loin et fort.
-- L'ambulance permet de soigner ses alliés.
+- La Rocket a la particularité de peu se déplacer (rayon de 1) mais pouvoir tirer loin et fort (rayon d'attaque de 5, damage de 8).
+- L'ambulance permet de soigner ses alliés (healing de 3), mais ne peut attaquer que faiblement (damage de 1).
 - Au début de la partie le joueur regarde au loin, profitez en car une fois bougé il ne regardera plus le paysage. :)
   N'oubliez pas de le faire gagner pour qu'il revienne admirer le paysage plus souvent.
 
