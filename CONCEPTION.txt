@@ -27,8 +27,7 @@ Class Opening Menu :
 
 Class Rocket, Ambulance (etc) :
 - Extension supplémentaire pour donner plus de contenu au jeu.
-- le Rocket aura la particularité de peu se déplacer mais pouvoir tirer loin et fort.
-- L'ambulance de soigner ses alliés.
+
 
 Extension : Ajout d'un Game Over a la fin du jeu
 
