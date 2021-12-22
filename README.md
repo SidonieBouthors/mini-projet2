@@ -8,6 +8,7 @@ Menu interactif :
 -
 - Jouer le personnage a l'aide des flèches droite et gauche,
 Pour jouer l'équipe de votre choix "montez" dans le tank en vous arretant une seconde sur le tank. Cette étape peut etre skip au moyen de la touche N, vous vous verrez attribué l'equipe allié automatiquement.
+- Grâce à la touche N le personnage peut prendre un vélo ! Fantastique pas vrai ?
 
 Jeu:
 -
