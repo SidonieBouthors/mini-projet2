@@ -239,7 +239,7 @@ public class ICWars extends AreaGame {
 			for (ICWarsPlayer player:playerForThisOne) {
 				player.setState(PlayerState.IDLE);
 		}
-		MenuText gameOver = new MenuText(area, new DiscreteCoordinates(10,2), "icwars/gameOver",10,10,new Vector(-5,-5));
+		MenuText gameOver = new MenuText(area, new DiscreteCoordinates(10,5), "icwars/gameOver",10,10,new Vector(-5,-5));
 		gameOver.draw(getWindow());
 		area.setViewCandidate(gameOver);
 		}
