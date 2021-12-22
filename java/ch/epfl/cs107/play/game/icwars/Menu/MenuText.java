@@ -24,11 +24,11 @@ public class MenuText extends ICWarsActor {
     }
     
     /**
-     * ICWarsActor Constructor (no Vector)
+     * MenuText Constructor (no Vector)
      *
      * @param owner       (Area): owner area
      * @param coordinates (DiscreteCoordinates): starting coordinates
-     * @param vector (Vector) :  Adjusting position of the text
+     *
      */
     public MenuText(Area owner, DiscreteCoordinates coordinates, String spriteName, float width, float height) {
         this(owner, coordinates, spriteName, width, height, new Vector(0,0));

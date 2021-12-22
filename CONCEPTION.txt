@@ -25,6 +25,13 @@ Class Opening Menu :
   Elle possède un animated player particulier muni de certaines interactions spécifiques a cette Area. Cette animated player doit transmettre des
   informations a l'area(choix de l'equipe jouée), pour faciliter leur communication mais aussi celle avec ICWars : c'est une classe imbriquée.
 
+Class Rocket, Ambulance (etc) :
+- Extension supplémentaire pour donner plus de contenu au jeu.
+- le Rocket aura la particularité de peu se déplacer mais pouvoir tirer loin et fort.
+- L'ambulance de soigner ses alliés.
+
+Extension : Ajout d'un Game Over a la fin du jeu
+
 
 
 Menu 
